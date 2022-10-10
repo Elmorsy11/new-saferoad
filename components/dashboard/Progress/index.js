@@ -3,8 +3,8 @@ import React from "react";
 import { Card, Col } from "react-bootstrap";
 import DProgress from "./dProgress";
 
-export default function Index({ VehTotal, loading }) {
-  const { t } = useTranslation("Dashboard");
+export default function Index({ VehTotal }) {
+  const { t } = useTranslation("dashboard");
   const totalVehs = VehTotal?.totalVehs || 0;
   const ActiveVehs = VehTotal?.activeVehs || 0;
   const PercentageActiveVehcles =
@@ -25,12 +25,11 @@ export default function Index({ VehTotal, loading }) {
         <Card>
           <Card.Body>
             <DProgress
-              loading={loading}
               duration={1.5}
-              name={["Active_Vehicles", "Total_Vehicles"]}
+              name={[t("active_vehicles_key"), t("total_vehicles_key")]}
               countStart={[0, 0]}
               countEnd={[ActiveVehs, totalVehs]}
-              dateType={t("Monthly")}
+              dateType={t("monthly_key")}
               progresCount={PercentageActiveVehcles}
               color={"primary"}
             />
@@ -41,12 +40,11 @@ export default function Index({ VehTotal, loading }) {
         <Card>
           <Card.Body>
             <DProgress
-              loading={loading}
               duration={1.5}
-              name={["Offline_Vehicles"]}
+              name={[t("offline_vehicles_key")]}
               countStart={[0]}
               countEnd={[OfflineVehs]}
-              dateType={t("Annual")}
+              dateType={t("annual_key")}
               progresCount={PercentageOfflineVehs}
               color={"warning"}
             />
@@ -57,12 +55,11 @@ export default function Index({ VehTotal, loading }) {
         <Card>
           <Card.Body>
             <DProgress
-              loading={loading}
               duration={1.5}
-              name={["Active_Drivers", "Total_Drivers"]}
+              name={[t("active_drivers_key"), t("total_drivers_key")]}
               countStart={[0, 0]}
               countEnd={[ActiveDrivers, AllDrivers]}
-              dateType={t("Today")}
+              dateType={t("today_key")}
               progresCount={PercentageActiveDrivers}
               color={"danger"}
             />

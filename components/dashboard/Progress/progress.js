@@ -8,7 +8,7 @@ const Progress = (props) => {
       elem.style.width = "0%";
       elem.style.transition = "width 1.5s";
       setTimeout(() => {
-        elem.style.width = !props.loading && currentValue + "%";
+        elem.style.width = currentValue + "%";
       }, 50);
     };
     const customProgressBar = document.querySelectorAll(
@@ -17,7 +17,7 @@ const Progress = (props) => {
     Array.from(customProgressBar, (elem) => {
       return progressBarInit(elem);
     });
-  },[props.loading]);
+  }, []);
   return (
     <>
       <div

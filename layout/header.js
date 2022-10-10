@@ -4,14 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar, toggleHead } from "lib/slices/layoutConfig";
-import { changeLanguage, darkMode, setConfig } from "lib/slices/config";
+import { changeLanguage, darkMode } from "lib/slices/config";
 import { useRouter } from "next/router";
 // translation
 import { useTranslation } from "next-i18next";
 import Styles from "styles/WidgetMenu.module.scss";
 import { signOut, useSession } from "next-auth/client";
 import { locale } from "moment";
-import { encryptName } from "helpers/encryptions";
 
 const Header = () => {
   const { t } = useTranslation("main");
@@ -32,23 +31,20 @@ const Header = () => {
       "dir",
       `${config.language === "ar" ? "rtl" : "ltr"}`
     );
-    router.push(router.pathname, router.pathname, { locale: config.language });
     config.darkMode
       ? document.body.classList.add("dark")
       : document.body.classList.remove("dark");
-  }, [config.darkMode, config.language]);
 
+    let timer = setTimeout(() => {
+      router.push(router.pathname, router.pathname, { locale: config.language });
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    }
+
+  }, [config]);
   const toggleDarkMode = () => dispatch(darkMode());
   const toggleLanguage = (locale) => dispatch(changeLanguage(locale));
-
-
-  useEffect(
-    () => {
-      const getConfig = localStorage.getItem(encryptName("config"));
-      if (getConfig) {
-        dispatch(setConfig(JSON.parse(getConfig)));
-      }
-    }, [dispatch]);
   return (
     <>
       <Navbar
@@ -449,7 +445,7 @@ const Header = () => {
                   aria-labelledby="navbarDropdown"
                 >
                   <Dropdown.Item as={Link} href="/Setting" className="p-2">
-                    <a className="d-block dropdown-item">{t("Setting")}</a>
+                    <a className="d-block dropdown-item">{t("settings_key")}</a>
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item
@@ -457,7 +453,7 @@ const Header = () => {
                     onClick={handleSignOut}
                     className="px-0"
                   >
-                    <a className="d-block dropdown-item">{t("Logout")}</a>
+                    <a className="d-block dropdown-item">{t("logout_key")}</a>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

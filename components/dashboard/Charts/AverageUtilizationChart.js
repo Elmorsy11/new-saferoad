@@ -6,16 +6,16 @@ import Styles from "styles/Dashboard.module.scss";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function AverageUtilizationChart() {
-	const { t } = useTranslation("Dashboard");
+	const { t } = useTranslation("dashboard");
 
 	const chart = {
 		series: [
 			{
-				name: t("Day_Events"),
+				name: t("day_events_key"),
 				data: [30, 50, 35, 60, 40],
 			},
 			{
-				name: t("Night_Events"),
+				name: t("night_events_key"),
 				data: [40, 50, 55, 50, 30],
 			},
 		],
@@ -83,7 +83,7 @@ export default function AverageUtilizationChart() {
 			tooltip: {
 				y: {
 					formatter: function (val) {
-						return ` ${val} ${t("Events")}`;
+						return ` ${val} ${t("events_key")}`;
 					},
 				},
 			},
@@ -98,7 +98,7 @@ export default function AverageUtilizationChart() {
 					<div className="card-header d-flex justify-content-between flex-wrap">
 						<div className="header-title">
 							<h4 className={"card-title " + Styles.head_title}>
-								{t("Average_Utilization")}
+								{t("average_utilization_key")}
 							</h4>
 						</div>
 					</div>

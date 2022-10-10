@@ -4,7 +4,7 @@ import Styles from "styles/Dashboard.module.scss";
 import { useTranslation } from "next-i18next";
 
 export default function Index({ data }) {
-  const { t } = useTranslation("Dashboard");
+  const { t } = useTranslation("dashboard");
 
   return (
     <>
@@ -12,7 +12,7 @@ export default function Index({ data }) {
         <Card>
           <Card.Header className="d-flex justify-content-between">
             <h4 className={"card-title " + Styles.head_title}>
-              {t("Next_repair_plans")}
+              {t("next_repair_plans_key")}
             </h4>
           </Card.Header>
           <Card.Body>
@@ -20,13 +20,13 @@ export default function Index({ data }) {
               <thead>
                 <tr>
                   {[
-                    t("#"),
-                    t("Display_Name"),
-                    t("Group_name"),
-                    t("Maintenance_Type"),
-                    t("Start_Value"),
-                    t("Next_value"),
-                    t("Period_Type"),
+                    "#",
+                    t("display_name_key"),
+                    t("group_name_key"),
+                    t("maintenance_type_key"),
+                    t("start_value_key"),
+                    t("next_value_key"),
+                    t("period_type_key"),
                   ]?.map((ele, i) => (
                     <th key={i}>{ele}</th>
                   ))}

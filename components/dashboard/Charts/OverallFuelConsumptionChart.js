@@ -6,17 +6,17 @@ import Styles from "styles/Dashboard.module.scss";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function OverallFuelConsumptionChart() {
-	const { t } = useTranslation("Dashboard");
+	const { t } = useTranslation("dashboard");
 
 	const chart = {
 		series: [
 			{
-				name: t("Fuel_Consumption"),
+				name: t("fuel_consumption_key"),
 				type: "column",
 				data: [1702, 131, 942, 852, 648, 835, 932, 1231, 1386, 84],
 			},
 			{
-				name: t("Mileage"),
+				name: t("mileage_key"),
 				type: "line",
 				data: [
 					26391, 2034, 14608, 13219, 10085, 12955, 14478, 19081, 21490, 1303,
@@ -51,23 +51,23 @@ export default function OverallFuelConsumptionChart() {
 			},
 
 			labels: [
-				t("Jan"),
-				t("Feb"),
-				t("Mar"),
-				t("Apr"),
-				t("May"),
-				t("Jun"),
-				t("Jul"),
-				t("Aug"),
-				t("Sep"),
-				t("Oct"),
+				t("jan_key"),
+				t("feb_key"),
+				t("mar_key"),
+				t("apr_key"),
+				t("may_key"),
+				t("jun_key"),
+				t("jul_key"),
+				t("aug_key"),
+				t("sep_key"),
+				t("oct_key"),
 			],
 			colors: ["#246c66", "#3e84b8"],
 
 			yaxis: [
 				{
 					title: {
-						text: t("Fuel_Consumption"),
+						text: t("fuel_consumption_key"),
 					},
 					labels: {
 						show: true,
@@ -82,7 +82,7 @@ export default function OverallFuelConsumptionChart() {
 				{
 					opposite: true,
 					title: {
-						text: t("Mileage"),
+						text: t("mileage_key"),
 					},
 				},
 			],
@@ -95,7 +95,7 @@ export default function OverallFuelConsumptionChart() {
 					<div className="card-header d-flex justify-content-between flex-wrap">
 						<div className="header-title">
 							<h4 className={"card-title " + Styles.head_title}>
-								{t("Overall_Fuel_Consumption")}
+								{t("overall_fuel_consumption_key")}
 							</h4>
 						</div>
 					</div>

@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Header from "./header";
 import SubHeader from "./sub-header";
 import Sidebar from "./sidebar";
+import { encryptName } from "helpers/encryptions";
 
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setConfig } from "lib/slices/config";
 const Layout = ({ children }) => {
   let router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(
+    () => {
+      const getConfig = localStorage.getItem(encryptName("config"));
+      if (getConfig) {
+        dispatch(setConfig(JSON.parse(getConfig)));
+      }
+    }, [dispatch]);
   return (
     <>
       <Sidebar />

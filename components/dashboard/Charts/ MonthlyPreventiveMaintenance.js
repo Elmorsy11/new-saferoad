@@ -6,12 +6,12 @@ import Styles from "styles/Dashboard.module.scss";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function MonthlyPreventiveMaintenance() {
-	const { t } = useTranslation("Dashboard");
+	const { t } = useTranslation("dashboard");
 
 	const chart = {
 		series: [
 			{
-				name: t("Number_of_Vehicles"),
+				name: t("number_of_vehicles_key"),
 				data: [94, 80, 94, 80, 94, 80, 94],
 			},
 		],
@@ -40,13 +40,6 @@ export default function MonthlyPreventiveMaintenance() {
 			stroke: {
 				width: 0,
 			},
-
-			/*grid: {
-								row: {
-										colors: ['#fff', '#f2f2f2']
-								}
-						},*/
-
 			xaxis: {
 				labels: {
 					minHeight: 100,
@@ -57,19 +50,19 @@ export default function MonthlyPreventiveMaintenance() {
 					},
 				},
 				categories: [
-					t("Change_Engine_Oil"),
-					t("Change_Vehicle_Breaks"),
-					t("Renew_Vehicle_License"),
-					t("Vehicle_Wash"),
-					t("Change_type"),
-					t("Change_Gear_Oil"),
-					t("Filter_Change"),
+					t("change_engine_oil_key"),
+					t("change_vehicle_breaks_key"),
+					t("renew_vehicle_license_key"),
+					t("vehicle_wash_key"),
+					t("change_type_key"),
+					t("change_gear_oil_key"),
+					t("filter_change_key"),
 				],
 				tickPlacement: "on",
 			},
 			yaxis: {
 				title: {
-					text: t("Number_of_Vehicles"),
+					text: t("number_of_vehicles_key"),
 				},
 			},
 			fill: {
@@ -95,7 +88,7 @@ export default function MonthlyPreventiveMaintenance() {
 					<div className="card-header d-flex justify-content-between flex-wrap">
 						<div className="header-title">
 							<h4 className={"card-title " + Styles.head_title}>
-								{t("Monthly_Preventive_Maintenance")}
+								{t("monthly_preventive_maintenance_key")}
 							</h4>
 						</div>
 					</div>

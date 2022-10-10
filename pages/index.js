@@ -1,81 +1,57 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
-
+import { useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 import axios from "axios";
+
+import { toast } from "react-toastify";
+import { encryptName } from "helpers/encryptions";
+import useStreamDataState from "hooks/useStreamDataState";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const Google = dynamic(() => import("components/dashboard/google"), {
-  ssr: false,
-});
-
 import Progress from "components/dashboard/Progress/index";
-
-// Chart Components
+// Charts
 import VehiclesStatusChart from "components/dashboard/Charts/VehiclesStatusChart";
 import AverageUtilizationChart from "components/dashboard/Charts/AverageUtilizationChart";
 import OverallFuelConsumptionChart from "components/dashboard/Charts/OverallFuelConsumptionChart";
 import MonthlyPreventiveMaintenance from "components/dashboard/Charts/ MonthlyPreventiveMaintenance";
-
-// import NextrepairplansTable
+//  NextrepairplansTable
 import NextrepairplansTable from "components/dashboard/NextrepairplansTable";
-
-// import CardsForRates
+//  CardsForRates
 import CardsForRates from "components/dashboard/CardsForRates";
-
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { encryptName } from "helpers/encryptions";
-import useStreamDataState from "hooks/useStreamDataState";
-import dynamic from "next/dynamic";
+const Google = dynamic(() => import("components/dashboard/google"), { ssr: false });
 
 const Home = () => {
-  const [DashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const {
-    streamData: { VehTotal },
-  } = useSelector((state) => state);
-  const { myMap } = useSelector((state) => state.mainMap);
+  const [DashboardData, setDashboardData] = useState({});
+  const VehTotal = useSelector((state) => state.streamData.VehTotal);
 
+  const { myMap } = useSelector((state) => state.mainMap);
   const { indexStreamLoader } = useStreamDataState();
+
   useEffect(() => {
     indexStreamLoader();
-  }, []);
-  const UpdateLocalData = (data) => {
-    localStorage.setItem(encryptName("DashboardData"), JSON.stringify(data));
+
+    // dashborad data
+    const DashboardDataLocal = localStorage.getItem(encryptName("DashboardData"));
+    let data = JSON.parse(DashboardDataLocal) ?? "{}";
     setDashboardData(data);
-  };
-
-  const fetchDashboardData = useCallback(async () => {
-    await axios
-      .get(`dashboard/mainDashboard/home`)
-      .then(({ data }) => {
-        setLoading(false);
-        UpdateLocalData(data);
-      })
-      .catch((error) => {
-        setLoading(false);
-        toast.error(error?.response?.data?.message);
-      });
+    (async () => {
+      await axios
+        .get(`dashboard/mainDashboard/home`)
+        .then(({ data }) => {
+          localStorage.setItem(encryptName("DashboardData"), JSON.stringify(data));
+          setDashboardData(data);
+        })
+        .catch((error) => { toast.error(error?.response?.data?.message) })
+    })();
   }, []);
-
-  useEffect(() => {
-    const DashboardDataLocal = localStorage.getItem(
-      encryptName("DashboardData")
-    );
-    if (DashboardDataLocal) {
-      setDashboardData(JSON.parse(DashboardDataLocal) ?? "{}");
-      fetchDashboardData();
-    } else {
-      fetchDashboardData();
-    }
-  }, [fetchDashboardData]);
   return (
     <div className="p-3">
       <Row>
         {/* ############################  progress bars + Map  ############################################## */}
         <Col lg="6">
           <Row>
-            <Progress loading={loading} VehTotal={VehTotal} />
+            <Progress VehTotal={VehTotal} />
           </Row>
         </Col>
         {/* map */}
@@ -120,7 +96,7 @@ const Home = () => {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["Dashboard", "main"])),
+      ...(await serverSideTranslations(locale, ["main", "dashboard"])),
     },
   };
 }

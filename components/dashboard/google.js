@@ -6,11 +6,13 @@ import "leaflet-defaulticon-compatibility";
 import { Saferoad } from "components/maps/leafletchild";
 import { useDispatch, useSelector } from "react-redux";
 import { setMap } from "lib/slices/mainMap";
+import { useLoadScript } from "@react-google-maps/api";
 
 const Map = ({ myMap }) => {
   const L = require("leaflet");
   const dispatch = useDispatch();
   const VehFullData = useSelector((state) => state.streamData.VehFullData);
+  useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, libraries: ["places"], });
 
   useEffect(() => {
     try {

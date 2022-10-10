@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import useStreamDataState from "../hooks/useStreamDataState";
 import { useSelector } from "react-redux";
-import { useLoadScript } from "@react-google-maps/api";
 
 // leafletActions
 const EditInfo = dynamic(
@@ -64,7 +63,6 @@ const MapWithNoSSR = dynamic(() => import("../components/maps/vector"), {
 });
 
 const Map = () => {
-  useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, libraries: ["places"], });
   const { trackStreamLoader } = useStreamDataState();
   const { myMap } = useSelector((state) => state.mainMap);
 

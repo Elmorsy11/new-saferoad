@@ -6,7 +6,7 @@ import Styles from "styles/Dashboard.module.scss";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function VehiclesStatusChart({ VehTotal }) {
-	const { t } = useTranslation("Dashboard");
+	const { t } = useTranslation("dashboard");
 	const Offline = VehTotal.offlineVehs || 0;
 	const Idleing = VehTotal.idlingVehs || 0;
 	const Running = VehTotal.RunningVehs || 0;
@@ -81,13 +81,13 @@ export default function VehiclesStatusChart({ VehTotal }) {
 				"#70ea6b",
 			],
 			labels: [
-				t("Offline"),
-				t("Idling"),
-				t("Running"),
-				t("Stopped"),
-				t("Over_Street_Speed"),
-				t("Over_Speed"),
-				t("Invalid_Locations"),
+				t("offline_key"),
+				t("idling_key"),
+				t("running_key"),
+				t("stopped_key"),
+				t("over_street_speed_key"),
+				t("over_speed_key"),
+				t("invalid_locations_key"),
 			],
 			legend: {
 				show: true,
@@ -128,7 +128,7 @@ export default function VehiclesStatusChart({ VehTotal }) {
 					<div className="card-header d-flex justify-content-between flex-wrap">
 						<div className="header-title">
 							<h4 className={"card-title " + Styles.head_title}>
-								{t("Vehicles_Status")}
+								{t("vehicles_status_key")}
 							</h4>
 						</div>
 					</div>

@@ -16,9 +16,8 @@ const DProgress = ({
   color = "primary",
   minvalue = 0,
   maxvalue = 100,
-  loading,
 }) => {
-  const { t } = useTranslation("Dashboard");
+  const { t } = useTranslation("dashboard");
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -29,16 +28,12 @@ const DProgress = ({
             </span>
             <div className="mt-2">
               <h2 className="counter">
-                {!loading ? (
-                  <CountUp
-                    isCounting
-                    start={countStart[i]}
-                    end={countEnd[i]}
-                    duration={duration}
-                  />
-                ) : (
-                  0
-                )}
+                <CountUp
+                  isCounting
+                  start={countStart[i]}
+                  end={countEnd[i]}
+                  duration={duration}
+                />
               </h2>
             </div>
           </div>
@@ -54,21 +49,18 @@ const DProgress = ({
       </div>
       <div className="d-flex justify-content-between mt-2">
         <div>
-          <span>{t("Percentage")}</span>
+          <span>{t("percentage_key")}</span>
         </div>
         <div>
           {/* <span>{!loading && `${progresCount}%`}</span> */}
-          {!loading ? (
-            <CountUp isCounting end={+progresCount} duration={duration} />
-          ) : (
-            0
-          )}
+
+          <CountUp isCounting end={+progresCount} duration={duration} />
+
           %
         </div>
       </div>
       <div className="mt-3">
         <Progress
-          loading={loading}
           softcolors={color}
           color={color}
           value={progresCount}

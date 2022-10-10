@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Index({ data }) {
   const topRatedDrivers = data?.topRatedDrivers;
   const BadRatedDrivers = data?.BadRatedDrivers;
-  const { t } = useTranslation("Dashboard");
+  const { t } = useTranslation("dashboard");
   return (
     <>
       {/* #######################  Drivers  ####################  */}
@@ -22,7 +22,7 @@ export default function Index({ data }) {
               <Card.Header className="d-flex justify-content-center align-items-center">
                 <div className="header-title  text-center">
                   <h4 className={"card-title " + Styles.head_title}>
-                    {t("Top_Drivers")}
+                    {t("top_drivers_key")}
                   </h4>
                 </div>
               </Card.Header>
@@ -31,7 +31,7 @@ export default function Index({ data }) {
                   name={
                     topRatedDrivers
                       ? topRatedDrivers[0]?.DriverName
-                      : "DriverName"
+                      : "Driver Name"
                   }
                   imgSrc={"/assets/images/avatars/01.png"}
                   imgAlt={"one"}
@@ -43,7 +43,7 @@ export default function Index({ data }) {
                   name={
                     topRatedDrivers
                       ? topRatedDrivers[1]?.DriverName
-                      : "DriverName"
+                      : "Driver Name"
                   }
                   imgSrc={"/assets/images/avatars/01.png"}
                   imgAlt={"two"}
@@ -64,7 +64,7 @@ export default function Index({ data }) {
               <Card.Header className="d-flex justify-content-center align-items-center">
                 <div className="header-title  text-center">
                   <h4 className={"card-title " + Styles.head_title}>
-                    {t("Worst_Drivers")}
+                    {t("worst_drivers_key")}
                   </h4>
                 </div>
               </Card.Header>
@@ -73,7 +73,7 @@ export default function Index({ data }) {
                   name={
                     BadRatedDrivers
                       ? BadRatedDrivers[0]?.DriverName
-                      : "DriverName"
+                      : "Driver Name"
                   }
                   imgSrc={"/assets/images/avatars/01.png"}
                   imgAlt={"one"}
@@ -83,7 +83,7 @@ export default function Index({ data }) {
                   name={
                     BadRatedDrivers
                       ? BadRatedDrivers[1]?.DriverName
-                      : "DriverName"
+                      : "Driver Name"
                   }
                   imgSrc={"/assets/images/avatars/01.png"}
                   imgAlt={"two"}
@@ -103,7 +103,7 @@ export default function Index({ data }) {
               <Card.Header className="d-flex justify-content-center align-items-center">
                 <div className="header-title  text-center">
                   <h4 className={"card-title " + Styles.head_title}>
-                    {t("Top_Utilized_Vehicles")}
+                    {t("top_utilized_vehicles_key")}
                   </h4>
                 </div>
               </Card.Header>
@@ -133,7 +133,7 @@ export default function Index({ data }) {
               <Card.Header className="d-flex justify-content-center align-items-center">
                 <div className="header-title text-center">
                   <h4 className={"card-title " + Styles.head_title}>
-                    {t("Worst_Utilized_Vehicles")}
+                    {t("worst_utilized_vehicles_key")}
                   </h4>
                 </div>
               </Card.Header>
