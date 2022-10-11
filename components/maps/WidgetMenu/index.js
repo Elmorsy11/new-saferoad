@@ -10,7 +10,6 @@ import MenuTree from "./menuTree";
 import FilterTree from "./cars-filter";
 import InputsFilter from "./inputsFilter";
 
-import configUrls from "config/config";
 import { Resizable } from "react-resizable";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -19,7 +18,7 @@ const WidgetMenu = () => {
   const { t } = useTranslation("common");
   const dispatch = useDispatch();
 
-  const label = { inputProps: { "aria-label": "Switch demo" } };
+  const label = { "aria-label": "Switch demo" };
   const { toggleMinuTrack, config } = useSelector((state) => state);
 
   const { VehTreeData, VehTotal } = useSelector((state) => state.streamData);
@@ -34,45 +33,8 @@ const WidgetMenu = () => {
   const [plateNumberFilter, setPlateNumberFilter] = useState("");
 
   const isOpenMinuTrack = toggleMinuTrack.value;
- 
-  const filteredTreeData = useMemo(() => {
-    const handleFilter = (VehTreeData) => {
-      return VehTreeData.filter(
-        (e) =>
-          (e.VehicleStatus !== 5 && e.VehicleStatus !== 600) ||
-          (e.VehicleStatus === 5 && e.VehicleStatus === 600) ||
-          e.VehicleStatus === 5 ||
-          e.VehicleStatus === 600 ||
-          e.VehicleStatus === 5 ||
-          e.VehicleStatus === 600 ||
-          e.VehicleStatus === carsIconsFilter
-      ).filter((ele) => {
-        if (serialNumberFilter !== "") {
-          return ele?.SerialNumber?.startsWith(serialNumberFilter) || false;
-        } else if (addressFilter !== "") {
-          return ele?.Address?.startsWith(addressFilter) || false;
-        } else if (displayNameFilter !== "") {
-          return ele?.DisplayName?.startsWith(displayNameFilter) || false;
-        } else if (plateNumberFilter !== "") {
-          return ele?.PlateNumber?.startsWith(plateNumberFilter) || false;
-        } else if (speedFromFilter !== "") {
-          return (
-            (ele?.Speed >= speedFromFilter &&
-              ele?.Speed <= (speedToFilter?.length ? speedToFilter : 200)) ||
-            false
-          );
-        } else if (speedToFilter !== "") {
-          return (
-            (ele?.Speed <= speedToFilter &&
-              ele?.Speed >= (+speedFromFilter?.length ? speedFromFilter : 0)) ||
-            false
-          );
-        } else {
-          return ele;
-        }
-      });
-    };
 
+  const filteredTreeData = useMemo(() => {
     // with no filters
     if (
       mainFilter == null &&
@@ -80,22 +42,82 @@ const WidgetMenu = () => {
       serialNumberFilter == "" &&
       addressFilter == "" &&
       speedFromFilter == "" &&
-      speedToFilter == "" &&
-      displayNameFilter == "" &&
-      plateNumberFilter == ""
+      speedToFilter == ""
     ) {
       return VehTreeData;
 
       // filter Active  Vehs
     } else if (mainFilter === 5) {
-      return handleFilter(VehTreeData);
-
+      return VehTreeData.filter(
+        (e) => e.VehicleStatus !== 5 && e.VehicleStatus !== 600
+      ).filter((ele) => {
+        if (serialNumberFilter !== "") {
+          return ele?.SerialNumber?.startsWith(serialNumberFilter) || false;
+        } else if (addressFilter !== "") {
+          return ele?.Address?.startsWith(addressFilter) || false;
+        } else if (speedFromFilter !== "") {
+          return (
+            (ele?.Speed > speedFromFilter &&
+              ele?.Speed < (speedToFilter?.length ? speedToFilter : 200)) ||
+            false
+          );
+        } else if (speedToFilter !== "") {
+          return (
+            (ele?.Speed < speedToFilter && ele?.Speed > speedFromFilter) ||
+            false
+          );
+        } else {
+          return ele;
+        }
+      });
       // filter Offline  Vehs
     } else if (mainFilter === -5 || carsIconsFilter === -5) {
-      return handleFilter(VehTreeData);
+      return VehTreeData.filter(
+        (e) => e.VehicleStatus === 5 || e.VehicleStatus === 600
+      ).filter((ele) => {
+        if (serialNumberFilter !== "") {
+          return ele?.SerialNumber?.startsWith(serialNumberFilter) || false;
+        } else if (addressFilter !== "") {
+          return ele?.Address?.startsWith(addressFilter) || false;
+        } else if (speedFromFilter !== "") {
+          return (
+            (ele?.Speed > speedFromFilter &&
+              ele?.Speed < (speedToFilter?.length ? speedToFilter : 200)) ||
+            false
+          );
+        } else if (speedToFilter !== "") {
+          return (
+            (ele?.Speed < speedToFilter && ele?.Speed > speedFromFilter) ||
+            false
+          );
+        } else {
+          return ele;
+        }
+      });
       // filter Icons Cars  Vehs
     } else if (carsIconsFilter !== null && carsIconsFilter !== -5) {
-      return handleFilter(VehTreeData);
+      return VehTreeData.filter(
+        (e) => e.VehicleStatus === carsIconsFilter
+      ).filter((ele) => {
+        if (serialNumberFilter !== "") {
+          return ele?.SerialNumber?.startsWith(serialNumberFilter) || false;
+        } else if (addressFilter !== "") {
+          return ele?.Address?.startsWith(addressFilter) || false;
+        } else if (speedFromFilter !== "") {
+          return (
+            (ele?.Speed > speedFromFilter &&
+              ele?.Speed < (speedToFilter?.length ? speedToFilter : 200)) ||
+            false
+          );
+        } else if (speedToFilter !== "") {
+          return (
+            (ele?.Speed < speedToFilter && ele?.Speed > speedFromFilter) ||
+            false
+          );
+        } else {
+          return ele;
+        }
+      });
     } else if (serialNumberFilter !== "") {
       return (
         VehTreeData.filter((e) =>
@@ -107,18 +129,6 @@ const WidgetMenu = () => {
         VehTreeData.filter((e) => e?.Address?.startsWith(addressFilter)) ||
         false
       );
-    } else if (displayNameFilter !== "") {
-      return (
-        VehTreeData.filter((e) =>
-          e?.DisplayName?.includes(displayNameFilter)
-        ) || false
-      );
-    } else if (plateNumberFilter !== "") {
-      return (
-        VehTreeData.filter((e) =>
-          e?.PlateNumber?.includes(plateNumberFilter)
-        ) || false
-      );
     }
 
     // Speed From
@@ -126,8 +136,8 @@ const WidgetMenu = () => {
       return (
         VehTreeData.filter(
           (e) =>
-            e?.Speed >= speedFromFilter &&
-            e?.Speed <= (speedToFilter?.length ? speedToFilter : 200)
+            e?.Speed > speedFromFilter &&
+            e?.Speed < (speedToFilter?.length ? speedToFilter : 200)
         ) || false
       );
     }
@@ -135,9 +145,7 @@ const WidgetMenu = () => {
     else if (speedToFilter !== "") {
       return (
         VehTreeData.filter(
-          (e) =>
-            e?.Speed <= speedToFilter &&
-            e?.Speed >= (+speedFromFilter?.length ? speedFromFilter : 0)
+          (e) => e?.Speed < speedToFilter && e?.Speed > speedFromFilter
         ) || false
       );
     }
@@ -151,8 +159,6 @@ const WidgetMenu = () => {
     serialNumberFilter,
     speedToFilter,
     speedFromFilter,
-    displayNameFilter,
-    plateNumberFilter,
   ]);
 
   const [ToggleConfig, setToggleConfig] = useState({
@@ -343,9 +349,8 @@ const WidgetMenu = () => {
   return (
     <aside className={`${config.darkMode && Styles.dark}`}>
       <nav
-        className={`${Styles.nav} ${
-          isOpenMinuTrack && Styles.active
-        } position-absolute rounded shadow-lg pt-5 overflow-hidden`}
+        className={`${Styles.nav} ${isOpenMinuTrack && Styles.active
+          } position-absolute rounded shadow-lg pt-5 overflow-hidden`}
         id="widget_menu"
         style={{
           width: parseInt(ToggleConfig?.treeBoxWidth) + "px",
@@ -364,9 +369,8 @@ const WidgetMenu = () => {
           <>
             {/* Main Filter */}
             <div
-              className={`${Styles.nav__item} ${
-                isOpenMinuTrack && Styles.active
-              }`}
+              className={`${Styles.nav__item} ${isOpenMinuTrack && Styles.active
+                }`}
             >
               <div
                 className={`${Styles.section__one} d-flex align-items-center justify-content-center text-center`}
@@ -424,9 +428,8 @@ const WidgetMenu = () => {
 
             {/* Cars Filter */}
             <div
-              className={`${Styles.nav__item} ${
-                isOpenMinuTrack && Styles.active
-              } mb-1`}
+              className={`${Styles.nav__item} ${isOpenMinuTrack && Styles.active
+                } mb-1`}
             >
               <FilterTree
                 config={config}
@@ -438,9 +441,8 @@ const WidgetMenu = () => {
             </div>
 
             <div
-              className={`${Styles.nav__item} ${
-                isOpenMinuTrack && Styles.active
-              } mb-1`}
+              className={`${Styles.nav__item} ${isOpenMinuTrack && Styles.active
+                } mb-1`}
             >
               <InputsFilter
                 t={t}
@@ -462,9 +464,8 @@ const WidgetMenu = () => {
 
             {/* MenuTree */}
             <div
-              className={`${Styles.nav__item} ${
-                isOpenMinuTrack && Styles.active
-              } border-top pt-2`}
+              className={`${Styles.nav__item} ${isOpenMinuTrack && Styles.active
+                } border-top pt-2`}
             >
               <MenuTree
                 addressFilter={addressFilter}
@@ -488,9 +489,8 @@ const WidgetMenu = () => {
             </button>
 
             <div
-              className={`${Styles.config} ${
-                isToggleConfigOpen && Styles.active
-              }`}
+              className={`${Styles.config} ${isToggleConfigOpen && Styles.active
+                }`}
             >
               <button
                 onClick={() => setisToggleConfigOpen((prev) => !prev)}
@@ -505,9 +505,8 @@ const WidgetMenu = () => {
                 data-scroll="1"
               >
                 <div
-                  className={`${Styles.nav__item} ${
-                    isOpenMinuTrack && Styles.active
-                  }`}
+                  className={`${Styles.nav__item} ${isOpenMinuTrack && Styles.active
+                    }`}
                 >
                   <div className="container">
                     <div className="row">
@@ -516,16 +515,14 @@ const WidgetMenu = () => {
                       </p> */}
                       <div className="d-flex justify-content-between align-items-center mt-5">
                         <span
-                          className={`text-${
-                            config.darkMode ? "light" : "primary"
-                          }`}
+                          className={`text-${config.darkMode ? "light" : "primary"
+                            }`}
                         >
                           800px
                         </span>
                         <span
-                          className={`text-${
-                            config.darkMode ? "light" : "primary"
-                          }`}
+                          className={`text-${config.darkMode ? "light" : "primary"
+                            }`}
                         >
                           350px
                         </span>
@@ -574,8 +571,8 @@ const WidgetMenu = () => {
                                       ? "#ddd"
                                       : "#246c66"
                                     : config.darkMode
-                                    ? "#8A92A6"
-                                    : "#575757",
+                                      ? "#8A92A6"
+                                      : "#575757",
                                   fontSize: ".9rem",
                                 }}
                               >
@@ -584,7 +581,7 @@ const WidgetMenu = () => {
                             </div>
 
                             <FormCheck
-                              onClick={(e) => {
+                              onChange={(e) => {
                                 const newObg =
                                   ToggleConfig?.ToggleConfig.findIndex(
                                     (ele) => ele.name === e.target.name
@@ -613,8 +610,8 @@ const WidgetMenu = () => {
                                     ? "#FFF"
                                     : "#246c66"
                                   : config.darkMode
-                                  ? "#8A92A6"
-                                  : "#575757",
+                                    ? "#8A92A6"
+                                    : "#575757",
                               }}
                               name={toggle?.name}
                               value={toggle?.value}
@@ -649,8 +646,8 @@ const WidgetMenu = () => {
                                         ? "#FFF"
                                         : "#246c66"
                                       : config.darkMode
-                                      ? "#8A92A6"
-                                      : "#575757",
+                                        ? "#8A92A6"
+                                        : "#575757",
                                     fontSize: ".9rem",
                                   }}
                                 >
@@ -658,7 +655,7 @@ const WidgetMenu = () => {
                                 </span>
                               </div>
                               <FormCheck
-                                onClick={(e) => {
+                                onChange={(e) => {
                                   const newObg =
                                     ToggleConfig?.ToggleConfigSettings.findIndex(
                                       (ele) => ele.name === e.target.name
@@ -687,8 +684,8 @@ const WidgetMenu = () => {
                                       ? "#FFF"
                                       : "#246c66"
                                     : config.darkMode
-                                    ? "#8A92A6"
-                                    : "#575757",
+                                      ? "#8A92A6"
+                                      : "#575757",
                                 }}
                                 name={toggle?.name}
                                 value={toggle?.value}
@@ -719,7 +716,7 @@ const WidgetMenu = () => {
       <div
         onClick={handleToggleMinuTrack}
         className={`${Styles.hamburger} ${isOpenMinuTrack && Styles.active}`}
-        // className={`${Styles.hamburger} `}
+      // className={`${Styles.hamburger} `}
       >
         <span className={Styles.hamburger__patty} />
         <span className={Styles.hamburger__patty} />

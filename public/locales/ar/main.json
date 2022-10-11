@@ -1,11 +1,22 @@
 {
-  "track_key": "الخريطه",
-  "arabic_key": "عربي",
-  "logout_key": "تسجيل الخروج",
-  "search_key": "بحث",
-  "english_key": "انجليزي",
-  "dashboard_key": "لوحة القيادة",
-  "vehicles_key": "مركبات",
-  "settings_key": "إعدادات"
+    "dashboard_key": "لوحة القيادة",
+    "track_key": "الخريطه",
+    "preventive_maintenance_key": "الصيانة الوقائية",
+    "update_maintenance_plan_key": "تحديث خطة الصيانة",
+    "add_maintenance_plan_key": "أضف خطة الصيانة",
+    "arabic_key": "عربي",
+    "logout_key": "تسجيل الخروج",
+    "search_key": "بحث",
+    "english_key": "انجليزي",
+    "vehicles_key": "مركبات",
+    "settings_key": "إعدادات",
+    "percentage_key": "نسبة مئوية",
+    "export_to_excel_key": "تصدير إلى Excel",
+    "export_as_pdf_file_key": "تصدير كملف PDF",
+    "delete_selected_key": "احذف المختار",
+    "edit_key": "تعديل",
+    "delete_key": "حذف",
+    "actions_key": "أجراءات",
+    "please_wait_while_your_rows_are_loading_key": "يرجى الانتظار بينما يتم تحميل بياناتك"
 
 }

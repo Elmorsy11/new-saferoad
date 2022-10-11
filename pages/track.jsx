@@ -72,7 +72,7 @@ const Map = () => {
   return (
     <div id="map" className="mt-5 position-relative">
       <MapWithNoSSR myMap={myMap} />
-      
+
       <Suspense fallback={"loading"}>
         <WidgetMenu />
       </Suspense>
@@ -112,11 +112,7 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, [
-        "main",
-        "common",
-        "Dashboard",
-        "Table",
-      ])),
+        "main",])),
     },
   };
 }

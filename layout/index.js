@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
           <Header />
           {!router.pathname.includes("track") &&
             !router.pathname.includes("map") &&
-            !router.pathname.includes("history") && (
+            !router.pathname.includes("/history") && (
               <SubHeader pageName={router.pathname} />
             )}
         </div>

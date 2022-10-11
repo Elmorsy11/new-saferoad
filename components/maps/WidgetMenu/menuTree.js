@@ -40,7 +40,7 @@ const MenuTree = ({
       children: [groups],
     });
     for (let key in result[0]?.children[0]) {
-      if (result[0]?.children[0]?.hasOwnProperty(key))
+      if (Object.hasOwn(result[0]?.children[0], key))
         result[0]?.children?.push({
           title: key,
           children: result[0]?.children[0][key],
@@ -243,16 +243,15 @@ const MenuTree = ({
                       return (
                         <div
                           key={key}
-                          className={`me-1 border-bottom ${
-                            serialNumberFilter?.length ||
+                          className={`me-1 border-bottom ${serialNumberFilter?.length ||
                             addressFilter?.length ||
                             speedFromFilter?.length ||
                             speedToFilter?.length ||
                             displayNameFilter?.length ||
                             plateNumberFilter?.length
-                              ? "text-danger"
-                              : ""
-                          }`}
+                            ? "text-danger"
+                            : ""
+                            }`}
                           title={Object.values(itemToggle)[0]}
                           style={{
                             fontSize: "10px",

@@ -6,10 +6,20 @@ const SubHeader = ({ pageName = "" }) => {
   const { t } = useTranslation("main");
 
   const [state, setState] = useState("");
+  console.log(pageName);
   useEffect(() => {
     switch (pageName) {
       case "/":
         setState("dashboard_key");
+        break;
+      case "/preventive-maintenance":
+        setState("preventive_maintenance_key");
+        break;
+      case "/preventive-maintenance/add":
+        setState("add_maintenance_plan_key");
+        break;
+      case "/preventive-maintenance/edit/[editId]":
+        setState("update_maintenance_plan_key");
         break;
       default:
         setState("");

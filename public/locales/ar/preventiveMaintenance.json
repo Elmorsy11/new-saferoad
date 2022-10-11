@@ -1,0 +1,14 @@
+{
+    "view_history_key": "عرض السجل",
+    "display_name_key": "اسم العرض",
+    "plate_number_key": "رقم لوحة",
+    "maintenance_key": "اعمال صيانة",
+    "add_maintenance_plan_key": "أضف خطة الصيانة",
+    "delete_selected_key": "احذف المختار",
+    "maintenance_type_key": "نوع الصيانة",
+    "period_type_key": "نوع الفترة",
+    "start_value_key": "قيمه البدايه",
+    "next_value_key": "القيمة التالية",
+    "recurring_key": "يتكرر",
+    "reset_key": "إعادة ضبط"
+}

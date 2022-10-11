@@ -145,25 +145,3 @@ export const editPreventiveMaintenanceValidation = (
           ),
   });
 };
-
-export const addEditOperateDriver = Yup.object().shape({
-  FirstName: stringValidation("First Name").matches(
-    /^([a-zA-Z]+\s)*[a-zA-Z]+$/,
-    "First Name must not have numbers"
-  ),
-  LastName: stringValidation("Last Name").matches(
-    /^([a-zA-Z]+\s)*[a-zA-Z]+$/,
-    "Last Name must not have numbers"
-  ),
-  DateOfBirth: dateValidation("Date Of Birth"),
-  Nationality: stringValidation("Nationality"),
-  PhoneNumber: numberValidation("Phone Number"),
-  Email: emailValidation(),
-  DLNumber: numberValidation("Licence Number").min(
-    0,
-    "Licence Number must be greater than or equal to 0"
-  ),
-  DLExpirationDate: dateValidation("Licence Expiration Date"),
-  Department: stringValidation("Department"),
-  RFID: stringValidation("RFID"),
-});
