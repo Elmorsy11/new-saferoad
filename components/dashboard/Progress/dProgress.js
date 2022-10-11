@@ -54,7 +54,7 @@ const DProgress = ({
         <div>
           {/* <span>{!loading && `${progresCount}%`}</span> */}
 
-          <CountUp isCounting end={+progresCount} duration={duration} />
+          <CountUp isCounting end={+progresCount || 0} duration={duration} />
 
           %
         </div>
@@ -63,7 +63,7 @@ const DProgress = ({
         <Progress
           softcolors={color}
           color={color}
-          value={progresCount}
+          value={+progresCount}
           minvalue={minvalue}
           maxvalue={maxvalue}
           className="shadow-none w-100"
