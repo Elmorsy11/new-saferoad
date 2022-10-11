@@ -46,7 +46,7 @@ const Signin = () => {
         signInBtnRef.current.click();
       }, 0);
     }
-  }, [nw]);
+  }, [nw, at]);
 
   const loginSchema = yup.object(
     isToken

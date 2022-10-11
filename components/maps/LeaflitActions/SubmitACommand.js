@@ -15,8 +15,6 @@ import { toast } from "react-toastify";
 export default function SubmitACommand() {
   const [SelectB, setSelectB] = useState("SetTimeInterval");
   const darkMode = useSelector((state) => state.config.darkMode);
-  const VehFullData = useSelector((state) => state.streamData.VehFullData);
-
   const [loading, setloading] = useState(false);
 
   const [Data, setData] = useState({
