@@ -11,7 +11,7 @@ const Google = dynamic(() => import("components/dashboard/google"), {
 
 import Progress from "components/dashboard/Progress/index";
 
-// Chart Components
+// Chart Component
 import VehiclesStatusChart from "components/dashboard/Charts/VehiclesStatusChart";
 import AverageUtilizationChart from "components/dashboard/Charts/AverageUtilizationChart";
 import AverageSpeedAndDistanceChart from "components/dashboard/Charts/AverageSpeedAndDistanceChart";
@@ -49,7 +49,10 @@ const Home = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, [VehTotal]);
-  useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, libraries: ["places"], });
+  useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries: ["places"],
+  });
 
   const { indexStreamLoader } = useStreamDataState();
   useEffect(() => {
