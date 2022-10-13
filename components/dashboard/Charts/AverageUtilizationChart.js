@@ -5,19 +5,24 @@ import { Col } from 'react-bootstrap';
 import Styles from "styles/Dashboard.module.scss";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function AverageUtilizationChart() {
+export default function AverageUtilizationChart({data}) {
+	const yAxis = data?.map((ele) => ele?.avgUtlization.toFixed(2));
+	const xAxis = data?.map((ele) =>
+	new Date(`${ele._id}`).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	})
+);
 	const { t } = useTranslation("dashboard");
+
 
 	const chart = {
 		series: [
 			{
-				name: t("day_events_key"),
-				data: [30, 50, 35, 60, 40],
-			},
-			{
-				name: t("night_events_key"),
-				data: [40, 50, 55, 50, 30],
-			},
+				name: t("average_utilization"),
+				data: yAxis,
+			}
 		],
 		options: {
 			chart: {
@@ -27,7 +32,7 @@ export default function AverageUtilizationChart() {
 					show: false,
 				},
 			},
-			colors: ["#246c66", "#4bc7d2"],
+			colors: ["#246c66"],
 			plotOptions: {
 				bar: {
 					horizontal: false,
@@ -48,30 +53,20 @@ export default function AverageUtilizationChart() {
 				colors: ["transparent"],
 			},
 			xaxis: {
-				categories: [
-					"2021-10-04",
-					"2021-10-03",
-					"2021-10-02",
-					"2021-10-01",
-					"2021-09-30",
-				],
+				categories: xAxis,
 				labels: {
-					minHeight: 20,
-					maxHeight: 20,
 					style: {
 						colors: "#8A92A6",
-						fontSize: ".5rem",
+						fontSize: ".7rem",
 						fontWeight: "bold",
 					},
 				},
 			},
 			yaxis: {
 				title: {
-					text: "",
+					text: t("average_utilization_key"),
 				},
 				labels: {
-					minWidth: 19,
-					maxWidth: 19,
 					style: {
 						colors: "#8A92A6",
 					},

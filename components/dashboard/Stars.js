@@ -6,7 +6,7 @@ function Stars({
   name = "name",
   imgSrc,
   imgAlt = "image alt",
-  starsCount = 3,
+  starsCount,
 }) {
   const starsBlack = 5 - starsCount;
   return (

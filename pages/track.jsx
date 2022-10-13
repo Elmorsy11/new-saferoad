@@ -111,8 +111,7 @@ export default Map;
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "main",])),
+      ...(await serverSideTranslations(locale, ["main"])),
     },
   };
 }

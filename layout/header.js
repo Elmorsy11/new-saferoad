@@ -25,6 +25,7 @@ const Header = () => {
   const handleSignOut = (e) => {
     e.preventDefault();
     signOut();
+    localStorage.clear();
   };
   useEffect(() => {
     document.body.setAttribute(

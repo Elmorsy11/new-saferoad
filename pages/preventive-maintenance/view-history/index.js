@@ -11,7 +11,7 @@ import { viewHistory } from "services/preventiveMaintenance";
 import { toast } from "react-toastify";
 
 const ViewHistory = () => {
-  const { t } = useTranslation("main");
+  const { t } = useTranslation("preventiveMaintenance");
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
   const [DataTable, setDataTable] = useState(null);
@@ -82,63 +82,63 @@ const ViewHistory = () => {
   const columns = useMemo(
     () => [
       {
-        headerName: `${t("Display_Name")}`,
+        headerName: `${t("display_name_key")}`,
         field: "DisplayName",
         minWidth: 200,
       },
       {
-        headerName: `${t("Plate_Number")}`,
+        headerName: `${t("plate_number_key")}`,
         field: "PlateNumber",
-        minWidth: 150,
-      },
-      {
-        headerName: `${t("Maintenance")}`,
-        field: "MaintenanceType",
-        minWidth: 150,
-        valueGetter: handleMaintenanceType,
-      },
-      {
-        headerName: `${t("Period_Type")}`,
-        field: "PeriodType",
-        minWidth: 140,
-        valueGetter: handlePeriodType,
-      },
-      {
-        headerName: `${t("Start_Value")}`,
-        field: "StartValue",
-        minWidth: 140,
-      },
-      {
-        headerName: `${t("Maintenance_Due_Value")}`,
-        field: "NextValue",
         minWidth: 200,
       },
       {
-        headerName: `${t("Recurring")}`,
+        headerName: `${t("maintenance_key")}`,
+        field: "MaintenanceType",
+        minWidth: 200,
+        valueGetter: handleMaintenanceType,
+      },
+      {
+        headerName: `${t("period_type_key")}`,
+        field: "PeriodType",
+        minWidth: 200,
+        valueGetter: handlePeriodType,
+      },
+      {
+        headerName: `${t("start_value_key")}`,
+        field: "StartValue",
+        minWidth: 200,
+      },
+      {
+        headerName: `${t("maintenance_due_value_key")}`,
+        field: "NextValue",
+        minWidth: 250,
+      },
+      {
+        headerName: `${t("recurring_key")}`,
         field: "Recurring",
-        minWidth: 120,
+        minWidth: 200,
         valueGetter: handleRecurring,
       },
       {
-        headerName: `${t("Notify_Period")}`,
+        headerName: `${t("notify_period_key")}`,
         field: "NotifPeriod",
-        minWidth: 150,
+        minWidth: 250,
         valueGetter: handleNotifyPeriod,
       },
       {
-        headerName: `${t("Notify_when_Value")}`,
+        headerName: `${t("notify_when_value_key")}`,
         field: "WhenValue",
-        minWidth: 180,
+        minWidth: 250,
       },
       {
-        headerName: `${t("Current_Value")}`,
+        headerName: `${t("current_value_key")}`,
         field: "CurrentValue",
-        minWidth: 150,
+        minWidth: 200,
       },
       {
-        headerName: `${t("Original_Value")}`,
+        headerName: `${t("original_value_key")}`,
         field: "OrginalValue",
-        minWidth: 160,
+        minWidth: 200,
       },
     ],
     [t]
@@ -162,7 +162,7 @@ const ViewHistory = () => {
                     icon={faHistory}
                     size="sm"
                   />
-                  {t("Back")}
+                  {t("back_key")}
                 </Button>
               </Link>
             </div>
@@ -192,7 +192,7 @@ export default ViewHistory;
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["main"])),
+      ...(await serverSideTranslations(locale, ["main", "preventiveMaintenance"])),
     },
   };
 }

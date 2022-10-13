@@ -497,12 +497,12 @@ L.GridLayer.GoogleMutant = L.GridLayer.extend({
   },
 
   _getLargeGMapBound: function (googleBounds) {
-    const sw = googleBounds.getSouthWest();
-    const ne = googleBounds.getNorthEast();
-    const swLat = sw.lat();
-    const swLng = sw.lng();
-    const neLat = ne.lat();
-    const neLng = ne.lng();
+    const sw = googleBounds?.getSouthWest();
+    const ne = googleBounds?.getNorthEast();
+    const swLat = sw?.lat();
+    const swLng = sw?.lng();
+    const neLat = ne?.lat();
+    const neLng = ne?.lng();
     const latDelta = Math.abs(neLat - swLat);
     const lngDelta = Math.abs(neLng - swLng);
     return L.latLngBounds([

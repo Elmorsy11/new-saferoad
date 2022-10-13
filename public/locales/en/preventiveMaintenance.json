@@ -10,5 +10,11 @@
     "start_value_key": "Start Value",
     "next_value_key": "Next Value",
     "recurring_key": "Recurring",
-    "reset_key": "Reset"
+    "reset_key": "Reset",
+    "maintenance_due_value_key": "Maintenance Due Value",
+    "notify_period_key": "Notify Period",
+    "notify_when_value_key": "Notify When Value",
+    "current_value_key": "Current Value",
+    "original_value_key": "Original Value",
+    "back_key": "Back"
 }
