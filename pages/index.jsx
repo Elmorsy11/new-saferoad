@@ -10,7 +10,7 @@ import useStreamDataState from "hooks/useStreamDataState";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import Progress from "components/dashboard/Progress/index";
-// Charts
+// Chart
 import VehiclesStatusChart from "components/dashboard/Charts/VehiclesStatusChart";
 import AverageUtilizationChart from "components/dashboard/Charts/AverageUtilizationChart";
 import OverallFuelConsumptionChart from "components/dashboard/Charts/OverallFuelConsumptionChart";
@@ -19,7 +19,9 @@ import MonthlyPreventiveMaintenance from "components/dashboard/Charts/ MonthlyPr
 import NextrepairplansTable from "components/dashboard/NextrepairplansTable";
 //  CardsForRates
 import CardsForRates from "components/dashboard/CardsForRates";
-const Google = dynamic(() => import("components/dashboard/google"), { ssr: false });
+const Google = dynamic(() => import("components/dashboard/google"), {
+  ssr: false,
+});
 
 const Home = () => {
   const [DashboardData, setDashboardData] = useState({});
@@ -32,17 +34,24 @@ const Home = () => {
     indexStreamLoader();
 
     // dashborad data
-    const DashboardDataLocal = localStorage.getItem(encryptName("DashboardData"));
+    const DashboardDataLocal = localStorage.getItem(
+      encryptName("DashboardData")
+    );
     let data = JSON.parse(DashboardDataLocal) ?? "{}";
     setDashboardData(data);
     (async () => {
       await axios
         .get(`dashboard/mainDashboard/home`)
         .then(({ data }) => {
-          localStorage.setItem(encryptName("DashboardData"), JSON.stringify(data));
+          localStorage.setItem(
+            encryptName("DashboardData"),
+            JSON.stringify(data)
+          );
           setDashboardData(data);
         })
-        .catch((error) => { toast.error(error?.response?.data?.message) })
+        .catch((error) => {
+          toast.error(error?.response?.data?.message);
+        });
     })();
   }, []);
   return (
