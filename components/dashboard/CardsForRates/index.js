@@ -8,8 +8,9 @@ import Stars from "../Stars";
 import Link from "next/link";
 
 export default function Index({ data }) {
-  const topRatedDrivers = data?.topRatedDrivers;
-  const BadRatedDrivers = data?.BadRatedDrivers;
+  const topRated = data?.topRatedDrivers || [];
+  const BadRated = data?.BadRatedDrivers || [];
+
   const { t } = useTranslation("dashboard");
   return (
     <>
@@ -27,30 +28,26 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                <Stars
-                  name={
-                    topRatedDrivers
-                      ? topRatedDrivers[0]?.DriverName
-                      : "Driver Name"
-                  }
-                  imgSrc={"/assets/images/avatars/01.png"}
-                  imgAlt={"one"}
-                  starsCount={
-                    topRatedDrivers ? topRatedDrivers[0]?.Rate / 2 : 5
-                  }
-                />
-                <Stars
-                  name={
-                    topRatedDrivers
-                      ? topRatedDrivers[1]?.DriverName
-                      : "Driver Name"
-                  }
-                  imgSrc={"/assets/images/avatars/01.png"}
-                  imgAlt={"two"}
-                  starsCount={
-                    topRatedDrivers ? topRatedDrivers[1]?.Rate / 2 : 5
-                  }
-                />
+                {topRated.length > 0 ? (
+                  <div>
+                    <Stars
+                      name={topRated[0]?.DriverName}
+                      imgSrc={"/assets/images/avatars/01.png"}
+                      imgAlt={"one"}
+                      starsCount={5}
+                    />
+                    <Stars
+                      name={topRated[1]?.DriverName}
+                      imgSrc={"/assets/images/avatars/01.png"}
+                      imgAlt={"two"}
+                      starsCount={5}
+                    />
+                  </div>
+                ) : (
+                  <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
+                    No Drivers to Show
+                  </div>
+                )}
               </Card.Body>
             </Card>
           </a>
@@ -69,26 +66,26 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                <Stars
-                  name={
-                    BadRatedDrivers
-                      ? BadRatedDrivers[0]?.DriverName
-                      : "Driver Name"
-                  }
-                  imgSrc={"/assets/images/avatars/01.png"}
-                  imgAlt={"one"}
-                  starsCount={1}
-                />
-                <Stars
-                  name={
-                    BadRatedDrivers
-                      ? BadRatedDrivers[1]?.DriverName
-                      : "Driver Name"
-                  }
-                  imgSrc={"/assets/images/avatars/01.png"}
-                  imgAlt={"two"}
-                  starsCount={1}
-                />
+                {BadRated.length > 0 ? (
+                  <div>
+                    <Stars
+                      name={BadRated[0]?.DriverName}
+                      imgSrc={"/assets/images/avatars/01.png"}
+                      imgAlt={"one"}
+                      starsCount={1}
+                    />
+                    <Stars
+                      name={BadRated[1]?.DriverName}
+                      imgSrc={"/assets/images/avatars/01.png"}
+                      imgAlt={"two"}
+                      starsCount={1}
+                    />
+                  </div>
+                ) : (
+                  <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
+                    No Drivers to Show
+                  </div>
+                )}
               </Card.Body>
             </Card>
           </a>
@@ -108,18 +105,26 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                <Stars
-                  name="Vehicle name 1"
-                  imgSrc={"/assets/images/741407.png"}
-                  imgAlt={"one"}
-                  starsCount={5}
-                />
-                <Stars
-                  name="Vehicle name 2"
-                  imgSrc={"/assets/images/741407.png"}
-                  imgAlt={"tow"}
-                  starsCount={1}
-                />
+                {topRated.length > 0 ? (
+                  <div>
+                    <Stars
+                      name={topRated[0]?.DisplayName}
+                      imgSrc={"/assets/images/741407.png"}
+                      imgAlt={"one"}
+                      starsCount={5}
+                    />
+                    <Stars
+                      name={topRated[1]?.DisplayName}
+                      imgSrc={"/assets/images/741407.png"}
+                      imgAlt={"tow"}
+                      starsCount={5}
+                    />
+                  </div>
+                ) : (
+                  <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
+                    No vehicles to Show
+                  </div>
+                )}
               </Card.Body>
             </Card>
           </a>
@@ -138,18 +143,26 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                <Stars
-                  name="Vehicle name 1"
-                  imgSrc={"/assets/images/741407.png"}
-                  imgAlt={"one"}
-                  starsCount={2}
-                />
-                <Stars
-                  name="Vehicle name 2"
-                  imgSrc={"/assets/images/741407.png"}
-                  imgAlt={"tow"}
-                  starsCount={3}
-                />
+                {BadRated.length > 0 ? (
+                  <div>
+                    <Stars
+                      name={BadRated[0]?.DisplayName}
+                      imgSrc={"/assets/images/741407.png"}
+                      imgAlt={"one"}
+                      starsCount={1}
+                    />
+                    <Stars
+                      name={BadRated[1]?.DisplayName}
+                      imgSrc={"/assets/images/741407.png"}
+                      imgAlt={"tow"}
+                      starsCount={1}
+                    />
+                  </div>
+                ) : (
+                  <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
+                    No vehicles to Show
+                  </div>
+                )}
               </Card.Body>
             </Card>
           </a>

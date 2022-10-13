@@ -10,5 +10,12 @@
     "start_value_key": "قيمه البدايه",
     "next_value_key": "القيمة التالية",
     "recurring_key": "يتكرر",
-    "reset_key": "إعادة ضبط"
+    "reset_key": "إعادة ضبط",
+    "maintenance_due_value_key": "قيمة الصيانة المستحقة",
+    "notify_period_key": "فترة الإخطار",
+    "notify_when_value_key": "إخطار عندما قيمة",
+    "current_value_key": "القيمة الحالية",
+    "original_value_key": "القيمة الأصلية",
+    "back_key": "رجوع"
+
 }
