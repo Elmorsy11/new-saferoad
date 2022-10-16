@@ -6,16 +6,16 @@ import { useSelector } from "react-redux";
 export default function DeleteModal({
   show,
   loading,
-  title = "Are you sure?",
-  description = "Are you sure you want to delete this table?",
-  confirmText = "Yes, delete it!",
-  cancelText = "No, cancel",
+  title,
+  description,
+  confirmText,
+  cancelText,
   onConfirm,
   onCancel,
 }) {
   const { config: { darkMode }, } = useSelector((state) => state);
   const Dark = darkMode ? "bg-dark" : "";
-  const { t } = useTranslation(["main"]);
+  const { t } = useTranslation("main");
 
   return (
     <Modal show={show} size="md" onHide={onCancel} centered className="border-0">
@@ -24,7 +24,7 @@ export default function DeleteModal({
         className={`${Dark} text-secondary`}
       >
         <Modal.Title className="" as="h4">
-          {title}
+          {t(title || "are_you_sure?")}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body
@@ -33,7 +33,7 @@ export default function DeleteModal({
         style={{ minHeight: "200px" }}
       >
         <DeleteSvg darkMode={darkMode} />
-        <p className="lead text-secondary">{description}</p>
+        <p className="lead text-secondary">{t(description || "are_you_sure_you_want_to_delete_this_table")}</p>
       </Modal.Body>
       <Modal.Footer
         className={`d-flex justify-content-center ${Dark}`}
@@ -44,7 +44,7 @@ export default function DeleteModal({
           variant="danger"
           className={`px-4 py-2 ms-3 ${darkMode ? "text-white" : ""} `}
         >
-          {t(confirmText)}
+          {t(confirmText || "yes,_delete_it!")}
         </Button>
         <Button
           variant="primary"
@@ -56,7 +56,7 @@ export default function DeleteModal({
                         icon={faTimes}
                         size="sm"
                     /> */}
-          {t(cancelText)}
+          {t(cancelText || "no,_cancel")}
         </Button>
       </Modal.Footer>
     </Modal>

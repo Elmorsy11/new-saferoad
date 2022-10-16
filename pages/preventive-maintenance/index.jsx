@@ -58,7 +58,7 @@ function PreventiveMaintenance() {
     setloadingDelete(true);
     try {
       await deletePreventive(deleteSelectedDateString);
-      toast.success(deleteSelectedNameseString + " deleted successfully");
+      toast.success(deleteSelectedNameseString + t("deleted_successfully_key"));
       setDataTable(
         DataTable?.filter((driver) => !deleteSelectedDate.includes(driver.ID))
       );
@@ -128,7 +128,7 @@ function PreventiveMaintenance() {
         headerName: t("display_name_key"),
         field: "DisplayName",
         minWidth: 170,
-        maxWidth: 180,
+        maxWidth: 220,
         sortable: true,
         unSortIcon: true,
         cellRenderer: (params) => (
@@ -148,7 +148,7 @@ function PreventiveMaintenance() {
                 }}
                 className=""
               >
-                {t("edit")}
+                {t("edit_key")}
               </span>
               <span
                 onClick={() => {
@@ -292,14 +292,12 @@ function PreventiveMaintenance() {
       <DeleteModal
         show={showModalDelete}
         loading={loadingDelete}
-        title={"Delete Maintenance Plan"}
+        title={t("delete_maintenance_plan_key")}
         description={
           deleteSelectedDate.length === 1
-            ? "Are you sure you want to delete this maintenance plan?"
-            : "Are you sure you want to delete the maintenance plans?"
+            ? t("are_you_sure_you_want_to_delete_this_maintenance_plan?")
+            : t("are_you_sure_you_want_to_delete_the_maintenance_plans?")
         }
-        confirmText={"Yes, delete!"}
-        cancelText={"No, cancel"}
         onConfirm={onDelete}
         onCancel={() => {
           setshowModalDelete(false);
@@ -319,7 +317,7 @@ function PreventiveMaintenance() {
           icon={faExternalLinkAlt}
           model={true}
           id={editID}
-          modelButtonMsg={"Open in new tab"}
+          // modelButtonMsg={""}
           className={`p-0 m-0`}
           onModelButtonClicked={() => {
             router.push(`/preventive-maintenance/edit/${editID}`);
