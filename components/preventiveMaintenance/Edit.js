@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { Button, Card, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useMemo } from "react";
 import { Formik, Form } from "formik";
 import {
   fitchPreventiveForEdit,
@@ -14,66 +14,7 @@ import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import Checkbox from "components/formik/Checkbox";
 import { editPreventiveMaintenanceValidation } from "helpers/yupValidations";
 import Progress from "components/Progress";
-
-//data of react select
-const optionsMaintenanceType = [
-  {
-    value: 1,
-    label: "Engine Oil Change",
-  },
-  {
-    value: 2,
-    label: "Change Vehicle Brakes",
-  },
-  {
-    value: 3,
-    label: "Vehicle License Renew",
-  },
-  {
-    value: 4,
-    label: "Vehicle Wash",
-  },
-  {
-    value: 5,
-    label: "Tires Change",
-  },
-  {
-    value: 6,
-    label: "Transmission Oil Change",
-  },
-  {
-    value: 7,
-    label: "Filter Change",
-  },
-  {
-    value: 8,
-    label: "Others",
-  },
-];
-const optionsPeriodType = [
-  {
-    value: 1,
-    label: "By Mileage",
-  },
-  {
-    value: 2,
-    label: "By Fixed Date",
-  },
-  {
-    value: 3,
-    label: "By Working Hours",
-  },
-];
-const optionsNotifyPeriod = [
-  {
-    value: "1",
-    label: "Percentage",
-  },
-  {
-    value: "2",
-    label: "Value",
-  },
-];
+import { useTranslation } from "next-i18next";
 
 const Edit = ({
   id,
@@ -85,6 +26,7 @@ const Edit = ({
   handleModel,
   updateTable
 }) => {
+  const { t } = useTranslation("preventiveMaintenance");
   const router = useRouter();
   const [selectedVehicles, setSelectedVehicles] = useState([]);
   const [periodType, setPeriodType] = useState("");
@@ -99,6 +41,67 @@ const Edit = ({
   const [whenValue, setWhenValue] = useState("");
   const [startValue, setStartValue] = useState("");
   const [nextValue, setNextValue] = useState("");
+
+
+  // data for select boxes
+  const optionsMaintenanceType = useMemo(() => [
+    {
+      value: 1,
+      label: t("engine_oil_change_key")
+    },
+    {
+      value: 2,
+      label: t("change_vehicle_brakes_key")
+    },
+    {
+      value: 3,
+      label: t("vehicle_license_renew_key")
+    },
+    {
+      value: 4,
+      label: t("vehicle_wash_key")
+    },
+    {
+      value: 5,
+      label: t("tires_change_key")
+    },
+    {
+      value: 6,
+      label: t("transmission_oil_change_key")
+    },
+    {
+      value: 7,
+      label: t("filter_change_key")
+    },
+    {
+      value: 8,
+      label: t("others_key")
+    },
+  ], [t]);
+  const optionsPeriodType = useMemo(() => [
+    {
+      value: 1,
+      label: t("by_Mileage_key"),
+    },
+    {
+      value: 2,
+      label: t("by_fixed_date_key"),
+    },
+    {
+      value: 3,
+      label: t("by_working_hours_key"),
+    },
+  ], [t]);
+  const optionsNotifyPeriod = useMemo(() => [
+    {
+      value: "1",
+      label: t("percentage_key"),
+    },
+    {
+      value: "2",
+      label: t("value_key"),
+    },
+  ], [t]);
 
   // fetch maintenance data
   useEffect(() => {
@@ -242,7 +245,7 @@ const Edit = ({
       {loadingPage ? <Progress /> : (
         <Card className="mb-1">
           {!model && (
-            <Card.Header className="h3">Update Maintenance Plan</Card.Header>
+            <Card.Header className="h3">{t("update_maintenance_plan_key")}</Card.Header>
           )}
           <Card.Body className={`${className}`}>
             <Formik
@@ -251,7 +254,8 @@ const Edit = ({
                 fixedDateCase,
                 minDate,
                 startValue,
-                nextValue
+                nextValue,
+                t
               )}
               onSubmit={onSubmit}
             >
@@ -261,8 +265,8 @@ const Edit = ({
                   <Form>
                     <Row>
                       <Input
-                        placeholder="Vehicle Name"
-                        label="Vehicle Name"
+                        label={t("select_vehicles_key")}
+                        placeholder={t("select_vehicles_key")}
                         name="vehicleName"
                         type="text"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -270,8 +274,7 @@ const Edit = ({
                       />
 
                       <Input
-                        placeholder="Select Maintenance Type"
-                        label="Maintenance Type"
+                        label={t("maintenance_type_key")}
                         name="MaintenanceType"
                         type="text"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -279,8 +282,7 @@ const Edit = ({
                       />
 
                       <Input
-                        placeholder="Select Period Type"
-                        label="Period Type"
+                        label={t("period_type_key")}
                         name="PeriodType"
                         type="text"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -289,8 +291,7 @@ const Edit = ({
 
                       {!(selectedVehicles?.length > 1) && !fixedDateCase && (
                         <Input
-                          placeholder="Start Value"
-                          label="Start Value"
+                          label={t("start_value_key")}
                           name="StartValue"
                           type="number"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -299,8 +300,7 @@ const Edit = ({
                       )}
 
                       <Input
-                        placeholder="Maintenance Due Value"
-                        label="Maintenance Due Value"
+                        label={t("maintenance_due_value_key")}
                         name="MaintenanceDueValue"
                         type={fixedDateCase ? "date" : "number"}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -310,8 +310,7 @@ const Edit = ({
 
                       {!(selectedVehicles?.length > 1) && !fixedDateCase && (
                         <Input
-                          placeholder="Next Value"
-                          label="Next Value"
+                          label={t("next_value_key")}
                           name="NextValue"
                           type="number"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -321,10 +320,9 @@ const Edit = ({
                       )}
 
                       <Input
+                        label={t("email_address_key")}
                         type="email"
                         name="NotifyByEmail"
-                        label="Email Address"
-                        placeholder="Email Address"
                         className={"col-12 col-md-6 col-lg-4 mb-2"}
                       />
 
@@ -333,7 +331,7 @@ const Edit = ({
                           name="Recurring"
                           option={{
                             value: "1",
-                            key: "Recurring",
+                            key: `${t("recurring_key")}`,
                           }}
                           className={"col-6 col-lg-3"}
                           disabled={fixedDateCase ? true : false}
@@ -343,25 +341,23 @@ const Edit = ({
                           name="NotifyByPush"
                           option={{
                             value: "true",
-                            key: "Notify By Push",
+                            key: `${t("notify_by_push_key")}`,
                           }}
                         />
                       </Row>
                       <Row>
                         <Input
+                          label={t("notify_message_key")}
                           type="text"
                           name="NotifMessage"
-                          label="Notify Message"
-                          placeholder="Notify Message"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
                       </Row>
 
                       <ReactSelect
-                        placeholder="Select Notify Period"
+                        label={`${t("notify_period_key")}`}
                         className={`col-12 col-md-6 col-lg-4 mb-3`}
                         options={optionsNotifyPeriod}
-                        label={"Notify Period"}
                         name="WhenPeriod"
                         isDisabled={fixedDateCase ? true : false}
                         isSearchable={true}
@@ -369,10 +365,9 @@ const Edit = ({
 
                       {!valueNotifyType && !fixedDateCase && (
                         <Input
+                          label={t("percentage_value_key")}
                           type="number"
                           name="PercentageValue"
-                          label="Percentage Value"
-                          placeholder="Percentage Value"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                           onFocus={(event) => event.target.select()}
                         />
@@ -380,10 +375,9 @@ const Edit = ({
 
                       {!(selectedVehicles?.length > 1) || fixedDateCase ? (
                         <Input
+                          label={t("notify_when_value_key")}
                           type={fixedDateCase ? "date" : "number"}
                           name="WhenValue"
-                          label="Notify when Value"
-                          placeholder="Notify when Value"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                           disabled={
                             valueNotifyType || fixedDateCase ? false : true
@@ -405,7 +399,7 @@ const Edit = ({
                           type="button"
                           onClick={onModelButtonClicked}
                         >
-                          {modelButtonMsg}
+                          {modelButtonMsg || t("open_in_new_tab_key")}
                           {
                             <FontAwesomeIcon
                               className="mx-2"
@@ -433,7 +427,7 @@ const Edit = ({
                             size="sm"
                           />
                         )}
-                        Save
+                        {t("save_key")}
                       </Button>
                       <Button
                         className="px-3 py-2 text-nowrap me-3 ms-0 "
@@ -450,7 +444,7 @@ const Edit = ({
                           icon={faTimes}
                           size="sm"
                         />
-                        Cancle
+                        {t("cancel_key")}
                       </Button>
                     </div>
                   </Form>

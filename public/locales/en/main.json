@@ -17,5 +17,10 @@
     "edit_key": "Edit",
     "delete_key": "Delete",
     "actions_key": "Actions",
-    "please_wait_while_your_rows_are_loading_key": "Please wait while your rows are loading"
+    "please_wait_while_your_rows_are_loading_key": "Please wait while your rows are loading",
+    "no,_cancel": "No, Cancel",
+    "yes,_delete_it!": "Yes, Delete it!",
+    "are_you_sure?": "Are you sure?",
+    "are_you_sure_you_want_to_delete_this_table?": "Are you sure you want to delete this table?",
+    "cancel_key": "Cancel"
 }

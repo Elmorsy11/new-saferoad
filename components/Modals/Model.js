@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -14,6 +15,7 @@ const Model = ({
   footer = true,
 }) => {
   const darkMode = useSelector((state) => state.config.darkMode);
+  const { t } = useTranslation("main");
 
   return (
     <Modal
@@ -34,7 +36,7 @@ const Model = ({
             {updateButton}
           </Button>
           <Button className="p-2" onClick={onHide}>
-            Close
+            {t("cancel_key")}
           </Button>
         </Modal.Footer>
       )}

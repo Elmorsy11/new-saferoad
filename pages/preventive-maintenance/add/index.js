@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Button, Card, Row } from "react-bootstrap";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { toast } from "react-toastify";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useMemo } from "react";
 import useStreamDataState from "hooks/useStreamDataState";
 import { encryptName } from "helpers/encryptions";
 import { Formik, Form } from "formik";
@@ -15,68 +15,11 @@ import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import Checkbox from "components/formik/Checkbox";
 import { addNewPreventive } from "services/preventiveMaintenance";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
-//data of react select
-const optionsMaintenanceType = [
-  {
-    value: 1,
-    label: "Engine Oil Change",
-  },
-  {
-    value: 2,
-    label: "Change Vehicle Brakes",
-  },
-  {
-    value: 3,
-    label: "Vehicle License Renew",
-  },
-  {
-    value: 4,
-    label: "Vehicle Wash",
-  },
-  {
-    value: 5,
-    label: "Tires Change",
-  },
-  {
-    value: 6,
-    label: "Transmission Oil Change",
-  },
-  {
-    value: 7,
-    label: "Filter Change",
-  },
-  {
-    value: 8,
-    label: "Others",
-  },
-];
-const optionsPeriodType = [
-  {
-    value: 1,
-    label: "By Mileage",
-  },
-  {
-    value: 2,
-    label: "By Fixed Date",
-  },
-  {
-    value: 3,
-    label: "By Working Hours",
-  },
-];
-const optionsNotifyPeriod = [
-  {
-    value: "1",
-    label: "Percentage",
-  },
-  {
-    value: "2",
-    label: "Value",
-  },
-];
 
 const FormikAdd = () => {
+  const { t } = useTranslation("preventiveMaintenance");
   const router = useRouter();
   const [vehicles, setVehicles] = useState([]);
   const [selectedVehicles, setSelectedVehicles] = useState([]);
@@ -90,7 +33,65 @@ const FormikAdd = () => {
   const [nextValue, setNextValue] = useState("");
   const [whenValue, setWhenValue] = useState("");
   const [percentageValue, setPercentageValue] = useState("");
-
+  // data for select boxes
+  const optionsMaintenanceType = useMemo(() => [
+    {
+      value: 1,
+      label: t("engine_oil_change_key")
+    },
+    {
+      value: 2,
+      label: t("change_vehicle_brakes_key")
+    },
+    {
+      value: 3,
+      label: t("vehicle_license_renew_key")
+    },
+    {
+      value: 4,
+      label: t("vehicle_wash_key")
+    },
+    {
+      value: 5,
+      label: t("tires_change_key")
+    },
+    {
+      value: 6,
+      label: t("transmission_oil_change_key")
+    },
+    {
+      value: 7,
+      label: t("filter_change_key")
+    },
+    {
+      value: 8,
+      label: t("others_key")
+    },
+  ], [t]);
+  const optionsPeriodType = useMemo(() => [
+    {
+      value: 1,
+      label: t("by_Mileage_key"),
+    },
+    {
+      value: 2,
+      label: t("by_fixed_date_key"),
+    },
+    {
+      value: 3,
+      label: t("by_working_hours_key"),
+    },
+  ], [t]);
+  const optionsNotifyPeriod = useMemo(() => [
+    {
+      value: "1",
+      label: t("percentage_key"),
+    },
+    {
+      value: "2",
+      label: t("value_key"),
+    },
+  ], [t]);
   const [valueNotifyPeriodError, setValueNotifyPeriodError] = useState(false);
 
   const [loading, setloading] = useState(false);
@@ -284,7 +285,7 @@ const FormikAdd = () => {
   return (
     <>
       <Card>
-        <Card.Header className="h3">Add Maintenance Plan</Card.Header>
+        <Card.Header className="h3">{t("add_maintenance_plan_key")}</Card.Header>
         <Card.Body>
           <Formik
             initialValues={initialValues}
@@ -293,7 +294,8 @@ const FormikAdd = () => {
               minDate,
               startValue,
               nextValue,
-              selectedVehiclesData
+              selectedVehiclesData,
+              t
             )}
             onSubmit={onSubmit}
           >
@@ -304,9 +306,9 @@ const FormikAdd = () => {
                   <Row>
                     <ReactSelect
                       options={vehiclesOptions}
-                      label="Select vehicles"
+                      label={t("select_vehicles_key")}
                       name="selectedVehicles"
-                      placeholder={"Select vehicles"}
+                      placeholder={t("select_vehicles_key")}
                       className={"col-12 col-md-6 col-lg-4 mb-3"}
                       isSearchable={true}
                       isMulti={true}
@@ -314,26 +316,23 @@ const FormikAdd = () => {
 
                     <ReactSelect
                       options={optionsMaintenanceType}
-                      label="Maintenance Type"
+                      label={t("maintenance_type_key")}
                       name="MaintenanceType"
-                      placeholder={"Select Maintenance Type"}
                       className={"col-12 col-md-6 col-lg-4 mb-3"}
                       isSearchable={true}
                     />
 
                     <ReactSelect
                       options={optionsPeriodType}
-                      label="Period Type"
+                      label={t("period_type_key")}
                       name="PeriodType"
-                      placeholder={"Select Period Type"}
                       className={"col-12 col-md-6 col-lg-4 mb-3"}
                       isSearchable={true}
                     />
 
                     {!(selectedVehiclesData?.length > 1) && !fixedDateCase && (
                       <Input
-                        placeholder="Start Value"
-                        label="Start Value"
+                        label={t("start_value_key")}
                         name="StartValue"
                         type="number"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -343,8 +342,7 @@ const FormikAdd = () => {
                     )}
 
                     <Input
-                      placeholder="Maintenance Due Value"
-                      label="Maintenance Due Value"
+                      label={t("maintenance_due_value_key")}
                       name="MaintenanceDueValue"
                       type={fixedDateCase ? "date" : "number"}
                       className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -354,8 +352,7 @@ const FormikAdd = () => {
 
                     {!(selectedVehiclesData?.length > 1) && !fixedDateCase && (
                       <Input
-                        placeholder="Next Value"
-                        label="Next Value"
+                        label={t("next_value_key")}
                         name="NextValue"
                         type="number"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -365,10 +362,9 @@ const FormikAdd = () => {
                     )}
 
                     <Input
+                      label={t("email_address_key")}
                       type="email"
                       name="NotifyByEmail"
-                      label="Email Address"
-                      placeholder="Email Address"
                       className={"col-12 col-md-6 col-lg-4 mb-2"}
                     />
 
@@ -377,7 +373,7 @@ const FormikAdd = () => {
                         name="Recurring"
                         option={{
                           value: "1",
-                          key: "Recurring",
+                          key: `${t("recurring_key")}`,
                         }}
                         className={"col-6 col-lg-3"}
                         disabled={fixedDateCase ? true : false}
@@ -387,7 +383,7 @@ const FormikAdd = () => {
                         name="NotifyByPush"
                         option={{
                           value: "true",
-                          key: "Notify By Push",
+                          key: `${t("notify_by_push_key")}`,
                         }}
                       />
                     </Row>
@@ -396,14 +392,12 @@ const FormikAdd = () => {
                       <Input
                         type="text"
                         name="NotifMessage"
-                        label="Notify Message"
-                        placeholder="Notify Message"
+                        label={t("notify_message_key")}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
                       />
                     </Row>
 
                     <ReactSelect
-                      placeholder="Select Notify Period"
                       className={`col-12 col-md-6 col-lg-4 ${valueNotifyPeriodError ? "" : "mb-3"
                         } `}
                       options={
@@ -411,7 +405,7 @@ const FormikAdd = () => {
                           ? [optionsNotifyPeriod[0]]
                           : optionsNotifyPeriod
                       }
-                      label={"Notify Period"}
+                      label={`${t("notify_period_key")}`}
                       name="WhenPeriod"
                       isDisabled={fixedDateCase ? true : false}
                       isSearchable={true}
@@ -421,7 +415,7 @@ const FormikAdd = () => {
                         className="mb-3"
                         style={{ color: "red", fontSize: "12px" }}
                       >
-                        Please select percentage
+                        {t("please_select_percentage_key")}
                       </span>
                     )}
 
@@ -429,8 +423,7 @@ const FormikAdd = () => {
                       <Input
                         type="number"
                         name="PercentageValue"
-                        label="Percentage Value"
-                        placeholder="Percentage Value"
+                        label={t("percentage_value_key")}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
                       />
                     )}
@@ -439,8 +432,7 @@ const FormikAdd = () => {
                       <Input
                         type={fixedDateCase ? "date" : "number"}
                         name="WhenValue"
-                        label="Notify when Value"
-                        placeholder="Notify when Value"
+                        label={t("notify_when_value_key")}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
                         disabled={
                           valueNotifyType || fixedDateCase ? false : true
@@ -457,7 +449,7 @@ const FormikAdd = () => {
                   <div className="w-25 d-flex flex-wrap flex-md-nowrap">
                     <Button
                       type="submit"
-                      disabled={loading || selectedVehicles.length === 0}
+                      // disabled={loading || selectedVehicles.length === 0}
                       className="px-3 py-2 text-nowrap me-3 ms-0  mb-2 mb-md-0"
                     >
                       {!loading ? (
@@ -473,7 +465,7 @@ const FormikAdd = () => {
                           size="sm"
                         />
                       )}
-                      Save
+                      {t("save_key")}
                     </Button>
                     <Button
                       className="px-3 py-2 text-nowrap me-3 ms-0 "
@@ -486,7 +478,7 @@ const FormikAdd = () => {
                             icon={faTimes}
                             size="sm"
                           />
-                          Cancle
+                          {t("cancel_key")}
                         </div>
 
                       </Link>
@@ -508,7 +500,7 @@ export default FormikAdd;
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["main"])),
+      ...(await serverSideTranslations(locale, ["preventiveMaintenance", "main"])),
     },
   };
 }
