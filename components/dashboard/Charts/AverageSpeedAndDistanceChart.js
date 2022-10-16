@@ -3,9 +3,11 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { Col } from "react-bootstrap";
 import Styles from "styles/Dashboard.module.scss";
+import EmptyMess from "components/UI/ChartErrorMsg";
+import Spinner from "components/UI/Spinner";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function AverageSpeedAndDistanceChart({ data }) {
+export default function AverageSpeedAndDistanceChart({ data, loading }) {
   const yAxisSpeed = data?.map((ele) => ele?.avgSpeed.toFixed(2));
   const yAxisDistance = data?.map((ele) => ele?.avgDistance.toFixed(2));
   const xAxis = data?.map((ele) =>
@@ -15,7 +17,7 @@ export default function AverageSpeedAndDistanceChart({ data }) {
       day: "numeric",
     })
   );
-  
+
   const { t } = useTranslation("dashboard");
 
   const chart = {
@@ -94,13 +96,19 @@ export default function AverageSpeedAndDistanceChart({ data }) {
               </h4>
             </div>
           </div>
-          <div style={{direction:'ltr'}} className="card-body">
-            <Chart
-              options={chart.options}
-              series={chart.series}
-              type="line"
-              height="245"
-            />
+          <div style={{ direction: "ltr" }} className="card-body">
+            {loading ? (
+              <Spinner />
+            ) : data.length ? (
+              <Chart
+                options={chart.options}
+                series={chart.series}
+                type="line"
+                height="245"
+              />
+            ) : (
+              <EmptyMess msg="OOPS! NO DATA FOUND." />
+            )}
           </div>
         </div>
       </Col>

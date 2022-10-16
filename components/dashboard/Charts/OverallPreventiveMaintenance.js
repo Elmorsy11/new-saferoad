@@ -3,9 +3,11 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { Col } from "react-bootstrap";
 import Styles from "styles/Dashboard.module.scss";
+import EmptyMess from "components/UI/ChartErrorMsg";
+import Spinner from "components/UI/Spinner";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function OverallPreventiveMaintenance({ data }) {
+export default function OverallPreventiveMaintenance({ data, loading }) {
   const xAxis = data?.map((ele) => ele?.MaintenancePlan);
   const yAxis = data?.map((ele) => ele?.numOfMaintenance);
   const { t } = useTranslation("dashboard");
@@ -87,13 +89,19 @@ export default function OverallPreventiveMaintenance({ data }) {
               </h4>
             </div>
           </div>
-          <div style={{direction:'ltr'}} className="card-body">
-            <Chart
-              options={chart.options}
-              series={chart.series}
-              type="bar"
-              height="245"
-            />
+          <div style={{ direction: "ltr" }} className="card-body">
+            {loading ? (
+              <Spinner />
+            ) : data.length ? (
+              <Chart
+                options={chart.options}
+                series={chart.series}
+                type="bar"
+                height="245"
+              />
+            ) : (
+              <EmptyMess msg="OOPS! NO DATA FOUND." />
+            )}
           </div>
         </div>
       </Col>
