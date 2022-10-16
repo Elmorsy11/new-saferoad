@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faCog, faHistory } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faHistory, faPlus } from "@fortawesome/free-solid-svg-icons";
 // translation
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -127,8 +127,8 @@ function PreventiveMaintenance() {
       {
         headerName: t("display_name_key"),
         field: "DisplayName",
-        minWidth: 170,
-        maxWidth: 220,
+        minWidth: 200,
+        maxWidth: 300,
         sortable: true,
         unSortIcon: true,
         cellRenderer: (params) => (
@@ -225,7 +225,7 @@ function PreventiveMaintenance() {
                       >
                         <FontAwesomeIcon
                           className="me-2"
-                          icon={faCog}
+                          icon={faPlus}
                           size="sm"
                         />
                         {t("add_maintenance_plan_key")}
