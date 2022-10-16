@@ -3,11 +3,10 @@ import { Card, Col } from "react-bootstrap";
 import Styles from "../../../styles/Dashboard.module.scss";
 import { useTranslation } from "next-i18next";
 import Stars from "../Stars";
-// import avatars1 from "/assets/images/avatars/01.png";
-// import avatars2 from "/assets/images/741407.png";
+import Spinner from "components/UI/Spinner";
 import Link from "next/link";
 
-export default function Index({ data }) {
+export default function Index({ data, loading }) {
   const topRated = data?.topRatedDrivers || [];
   const BadRated = data?.BadRatedDrivers || [];
 
@@ -28,7 +27,9 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                {topRated.length > 0 ? (
+                {loading ? (
+                  <Spinner />
+                ) : topRated.length > 0 ? (
                   <div>
                     <Stars
                       name={topRated[0]?.DriverName}
@@ -66,7 +67,9 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                {BadRated.length > 0 ? (
+                {loading ? (
+                  <Spinner />
+                ) : BadRated.length > 0 ? (
                   <div>
                     <Stars
                       name={BadRated[0]?.DriverName}
@@ -105,7 +108,9 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                {topRated.length > 0 ? (
+                {loading ? (
+                  <Spinner />
+                ) : topRated.length > 0 ? (
                   <div>
                     <Stars
                       name={topRated[0]?.DisplayName}
@@ -143,7 +148,9 @@ export default function Index({ data }) {
                 </div>
               </Card.Header>
               <Card.Body>
-                {BadRated.length > 0 ? (
+                {loading ? (
+                  <Spinner />
+                ) : BadRated.length > 0 ? (
                   <div>
                     <Stars
                       name={BadRated[0]?.DisplayName}

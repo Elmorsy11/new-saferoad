@@ -13,7 +13,7 @@ import Input from "components/formik/Input";
 import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import Checkbox from "components/formik/Checkbox";
 import { editPreventiveMaintenanceValidation } from "helpers/yupValidations";
-import Progress from "components/Progress";
+import Progress from "components/UI/Spinner";
 
 //data of react select
 const optionsMaintenanceType = [
@@ -83,7 +83,7 @@ const Edit = ({
   icon,
   className,
   handleModel,
-  updateTable
+  updateTable,
 }) => {
   const router = useRouter();
   const [selectedVehicles, setSelectedVehicles] = useState([]);
@@ -139,7 +139,7 @@ const Edit = ({
         setWhenValue(
           vehiclesData?.length === 1
             ? +vehiclesData[0]?.StartValue +
-            +maintenanceDueValue * (+percentageValue / 100)
+                +maintenanceDueValue * (+percentageValue / 100)
             : 0
         );
       } else if (notifyType === "2") {
@@ -185,7 +185,7 @@ const Edit = ({
     PercentageValue: fixedDateCase
       ? 0
       : ((Data.WhenValue - Data.StartValue) * 100) /
-      (Data.NextValue - Data.StartValue),
+        (Data.NextValue - Data.StartValue),
     WhenValue: Data.WhenValue,
   };
 
@@ -229,7 +229,7 @@ const Edit = ({
       setloading(false);
       if (model) {
         handleModel();
-        updateTable()
+        updateTable();
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -239,7 +239,9 @@ const Edit = ({
 
   return (
     <div className="container-fluid">
-      {loadingPage ? <Progress /> : (
+      {loadingPage ? (
+        <Progress />
+      ) : (
         <Card className="mb-1">
           {!model && (
             <Card.Header className="h3">Update Maintenance Plan</Card.Header>
