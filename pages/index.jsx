@@ -36,26 +36,15 @@ import useStreamDataState from "hooks/useStreamDataState";
 import dynamic from "next/dynamic";
 
 const Home = () => {
-  // let syncLocaleStorage = (key, val = [], type = "get") => {
-  //   let loc = JSON.parse(localStorage.getItem("all")) || null;
-  //   if (type === "get") {
-  //     if (loc) {
-  //       return loc[key];
-  //     }
-  //   }
-  //   if (type === "post") {
-  //     localStorage.setItem(
-  //       "all",
-  //       JSON.stringify({ ...(loc || {}), [key]: val })
-  //     );
-  //   }
-  // };
-
-  const [DashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [topWorstData, setTopWorstData] = useState(null);
   const [speedChartData, setSpeedChartData] = useState([]);
   const [preventiveChartData, setPreventiveChartData] = useState([]);
   const [averageUtilizationChart, setAverageUtilizationChart] = useState([]);
+  const [loadingProgress, setLoadingProgress] = useState(true);
+  const [loadingPreventiveChart, setLoadingPreventiveChart] = useState(true);
+  const [loadingAvgSpeedChart, setLoadingAvgSpeedChart] = useState(true);
+  const [loadingUtilization, setLoadingUtilization] = useState(true);
+  const [loadingTopWorstData, setLoadingTopWorstData] = useState(true);
 
   const {
     streamData: { VehTotal },
@@ -66,7 +55,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (Object.keys(VehTotal).length > 0) {
-        setLoading(false);
+        setLoadingProgress(false);
       }
     }, 1500);
     return () => clearTimeout(timer);
@@ -83,90 +72,100 @@ const Home = () => {
     indexStreamLoader();
   }, []);
 
+  // helper func to get data from localstorage
+  const getLocalstorage = (dataName, setData, setLoading) => {
+    if (localStorage.getItem("allData")) {
+      let allData = JSON.parse(localStorage.getItem("allData"));
+      if (allData[dataName]) {
+        const localstorageData = allData[dataName];
+        setData(localstorageData);
+        setLoading(false);
+      }
+    }
+  };
+
+  // helper func to set data in localstorage
+  const setLocalstorage = (dataName, data) => {
+    const allData = JSON.parse(localStorage.getItem("allData"));
+    localStorage.setItem(
+      "allData",
+      JSON.stringify({ ...allData, [dataName]: data })
+    );
+  };
+
   useEffect(() => {
     // fetch Overall Preventive Maintenance chart data
     const fetchPreventiveData = async () => {
-      if (localStorage.getItem("PreventiveChartData")) {
-        const preventiveChartData = JSON.parse(
-          localStorage.getItem("PreventiveChartData")
-        );
-        setPreventiveChartData(preventiveChartData)
-      }
-      // setPreventiveChartData(syncLocaleStorage("PreventiveChartData"));
+      getLocalstorage(
+        "preventive-data",
+        setPreventiveChartData,
+        setLoadingPreventiveChart
+      );
       try {
         const respond = await fetchPreventiveChartData();
         setPreventiveChartData(respond.allMaintenance);
-        // await syncLocaleStorage(
-        //   "PreventiveChartData",
-        //   respond?.allMaintenance,
-        //   "post"
-        // );
-        localStorage.setItem(
-          "PreventiveChartData",
-          JSON.stringify(respond.allMaintenance)
-        );
+        setLoadingPreventiveChart(false);
+        setLocalstorage("preventive-data", respond.allMaintenance);
       } catch (error) {
         toast.error(error?.response?.data?.message);
+        setLoadingPreventiveChart(false);
       }
     };
     fetchPreventiveData();
 
     // top and low rated drivers
     const fetchTopWorst = async () => {
-      if (localStorage.getItem("DashboardData")) {
-        const TopWorstData = JSON.parse(localStorage.getItem("DashboardData"));
-        setDashboardData(TopWorstData);
-      }
+      getLocalstorage(
+        "top-worst-data",
+        setTopWorstData,
+        setLoadingTopWorstData
+      );
       try {
         const respond = await fetchTopWorstData();
-        setDashboardData(respond);
-        localStorage.setItem("DashboardData", JSON.stringify(respond));
+        setTopWorstData(respond);
+        setLoadingTopWorstData(false);
+        setLocalstorage("top-worst-data", respond);
       } catch (error) {
-        toast.error(error?.message);
+        toast.error(error?.response?.data?.message);
+        setLoadingTopWorstData(false);
       }
     };
     fetchTopWorst();
-  }, []);
 
-  // fetch Average Utilization chart data
-  useEffect(() => {
+    // fetch Average Utilization chart data
     const fetchAvgUtilizationChart = async () => {
-      if (localStorage.getItem("averageUtilizationChart")) {
-        const UtilizationChart = JSON.parse(
-          localStorage.getItem("averageUtilizationChart")
-        );
-        setAverageUtilizationChart(UtilizationChart);
-      }
+      getLocalstorage(
+        "avg-utilization-data",
+        setAverageUtilizationChart,
+        setLoadingUtilization
+      );
       try {
         const respond = await fetchAverageUtilizationChart();
         setAverageUtilizationChart(respond.avgUtlizations);
-        localStorage.setItem(
-          "averageUtilizationChart",
-          JSON.stringify(respond.avgUtlizations)
-        );
+        setLoadingUtilization(false);
+        setLocalstorage("avg-utilization-data", respond.avgUtlizations);
       } catch (error) {
         toast.error(error?.response?.data?.message);
+        setLoadingUtilization(false);
       }
     };
     fetchAvgUtilizationChart();
-  }, []);
 
-  // fetch Overall average speed chart data
-  useEffect(() => {
+    // fetch Overall average speed chart data
     const fetchSpeedChart = async () => {
-      if (localStorage.getItem("speedChart")) {
-        const speedChart = JSON.parse(localStorage.getItem("speedChart"));
-        setSpeedChartData(speedChart);
-      }
+      getLocalstorage(
+        "speed-chart-data",
+        setSpeedChartData,
+        setLoadingAvgSpeedChart
+      );
       try {
         const respond = await fetchSpeedChartData();
         setSpeedChartData(respond.fuelConsumptions);
-        localStorage.setItem(
-          "speedChart",
-          JSON.stringify(respond.fuelConsumptions)
-        );
+        setLoadingAvgSpeedChart(false);
+        setLocalstorage("speed-chart-data", respond.fuelConsumptions);
       } catch (error) {
         toast.error(error?.response?.data?.message);
+        setLoadingAvgSpeedChart(false);
       }
     };
     fetchSpeedChart();
@@ -178,7 +177,7 @@ const Home = () => {
         {/* ############################  progress bars + Map  ############################################## */}
         <Col lg="6">
           <Row>
-            <Progress loading={loading} VehTotal={VehTotal} />
+            <Progress loading={loadingProgress} VehTotal={VehTotal} />
           </Row>
         </Col>
         {/* map */}
@@ -195,25 +194,33 @@ const Home = () => {
       <Row>
         {/* charts part one */}
         <VehiclesStatusChart VehTotal={VehTotal} />
-
         {/* charts part two */}
-        <AverageUtilizationChart data={averageUtilizationChart} />
+        <AverageUtilizationChart
+          data={averageUtilizationChart}
+          loading={loadingUtilization}
+        />
       </Row>
       <Row>
         {/* chart part three */}
-        <AverageSpeedAndDistanceChart data={speedChartData} />
+        <AverageSpeedAndDistanceChart
+          data={speedChartData}
+          loading={loadingAvgSpeedChart}
+        />
 
         {/* chart part four */}
-        <OverallPreventiveMaintenance data={preventiveChartData} />
+        <OverallPreventiveMaintenance
+          data={preventiveChartData}
+          loading={loadingPreventiveChart}
+        />
       </Row>
 
       {/* ############################ cards for rates  ############################################## */}
       <Row>
-        <CardsForRates data={DashboardData} />
+        <CardsForRates data={topWorstData} loading={loadingTopWorstData} />
       </Row>
       {/* ############################ table  ############################################## */}
       <Row>
-        <NextrepairplansTable data={DashboardData} />
+        <NextrepairplansTable data={topWorstData} />
       </Row>
     </div>
   );
