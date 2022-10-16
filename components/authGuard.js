@@ -18,7 +18,7 @@ const AuthGuard = ({ children }) => {
     else {
       axios.defaults.headers.common.Authorization = `Bearer ${session?.user?.new_token}`;
       axios.defaults.baseURL = config?.apiGateway?.URL;
-      setTimeout(() => setloading(false), 100);
+      setTimeout(() => setloading(false), 500);
     }
   }, [loading, session]);
 
