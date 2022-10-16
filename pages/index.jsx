@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
-import axios from "axios";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useLoadScript } from "@react-google-maps/api";
 
@@ -10,6 +9,14 @@ const Google = dynamic(() => import("components/dashboard/google"), {
 });
 
 import Progress from "components/dashboard/Progress/index";
+
+// services functions
+import {
+  fetchPreventiveChartData,
+  fetchTopWorstData,
+  fetchAverageUtilizationChart,
+  fetchSpeedChartData,
+} from "services/dashboard";
 
 // Chart Component
 import VehiclesStatusChart from "components/dashboard/Charts/VehiclesStatusChart";
@@ -29,6 +36,21 @@ import useStreamDataState from "hooks/useStreamDataState";
 import dynamic from "next/dynamic";
 
 const Home = () => {
+  // let syncLocaleStorage = (key, val = [], type = "get") => {
+  //   let loc = JSON.parse(localStorage.getItem("all")) || null;
+  //   if (type === "get") {
+  //     if (loc) {
+  //       return loc[key];
+  //     }
+  //   }
+  //   if (type === "post") {
+  //     localStorage.setItem(
+  //       "all",
+  //       JSON.stringify({ ...(loc || {}), [key]: val })
+  //     );
+  //   }
+  // };
+
   const [DashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [speedChartData, setSpeedChartData] = useState([]);
@@ -49,94 +71,106 @@ const Home = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, [VehTotal]);
+
   useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
   const { indexStreamLoader } = useStreamDataState();
+
+  useEffect(() => {
+    indexStreamLoader();
+  }, []);
+
   useEffect(() => {
     // fetch Overall Preventive Maintenance chart data
     const fetchPreventiveData = async () => {
+      if (localStorage.getItem("PreventiveChartData")) {
+        const preventiveChartData = JSON.parse(
+          localStorage.getItem("PreventiveChartData")
+        );
+        setPreventiveChartData(preventiveChartData)
+      }
+      // setPreventiveChartData(syncLocaleStorage("PreventiveChartData"));
       try {
-        const respond = await axios.get(`dashboard/mainDashboard/home`);
-        setPreventiveChartData(respond.data.allMaintenance);
+        const respond = await fetchPreventiveChartData();
+        setPreventiveChartData(respond.allMaintenance);
+        // await syncLocaleStorage(
+        //   "PreventiveChartData",
+        //   respond?.allMaintenance,
+        //   "post"
+        // );
+        localStorage.setItem(
+          "PreventiveChartData",
+          JSON.stringify(respond.allMaintenance)
+        );
       } catch (error) {
         toast.error(error?.response?.data?.message);
       }
     };
     fetchPreventiveData();
-    //
-    indexStreamLoader();
-  }, []);
 
-  // top and low rated drivers
-  useEffect(() => {
-    const fetchData = async () => {
+    // top and low rated drivers
+    const fetchTopWorst = async () => {
       if (localStorage.getItem("DashboardData")) {
         const TopWorstData = JSON.parse(localStorage.getItem("DashboardData"));
         setDashboardData(TopWorstData);
       }
-      await axios
-        .get(`dashboard/mainDashboard/topWorst`)
-        .then(({ data }) => {
-          setDashboardData(data);
-          localStorage.setItem("DashboardData", JSON.stringify(data));
-        })
-        .catch((error) => {
-          toast.error(error?.message);
-        });
+      try {
+        const respond = await fetchTopWorstData();
+        setDashboardData(respond);
+        localStorage.setItem("DashboardData", JSON.stringify(respond));
+      } catch (error) {
+        toast.error(error?.message);
+      }
     };
-    fetchData();
-  }, []);
-
-  // fetch Average Utilization chart data
-  const fetchAverageUtilization = useCallback(async () => {
-    if (localStorage.getItem("averageUtilizationChart")) {
-      const UtilizationChart = JSON.parse(
-        localStorage.getItem("averageUtilizationChart")
-      );
-      setAverageUtilizationChart(UtilizationChart);
-    }
-    try {
-      const respond = await axios.get(`dashboard/mainDashboard/avgUtlization`);
-      setAverageUtilizationChart(respond.data.avgUtlizations);
-      localStorage.setItem(
-        "averageUtilizationChart",
-        JSON.stringify(respond.data.avgUtlizations)
-      );
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+    fetchTopWorst();
   }, []);
 
   // fetch Average Utilization chart data
   useEffect(() => {
-    fetchAverageUtilization();
-  }, [fetchAverageUtilization]);
-
-  // fetch Overall average speed chart data
-  const fetchSpeedData = useCallback(async () => {
-    if (localStorage.getItem("speedChart")) {
-      const speedChart = JSON.parse(localStorage.getItem("speedChart"));
-      setSpeedChartData(speedChart);
-    }
-    try {
-      const respond = await axios.get(`dashboard/mainDashboard/fuel`);
-      setSpeedChartData(respond.data.fuelConsumptions);
-      localStorage.setItem(
-        "speedChart",
-        JSON.stringify(respond.data.fuelConsumptions)
-      );
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+    const fetchAvgUtilizationChart = async () => {
+      if (localStorage.getItem("averageUtilizationChart")) {
+        const UtilizationChart = JSON.parse(
+          localStorage.getItem("averageUtilizationChart")
+        );
+        setAverageUtilizationChart(UtilizationChart);
+      }
+      try {
+        const respond = await fetchAverageUtilizationChart();
+        setAverageUtilizationChart(respond.avgUtlizations);
+        localStorage.setItem(
+          "averageUtilizationChart",
+          JSON.stringify(respond.avgUtlizations)
+        );
+      } catch (error) {
+        toast.error(error?.response?.data?.message);
+      }
+    };
+    fetchAvgUtilizationChart();
   }, []);
 
   // fetch Overall average speed chart data
   useEffect(() => {
-    fetchSpeedData();
-  }, [fetchSpeedData]);
+    const fetchSpeedChart = async () => {
+      if (localStorage.getItem("speedChart")) {
+        const speedChart = JSON.parse(localStorage.getItem("speedChart"));
+        setSpeedChartData(speedChart);
+      }
+      try {
+        const respond = await fetchSpeedChartData();
+        setSpeedChartData(respond.fuelConsumptions);
+        localStorage.setItem(
+          "speedChart",
+          JSON.stringify(respond.fuelConsumptions)
+        );
+      } catch (error) {
+        toast.error(error?.response?.data?.message);
+      }
+    };
+    fetchSpeedChart();
+  }, []);
 
   return (
     <div className="p-3">
