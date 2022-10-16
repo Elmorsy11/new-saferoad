@@ -445,10 +445,6 @@ const Header = () => {
                   className="dropdown-menu-end shadow"
                   aria-labelledby="navbarDropdown"
                 >
-                  <Dropdown.Item as={Link} href="/Setting" className="p-2">
-                    <a className="d-block dropdown-item">{t("settings_key")}</a>
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
                   <Dropdown.Item
                     as={"button"}
                     onClick={handleSignOut}
