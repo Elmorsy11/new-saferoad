@@ -13,7 +13,7 @@ import Input from "components/formik/Input";
 import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import Checkbox from "components/formik/Checkbox";
 import { editPreventiveMaintenanceValidation } from "helpers/yupValidations";
-import Progress from "components/UI/Spinner";
+import Spinner from "components/UI/Spinner";
 import { useTranslation } from "next-i18next";
 
 const Edit = ({
@@ -243,7 +243,7 @@ const Edit = ({
   return (
     <div className="container-fluid">
       {loadingPage ? (
-        <Progress />
+        <Spinner />
       ) : (
         <Card className="mb-1">
           {!model && (
