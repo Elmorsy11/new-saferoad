@@ -43,12 +43,6 @@ export default function OverallPreventiveMaintenance({ data }) {
         width: 0,
       },
 
-      /*grid: {
-								row: {
-										colors: ['#fff', '#f2f2f2']
-								}
-						},*/
-
       xaxis: {
         labels: {
           rotate: -45,
@@ -93,7 +87,7 @@ export default function OverallPreventiveMaintenance({ data }) {
               </h4>
             </div>
           </div>
-          <div className="card-body">
+          <div style={{direction:'ltr'}} className="card-body">
             <Chart
               options={chart.options}
               series={chart.series}

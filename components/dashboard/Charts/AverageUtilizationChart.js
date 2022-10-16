@@ -78,7 +78,7 @@ export default function AverageUtilizationChart({data}) {
 			tooltip: {
 				y: {
 					formatter: function (val) {
-						return ` ${val} ${t("events_key")}`;
+						return ` ${val}`;
 					},
 				},
 			},
@@ -97,7 +97,7 @@ export default function AverageUtilizationChart({data}) {
 							</h4>
 						</div>
 					</div>
-					<div className="card-body">
+					<div style={{direction:'ltr'}} className="card-body">
 						<Chart
 							className="d-activity"
 							options={chart.options}

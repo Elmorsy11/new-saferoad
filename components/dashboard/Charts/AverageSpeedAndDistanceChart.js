@@ -94,7 +94,7 @@ export default function AverageSpeedAndDistanceChart({ data }) {
               </h4>
             </div>
           </div>
-          <div className="card-body">
+          <div style={{direction:'ltr'}} className="card-body">
             <Chart
               options={chart.options}
               series={chart.series}
