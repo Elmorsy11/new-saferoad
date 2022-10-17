@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { useTranslation } from "next-i18next";
 
 const PDFExportPanel = (props) => {
-  const { t } = useTranslation(["reports", "main", "Table"]);
+  const { t } = useTranslation(["main"]);
   const [PDF_PAGE_ORITENTATION, SET_PDF_PAGE_ORIENTATION] =
     useState("landscape");
   const [PDF_WITH_FOOTER_PAGE_COUNT, SET_PDF_WITH_FOOTER_PAGE_COUNT] =
@@ -94,7 +94,7 @@ const PDFExportPanel = (props) => {
           }}
         />
         <label className="form-check-label me-2" htmlFor="landscape">
-          Landscape
+          {t("landscape_key")}
         </label>
         <input
           className="form-check-input"
@@ -110,7 +110,7 @@ const PDFExportPanel = (props) => {
           }}
         />
         <label className="form-check-label" htmlFor="portrait">
-          Portrait
+          {t("portrait_key")}
         </label>
       </div>
       <div className="form-check">
@@ -124,7 +124,7 @@ const PDFExportPanel = (props) => {
           }}
         />
         <label className="form-check-label" htmlFor="footerPageCount">
-          Footer (page count)
+          {t("footer_(page_count)_key")}
         </label>
       </div>
       <div className="my-2">
@@ -137,7 +137,7 @@ const PDFExportPanel = (props) => {
             SET_PDF_HEADER_HEIGHT(parseInt(event.target.value));
           }}
         />
-        <label htmlFor="headerRowHeight">Header height</label>
+        <label htmlFor="headerRowHeight">{t("header_height_key")}</label>
       </div>
       <div className="my-2">
         <input
@@ -149,15 +149,15 @@ const PDFExportPanel = (props) => {
             SET_PDF_ROW_HEIGHT(parseInt(event.target.value));
           }}
         />
-        <label htmlFor="cellRowHeight">Cell height</label>
+        <label htmlFor="cellRowHeight">{t("cell_height_key")}</label>
       </div>
       <div className="color-picker-container d-flex">
         <div className="color-picker-odd-row-bkg" />
-        <div className="ms-2">Odd row background color</div>
+        <div className="ms-2">{t("odd_row_background_color_key")}</div>
       </div>
       <div className="color-picker-container d-flex">
         <div className="color-picker-even-row-bkg" />
-        <div className="ms-2">Even row background color</div>
+        <div className="ms-2">{t("even_row_background_color_key")}</div>
       </div>
       <div className="form-check">
         <input
@@ -170,7 +170,7 @@ const PDFExportPanel = (props) => {
           }}
         />
         <label className="form-check-label" htmlFor="exportWithFormatting">
-          Cell styles
+          {t("cell_styles_key")}
         </label>
       </div>
       <div className="form-check">
@@ -184,7 +184,7 @@ const PDFExportPanel = (props) => {
           }}
         />
         <label className="form-check-label" htmlFor="exportColumnsAsLink">
-          Hyperlinks
+          {t("hyperlinks_key")}
         </label>
       </div>
       <div className="form-check">
@@ -198,7 +198,7 @@ const PDFExportPanel = (props) => {
           }}
         />
         <label className="form-check-label" htmlFor="selectedRowsOnly">
-          Selected rows only
+          {t("selected_rows_only_key")}
         </label>
       </div>
 
@@ -207,7 +207,7 @@ const PDFExportPanel = (props) => {
         className="mb-2 mb-md-0 mt-2"
         type="submit"
       >
-        {t("Export")}
+        {t("export_key")}
       </Button>
     </form>
   );

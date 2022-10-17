@@ -37,20 +37,20 @@ export default function getDocDefinition(
 
     const header = PDF_WITH_HEADER_IMAGE
       ? {
-        image: "ag-grid-logo",
-        width: 150,
-        alignment: "center",
-        margin: [0, 10, 0, 10],
-      }
+          image: "ag-grid-logo",
+          width: 150,
+          alignment: "center",
+          margin: [0, 10, 0, 10],
+        }
       : null;
 
     const footer = PDF_WITH_FOOTER_PAGE_COUNT
       ? function (currentPage, pageCount) {
-        return {
-          text: currentPage.toString() + " of " + pageCount,
-          margin: [20],
-        };
-      }
+          return {
+            text: currentPage.toString() + " of " + pageCount,
+            margin: [20],
+          };
+        }
       : null;
 
     const pageMargins = [
@@ -108,6 +108,9 @@ export default function getDocDefinition(
           },
         },
       ],
+      defaultStyle: {
+        font: "Cairo",
+      },
       images: {
         "ag-grid-logo": PDF_LOGO,
       },
@@ -210,7 +213,7 @@ export default function getDocDefinition(
   function createHeaderCell(col) {
     let headerCell = {};
 
-    let isColGroup = Object.hasOwn(col, 'children');
+    let isColGroup = Object.hasOwn(col, "children");
 
     if (isColGroup) {
       headerCell.text = col.originalColumnGroup.colGroupDef.headerName;

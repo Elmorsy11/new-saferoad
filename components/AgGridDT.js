@@ -109,7 +109,7 @@ const AgGridDT = ({
         onHide={() => setOpenBtnsExportsModel(false)}
       >
         <Modal.Header closeButton>
-          <Modal.Title>PDF Export Options</Modal.Title>
+          <Modal.Title>{t('PDF_export_options_key')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <PDFExportPanel

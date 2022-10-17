@@ -22,5 +22,18 @@
     "yes,_delete_it!": "نعم ، احذفها!",
     "are_you_sure?": "Are you sure?",
     "are_you_sure_you_want_to_delete_this_table?": "هل أنت متأكد أنك تريد حذف هذا الجدول؟",
-    "cancel_key": "إلغاء"
+    "cancel_key": "إلغاء",
+
+    "PDF_export_options_key": "خيارات تصدير PDF",
+    "landscape_key": "عرضى",
+    "portrait_key": "طولى",
+    "footer_(page_count)_key": "التذييل (عدد الصفحات)",
+    "header_height_key":"ارتفاع الرأس",
+    "cell_height_key":"ارتفاع الخلية",
+    "odd_row_background_color_key":"لون خلفية الصف الفردي",
+    "even_row_background_color_key":"لون خلفية الصف الزوجي",
+    "cell_styles_key":"أنماط الخلية",
+    "hyperlinks_key":"الارتباطات التشعبية",
+    "selected_rows_only_key":"الصفوف المختارة فقط",
+    "export_key":"تصدير"
 }
