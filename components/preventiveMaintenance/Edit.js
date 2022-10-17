@@ -24,7 +24,7 @@ const Edit = ({
   icon,
   className,
   handleModel,
-  updateTable
+  updateTable,
 }) => {
   const { t } = useTranslation("preventiveMaintenance");
   const router = useRouter();
@@ -42,66 +42,74 @@ const Edit = ({
   const [startValue, setStartValue] = useState("");
   const [nextValue, setNextValue] = useState("");
 
-
   // data for select boxes
-  const optionsMaintenanceType = useMemo(() => [
-    {
-      value: 1,
-      label: t("engine_oil_change_key")
-    },
-    {
-      value: 2,
-      label: t("change_vehicle_brakes_key")
-    },
-    {
-      value: 3,
-      label: t("vehicle_license_renew_key")
-    },
-    {
-      value: 4,
-      label: t("vehicle_wash_key")
-    },
-    {
-      value: 5,
-      label: t("tires_change_key")
-    },
-    {
-      value: 6,
-      label: t("transmission_oil_change_key")
-    },
-    {
-      value: 7,
-      label: t("filter_change_key")
-    },
-    {
-      value: 8,
-      label: t("others_key")
-    },
-  ], [t]);
-  const optionsPeriodType = useMemo(() => [
-    {
-      value: 1,
-      label: t("by_Mileage_key"),
-    },
-    {
-      value: 2,
-      label: t("by_fixed_date_key"),
-    },
-    {
-      value: 3,
-      label: t("by_working_hours_key"),
-    },
-  ], [t]);
-  const optionsNotifyPeriod = useMemo(() => [
-    {
-      value: "1",
-      label: t("percentage_key"),
-    },
-    {
-      value: "2",
-      label: t("value_key"),
-    },
-  ], [t]);
+  const optionsMaintenanceType = useMemo(
+    () => [
+      {
+        value: 1,
+        label: t("engine_oil_change_key"),
+      },
+      {
+        value: 2,
+        label: t("change_vehicle_brakes_key"),
+      },
+      {
+        value: 3,
+        label: t("vehicle_license_renew_key"),
+      },
+      {
+        value: 4,
+        label: t("vehicle_wash_key"),
+      },
+      {
+        value: 5,
+        label: t("tires_change_key"),
+      },
+      {
+        value: 6,
+        label: t("transmission_oil_change_key"),
+      },
+      {
+        value: 7,
+        label: t("filter_change_key"),
+      },
+      {
+        value: 8,
+        label: t("others_key"),
+      },
+    ],
+    [t]
+  );
+  const optionsPeriodType = useMemo(
+    () => [
+      {
+        value: 1,
+        label: t("by_Mileage_key"),
+      },
+      {
+        value: 2,
+        label: t("by_fixed_date_key"),
+      },
+      {
+        value: 3,
+        label: t("by_working_hours_key"),
+      },
+    ],
+    [t]
+  );
+  const optionsNotifyPeriod = useMemo(
+    () => [
+      {
+        value: "1",
+        label: t("percentage_key"),
+      },
+      {
+        value: "2",
+        label: t("value_key"),
+      },
+    ],
+    [t]
+  );
 
   // fetch maintenance data
   useEffect(() => {
@@ -247,7 +255,9 @@ const Edit = ({
       ) : (
         <Card className="mb-1">
           {!model && (
-            <Card.Header className="h3">{t("update_maintenance_plan_key")}</Card.Header>
+            <Card.Header className="h3">
+              {t("update_maintenance_plan_key")}
+            </Card.Header>
           )}
           <Card.Body className={`${className}`}>
             <Formik
@@ -331,20 +341,24 @@ const Edit = ({
                       <Row className="d-flex  justify-content-start ms-2 my-2">
                         <Checkbox
                           name="Recurring"
-                          option={{
-                            value: "1",
-                            key: `${t("recurring_key")}`,
-                          }}
+                          option={[
+                            {
+                              value: "1",
+                              key: `${t("recurring_key")}`,
+                            },
+                          ]}
                           className={"col-6 col-lg-3"}
                           disabled={fixedDateCase ? true : false}
                         />
                         <Checkbox
                           className="col-6 col-lg-3"
                           name="NotifyByPush"
-                          option={{
-                            value: "true",
-                            key: `${t("notify_by_push_key")}`,
-                          }}
+                          option={[
+                            {
+                              value: "true",
+                              key: `${t("notify_by_push_key")}`,
+                            },
+                          ]}
                         />
                       </Row>
                       <Row>

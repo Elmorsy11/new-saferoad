@@ -24,6 +24,7 @@
     "percentage_value_key": "Percentage Value",
     "save_key": "Save",
     "cancel_key": "Cancel",
+    "submit_key":"Submit",
     "please_select_percentage_key": "Please Select Percentage",
     "engine_oil_change_key": "Engine Oil Change",
     "change_vehicle_brakes_key": "Change Vehicle Brakes",
@@ -62,5 +63,6 @@
     "are_you_sure_you_want_to_delete_the_maintenance_plans?": "Are you sure you want to delete the maintenance plans?",
     "open_in_new_tab_key": "Open in new tab",
     "update_maintenance_plan_key": "Update Maintenance Plan",
-    "deleted_successfully_key": "Deleted successfully"
+    "deleted_successfully_key": "Deleted successfully",
+    "reset_notification's_value_key":"Reset Notification's Value"
 }

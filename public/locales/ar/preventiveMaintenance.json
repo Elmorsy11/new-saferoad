@@ -24,6 +24,7 @@
     "percentage_value_key": "قيمة النسبة المئوية",
     "save_key": "حفظ",
     "cancel_key": "ألغاء",
+    "submit_key": "إرسال",
     "please_select_percentage_key": "الرجاء تحديد النسبة المئوية",
     "engine_oil_change_key": "تغيير زيت المحرك",
     "change_vehicle_brakes_key": "تغيير فرامل السيارة",
@@ -63,5 +64,6 @@
     "are_you_sure_you_want_to_delete_the_maintenance_plans?": "هل أنت متأكد أنك تريد حذف خطط الصيانة؟",
     "open_in_new_tab_key": "فتح في علامة تبويب جديدة",
     "update_maintenance_plan_key": "تحديث خطة الصيانة",
-    "deleted_successfully_key": "حذف بنجاح"
+    "deleted_successfully_key": "حذف بنجاح",
+    "reset_notification's_value_key":"إعادة تعيين قيمة الإخطار"
 }

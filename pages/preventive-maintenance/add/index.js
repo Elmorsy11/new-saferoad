@@ -17,7 +17,6 @@ import { addNewPreventive } from "services/preventiveMaintenance";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
-
 const FormikAdd = () => {
   const { t } = useTranslation("preventiveMaintenance");
   const router = useRouter();
@@ -34,64 +33,73 @@ const FormikAdd = () => {
   const [whenValue, setWhenValue] = useState("");
   const [percentageValue, setPercentageValue] = useState("");
   // data for select boxes
-  const optionsMaintenanceType = useMemo(() => [
-    {
-      value: 1,
-      label: t("engine_oil_change_key")
-    },
-    {
-      value: 2,
-      label: t("change_vehicle_brakes_key")
-    },
-    {
-      value: 3,
-      label: t("vehicle_license_renew_key")
-    },
-    {
-      value: 4,
-      label: t("vehicle_wash_key")
-    },
-    {
-      value: 5,
-      label: t("tires_change_key")
-    },
-    {
-      value: 6,
-      label: t("transmission_oil_change_key")
-    },
-    {
-      value: 7,
-      label: t("filter_change_key")
-    },
-    {
-      value: 8,
-      label: t("others_key")
-    },
-  ], [t]);
-  const optionsPeriodType = useMemo(() => [
-    {
-      value: 1,
-      label: t("by_Mileage_key"),
-    },
-    {
-      value: 2,
-      label: t("by_fixed_date_key"),
-    },
-    {
-      value: 3,
-      label: t("by_working_hours_key"),
-    },
-  ], [t]);
-  const optionsNotifyPeriod = useMemo(() => [
-    {
-      value: "1",
-      label: t("percentage_key"),
-    },
-    {
-      value: "2",
-      label: t("value_key"),
-    },
-  ], [t]);
+  const optionsMaintenanceType = useMemo(
+    () => [
+      {
+        value: 1,
+        label: t("engine_oil_change_key"),
+      },
+      {
+        value: 2,
+        label: t("change_vehicle_brakes_key"),
+      },
+      {
+        value: 3,
+        label: t("vehicle_license_renew_key"),
+      },
+      {
+        value: 4,
+        label: t("vehicle_wash_key"),
+      },
+      {
+        value: 5,
+        label: t("tires_change_key"),
+      },
+      {
+        value: 6,
+        label: t("transmission_oil_change_key"),
+      },
+      {
+        value: 7,
+        label: t("filter_change_key"),
+      },
+      {
+        value: 8,
+        label: t("others_key"),
+      },
+    ],
+    [t]
+  );
+  const optionsPeriodType = useMemo(
+    () => [
+      {
+        value: 1,
+        label: t("by_Mileage_key"),
+      },
+      {
+        value: 2,
+        label: t("by_fixed_date_key"),
+      },
+      {
+        value: 3,
+        label: t("by_working_hours_key"),
+      },
+    ],
+    [t]
+  );
+  const optionsNotifyPeriod = useMemo(
+    () => [
+      {
+        value: "1",
+        label: t("percentage_key"),
+      },
+      {
+        value: "2",
+        label: t("value_key"),
+      },
+    ],
+    [t]
+  );
   const [valueNotifyPeriodError, setValueNotifyPeriodError] = useState(false);
 
   const [loading, setloading] = useState(false);
@@ -112,16 +120,16 @@ const FormikAdd = () => {
         vehiclesData?.length === 1
           ? [vehiclesData[0]?.[`${type}`]]
           : vehiclesData?.length > 1
-            ? vehiclesDataType
-            : 0
+          ? vehiclesDataType
+          : 0
       );
 
       setNextValue(
         vehiclesData?.length === 1
           ? [vehiclesData[0]?.[`${type}`] + +maintenanceDueValue]
           : vehiclesData?.length > 1
-            ? vehiclesDataType.map((vehicle) => vehicle + +maintenanceDueValue)
-            : 0
+          ? vehiclesDataType.map((vehicle) => vehicle + +maintenanceDueValue)
+          : 0
       );
 
       if (notifyType === "1") {
@@ -129,15 +137,15 @@ const FormikAdd = () => {
         setWhenValue(
           vehiclesData?.length === 1
             ? [
-              vehiclesData[0]?.[`${type}`] +
-              +maintenanceDueValue * (+percentageValue / 100),
-            ]
+                vehiclesData[0]?.[`${type}`] +
+                  +maintenanceDueValue * (+percentageValue / 100),
+              ]
             : vehiclesData?.length > 1
-              ? vehiclesDataType.map(
+            ? vehiclesDataType.map(
                 (vehicle) =>
                   vehicle + +maintenanceDueValue * (+percentageValue / 100)
               )
-              : 0
+            : 0
         );
         // delete Value Notify Period Error if Percentage selected
         setValueNotifyPeriodError(false);
@@ -242,8 +250,8 @@ const FormikAdd = () => {
           periodType === 2
             ? WhenValue
             : notifyType === "2"
-              ? WhenValue
-              : WhenValue[index],
+            ? WhenValue
+            : WhenValue[index],
       };
     });
 
@@ -285,7 +293,9 @@ const FormikAdd = () => {
   return (
     <>
       <Card>
-        <Card.Header className="h3">{t("add_maintenance_plan_key")}</Card.Header>
+        <Card.Header className="h3">
+          {t("add_maintenance_plan_key")}
+        </Card.Header>
         <Card.Body>
           <Formik
             initialValues={initialValues}
@@ -371,20 +381,24 @@ const FormikAdd = () => {
                     <Row className="d-flex  justify-content-start my-2">
                       <Checkbox
                         name="Recurring"
-                        option={{
-                          value: "1",
-                          key: `${t("recurring_key")}`,
-                        }}
+                        option={[
+                          {
+                            value: "1",
+                            key: `${t("recurring_key")}`,
+                          },
+                        ]}
                         className={"col-6 col-lg-3"}
                         disabled={fixedDateCase ? true : false}
                       />
                       <Checkbox
                         className="col-6 col-lg-3"
                         name="NotifyByPush"
-                        option={{
-                          value: "true",
-                          key: `${t("notify_by_push_key")}`,
-                        }}
+                        option={[
+                          {
+                            value: "true",
+                            key: `${t("notify_by_push_key")}`,
+                          },
+                        ]}
                       />
                     </Row>
 
@@ -398,8 +412,9 @@ const FormikAdd = () => {
                     </Row>
 
                     <ReactSelect
-                      className={`col-12 col-md-6 col-lg-4 ${valueNotifyPeriodError ? "" : "mb-3"
-                        } `}
+                      className={`col-12 col-md-6 col-lg-4 ${
+                        valueNotifyPeriodError ? "" : "mb-3"
+                      } `}
                       options={
                         selectedVehiclesData?.length > 1
                           ? [optionsNotifyPeriod[0]]
@@ -467,10 +482,7 @@ const FormikAdd = () => {
                       )}
                       {t("save_key")}
                     </Button>
-                    <Button
-                      className="px-3 py-2 text-nowrap me-3 ms-0 "
-
-                    >
+                    <Button className="px-3 py-2 text-nowrap me-3 ms-0 ">
                       <Link href="/preventive-maintenance" passHref>
                         <div>
                           <FontAwesomeIcon
@@ -480,7 +492,6 @@ const FormikAdd = () => {
                           />
                           {t("cancel_key")}
                         </div>
-
                       </Link>
                     </Button>
                   </div>
@@ -500,7 +511,10 @@ export default FormikAdd;
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["preventiveMaintenance", "main"])),
+      ...(await serverSideTranslations(locale, [
+        "preventiveMaintenance",
+        "main",
+      ])),
     },
   };
 }

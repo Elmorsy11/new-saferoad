@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import Model from "components/Modals/Model";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import Edit from "components/preventiveMaintenance/Edit";
+import Reset from "components/preventiveMaintenance/Reset";
 
 function PreventiveMaintenance() {
   const router = useRouter();
@@ -28,8 +29,10 @@ function PreventiveMaintenance() {
   const [DataTable, setDataTable] = useState(null);
   const [showModalDelete, setshowModalDelete] = useState(false);
   const [loadingDelete, setloadingDelete] = useState();
-  const [modalShow, setModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
   const [editID, setEditID] = useState("");
+  const [resetModalShow, setResetModalShow] = useState(false);
+  const [resetPreventive, setResetPreventive] = useState({});
 
   // fecth all preventive maintenance and set the Api of the AG grid table for export pdf
   const onGridReady = useCallback(async (params) => {
@@ -131,36 +134,47 @@ function PreventiveMaintenance() {
         maxWidth: 300,
         sortable: true,
         unSortIcon: true,
-        cellRenderer: (params) => (
-          <>
-            <div>{params.value}</div>
-            <div className="d-flex justify-content-start gap-1 options flex-wrap">
-              <Link
-                href={`/preventiveMaintenance`}
-                passHref
-              >
-                <span>{t("reset_key")} |</span>
-              </Link>
-              <span
-                onClick={() => {
-                  setModalShow(true);
-                  setEditID(params.data.ID);
-                }}
-                className=""
-              >
-                {t("edit_key")}
-              </span>
-              <span
-                onClick={() => {
-                  setshowModalDelete(true);
-                }}
-                className=""
-              >
-                | {t("delete_key")}
-              </span>
-            </div>
-          </>
-        ),
+        cellRenderer: (params) => {
+          const resetData = {
+            plateNumber: params.data.PlateNumber,
+            maintenanceType: params.data.MaintenanceType,
+            periodType: params.data.PeriodType,
+            startValue: params.data.StartValue,
+            nextValue: params.data.NextValue,
+          };
+          return (
+            <>
+              <div>{params.value}</div>
+              <div className="d-flex justify-content-start gap-1 options flex-wrap">
+                <span
+                  onClick={() => {
+                    setResetModalShow(true);
+                    setResetPreventive(resetData);
+                  }}
+                >
+                  {t("reset_key")} |
+                </span>
+                <span
+                  onClick={() => {
+                    setEditModalShow(true);
+                    setEditID(params.data.ID);
+                  }}
+                  className=""
+                >
+                  {t("edit_key")}
+                </span>
+                <span
+                  onClick={() => {
+                    setshowModalDelete(true);
+                  }}
+                  className=""
+                >
+                  | {t("delete_key")}
+                </span>
+              </div>
+            </>
+          );
+        },
       },
       {
         headerName: t("plate_number_key"),
@@ -303,16 +317,17 @@ function PreventiveMaintenance() {
           setshowModalDelete(false);
         }}
       />
+      {/* Edit Model */}
       <Model
         header={t("update_maintenance_plan_key")}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
+        show={editModalShow}
+        onHide={() => setEditModalShow(false)}
         updateButton={"Update"}
         footer={false}
       >
         <Edit
           handleModel={() => {
-            setModalShow(false);
+            setEditModalShow(false);
           }}
           icon={faExternalLinkAlt}
           model={true}
@@ -325,6 +340,21 @@ function PreventiveMaintenance() {
           updateTable={onGridReady}
         />
       </Model>
+      {/* Reset Model */}
+      <Model
+        header={t("reset_notification's_value_key")}
+        show={resetModalShow}
+        onHide={() => setResetModalShow(false)}
+        updateButton={"Submit"}
+        footer={false}
+      >
+        <Reset
+          data={resetPreventive}
+          handleModel={() => {
+            setResetModalShow(false);
+          }}
+        />
+      </Model>
     </div>
   );
 }
@@ -335,7 +365,10 @@ export default PreventiveMaintenance;
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["preventiveMaintenance", "main"])),
+      ...(await serverSideTranslations(locale, [
+        "preventiveMaintenance",
+        "main",
+      ])),
     },
   };
 }

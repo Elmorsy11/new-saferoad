@@ -10,17 +10,20 @@ function Checkbox(props) {
       {label && <label className="mb-1">{label}</label>}
       <Field name={name}>
         {({ field }) => {
-          return (
-            <Form.Check
-              type="checkbox"
-              id={option.value}
-              {...field}
-              {...rest}
-              label={option.key}
-              value={option.value}
-              checked={field.value.includes(option.value)}
-            />
-          );
+          return option.map((option) => {
+            return (
+              <Form.Check
+                key={option.value}
+                type="checkbox"
+                id={option.value}
+                {...field}
+                {...rest}
+                label={option.key}
+                value={option.value}
+                checked={field.value.includes(option.value)}
+              />
+            );
+          });
         }}
       </Field>
       <ErrorMessage component={TextError} name={name} />
