@@ -81,7 +81,7 @@ const FormikAdd = () => {
         label: t("by_fixed_date_key"),
       },
       {
-        value: 3,
+        value: 4,
         label: t("by_working_hours_key"),
       },
     ],
@@ -177,7 +177,7 @@ const FormikAdd = () => {
     if (periodType === 1) {
       periodTypeFunc(vehiclesData, vehiclesMileage, "Mileage");
       // conditions of period Type equal to WorkingHours
-    } else if (periodType === 3) {
+    } else if (periodType === 4) {
       periodTypeFunc(vehiclesData, vehiclesHours, "WorkingHours");
       // conditions of period Type equal to Fixed DAte
     } else if (periodType === 2) {
@@ -335,6 +335,7 @@ const FormikAdd = () => {
                     <ReactSelect
                       options={optionsPeriodType}
                       label={t("period_type_key")}
+                      placeholder={t("period_type_key")}
                       name="PeriodType"
                       className={"col-12 col-md-6 col-lg-4 mb-3"}
                       isSearchable={true}
@@ -343,6 +344,7 @@ const FormikAdd = () => {
                     {!(selectedVehiclesData?.length > 1) && !fixedDateCase && (
                       <Input
                         label={t("start_value_key")}
+                        placeholder={t("start_value_key")}
                         name="StartValue"
                         type="number"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -353,6 +355,7 @@ const FormikAdd = () => {
 
                     <Input
                       label={t("maintenance_due_value_key")}
+                      placeholder={t("maintenance_due_value_key")}
                       name="MaintenanceDueValue"
                       type={fixedDateCase ? "date" : "number"}
                       className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -363,6 +366,7 @@ const FormikAdd = () => {
                     {!(selectedVehiclesData?.length > 1) && !fixedDateCase && (
                       <Input
                         label={t("next_value_key")}
+                        placeholder={t("next_value_key")}
                         name="NextValue"
                         type="number"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -373,6 +377,7 @@ const FormikAdd = () => {
 
                     <Input
                       label={t("email_address_key")}
+                      placeholder={t("email_address_key")}
                       type="email"
                       name="NotifyByEmail"
                       className={"col-12 col-md-6 col-lg-4 mb-2"}
@@ -407,6 +412,7 @@ const FormikAdd = () => {
                         type="text"
                         name="NotifMessage"
                         label={t("notify_message_key")}
+                        placeholder={t("notify_message_key")}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
                       />
                     </Row>
@@ -421,6 +427,7 @@ const FormikAdd = () => {
                           : optionsNotifyPeriod
                       }
                       label={`${t("notify_period_key")}`}
+                      placeholder={`${t("notify_period_key")}`}
                       name="WhenPeriod"
                       isDisabled={fixedDateCase ? true : false}
                       isSearchable={true}
@@ -439,6 +446,7 @@ const FormikAdd = () => {
                         type="number"
                         name="PercentageValue"
                         label={t("percentage_value_key")}
+                        placeholder={t("percentage_value_key")}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
                       />
                     )}
@@ -448,6 +456,7 @@ const FormikAdd = () => {
                         type={fixedDateCase ? "date" : "number"}
                         name="WhenValue"
                         label={t("notify_when_value_key")}
+                        placeholder={t("notify_when_value_key")}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
                         disabled={
                           valueNotifyType || fixedDateCase ? false : true
