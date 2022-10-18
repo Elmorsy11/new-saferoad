@@ -91,7 +91,7 @@ const Edit = ({
         label: t("by_fixed_date_key"),
       },
       {
-        value: 3,
+        value: 4,
         label: t("by_working_hours_key"),
       },
     ],
@@ -164,7 +164,7 @@ const Edit = ({
   useEffect(() => {
     if (Object.keys(Data).length > 1) {
       // conditions of period Type equal to Mileage or WorkingHours
-      if (periodType === 1 || periodType === 3) {
+      if (periodType === 1 || periodType === 4) {
         periodTypeFunc(selectedVehicles);
         // conditions of period Type equal to fixed date
       } else if (periodType === 2) {
@@ -287,6 +287,7 @@ const Edit = ({
 
                       <Input
                         label={t("maintenance_type_key")}
+                        placeholder={t("maintenance_type_key")}
                         name="MaintenanceType"
                         type="text"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -295,6 +296,7 @@ const Edit = ({
 
                       <Input
                         label={t("period_type_key")}
+                        placeholder={t("period_type_key")}
                         name="PeriodType"
                         type="text"
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -304,6 +306,7 @@ const Edit = ({
                       {!(selectedVehicles?.length > 1) && !fixedDateCase && (
                         <Input
                           label={t("start_value_key")}
+                          placeholder={t("start_value_key")}
                           name="StartValue"
                           type="number"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -313,6 +316,7 @@ const Edit = ({
 
                       <Input
                         label={t("maintenance_due_value_key")}
+                        placeholder={t("maintenance_due_value_key")}
                         name="MaintenanceDueValue"
                         type={fixedDateCase ? "date" : "number"}
                         className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -323,6 +327,7 @@ const Edit = ({
                       {!(selectedVehicles?.length > 1) && !fixedDateCase && (
                         <Input
                           label={t("next_value_key")}
+                          placeholder={t("next_value_key")}
                           name="NextValue"
                           type="number"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -333,6 +338,7 @@ const Edit = ({
 
                       <Input
                         label={t("email_address_key")}
+                        placeholder={t("email_address_key")}
                         type="email"
                         name="NotifyByEmail"
                         className={"col-12 col-md-6 col-lg-4 mb-2"}
@@ -364,6 +370,7 @@ const Edit = ({
                       <Row>
                         <Input
                           label={t("notify_message_key")}
+                          placeholder={t("notify_message_key")}
                           type="text"
                           name="NotifMessage"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -371,7 +378,8 @@ const Edit = ({
                       </Row>
 
                       <ReactSelect
-                        label={`${t("notify_period_key")}`}
+                        label={t("notify_period_key")}
+                        placeholder={t("notify_period_key")}
                         className={`col-12 col-md-6 col-lg-4 mb-3`}
                         options={optionsNotifyPeriod}
                         name="WhenPeriod"
@@ -382,6 +390,7 @@ const Edit = ({
                       {!valueNotifyType && !fixedDateCase && (
                         <Input
                           label={t("percentage_value_key")}
+                          placeholder={t("percentage_value_key")}
                           type="number"
                           name="PercentageValue"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -392,6 +401,7 @@ const Edit = ({
                       {!(selectedVehicles?.length > 1) || fixedDateCase ? (
                         <Input
                           label={t("notify_when_value_key")}
+                          placeholder={t("notify_when_value_key")}
                           type={fixedDateCase ? "date" : "number"}
                           name="WhenValue"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
