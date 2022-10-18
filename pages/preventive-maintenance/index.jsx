@@ -95,7 +95,7 @@ function PreventiveMaintenance() {
     const allData = {
       1: "By Mileage",
       2: "By Fixed Date",
-      3: "By Working Hours",
+      4: "By Working Hours",
     };
     return allData[params.data.PeriodType];
   };
