@@ -151,7 +151,6 @@ const Signin = () => {
                             data: { username, password },
                           })
                             .then(({ data }) => {
-                              console.log(data);
                               signIn("credentials", {
                                 user: JSON.stringify(data),
                               });

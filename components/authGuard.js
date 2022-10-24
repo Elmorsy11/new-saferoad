@@ -5,6 +5,7 @@ import Layout from "../layout";
 import Loader from "./loader";
 import config from "../config/config";
 import axios from "axios";
+import { encryptName } from "helpers/encryptions";
 
 const AuthGuard = ({ children }) => {
   const [session] = useSession();
@@ -18,7 +19,24 @@ const AuthGuard = ({ children }) => {
     else {
       axios.defaults.headers.common.Authorization = `Bearer ${session?.user?.new_token}`;
       axios.defaults.baseURL = config?.apiGateway?.URL;
-      setTimeout(() => setloading(false), 500);
+      setTimeout(() => setloading(false), 600);
+
+
+      const userId = JSON.parse(localStorage.getItem(encryptName("userId")));
+      console.log(userId);
+      localStorage.setItem(JSON.stringify(encryptName("userId")), session?.user?.user?.id);
+      // if (userId != session?.user?.user?.id) {
+      //   console.log(userId, session?.user?.user?.id);
+      //   console.log(userId != session?.user?.user?.id);
+      //   localStorage.clear()
+      //   localStorage.setItem(JSON.stringify(encryptName("userId")), session?.user?.user?.id);
+      // } else {
+
+      //   localStorage.setItem(JSON.stringify(encryptName("userId")), session?.user?.user?.id);
+      // }
+
+
+
     }
   }, [loading, session]);
 

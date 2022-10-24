@@ -7,13 +7,15 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function VehiclesStatusChart({ VehTotal }) {
 	const { t } = useTranslation("dashboard");
-	const Offline = VehTotal.offlineVehs || 0;
-	const Idleing = VehTotal.idlingVehs || 0;
-	const Running = VehTotal.RunningVehs || 0;
-	const Stopped = VehTotal.stoppedVehs || 0;
-	const OverStreetSpeed = VehTotal.osspeedVehs || 0;
-	const OverSpeed = VehTotal.ospeedVehs || 0;
-	const invalidLocations = VehTotal.invalidVehs || 0;
+  const Offline = ((VehTotal.offlineVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
+  const Idleing = ((VehTotal.idlingVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
+  const Running = ((VehTotal.RunningVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
+  const Stopped = ((VehTotal.stoppedVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
+  const OverStreetSpeed =
+    ((VehTotal.osspeedVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
+  const OverSpeed = ((VehTotal.ospeedVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
+  const invalidLocations =
+    ((VehTotal.invalidVehs / VehTotal.totalVehs) * 100).toFixed(2) || 0;
 
 	const chart = {
 		series: [

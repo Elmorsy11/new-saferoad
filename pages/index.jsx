@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -103,9 +103,9 @@ const Home = () => {
       );
       try {
         const respond = await fetchPreventiveChartData();
-        setPreventiveChartData(respond.allMaintenance);
+        setPreventiveChartData(respond);
         setLoadingPreventiveChart(false);
-        setLocalstorage("preventive-data", respond.allMaintenance);
+        setLocalstorage("preventive-data", respond);
       } catch (error) {
         toast.error(error?.response?.data?.message);
         setLoadingPreventiveChart(false);
@@ -209,7 +209,7 @@ const Home = () => {
 
         {/* chart part four */}
         <OverallPreventiveMaintenance
-          data={preventiveChartData}
+          data={preventiveChartData?.allMaintenance}
           loading={loadingPreventiveChart}
         />
       </Row>
@@ -220,7 +220,7 @@ const Home = () => {
       </Row>
       {/* ############################ table  ############################################## */}
       <Row>
-        <NextrepairplansTable data={topWorstData} />
+        <NextrepairplansTable data={preventiveChartData?.Upcoming_Maintenance_Plans} />
       </Row>
     </div>
   );
