@@ -25,15 +25,16 @@
     "cancel_key": "Cancel",
 
     "PDF_export_options_key": "PDF Export Options",
-    "landscape_key":"Landscape",
-    "portrait_key":"Portrait",
-    "footer_(page_count)_key":"Footer (page count)",
-    "header_height_key":"Header Height",
-    "cell_height_key":"Cell Height",
-    "odd_row_background_color_key":"Odd Row Background Color",
-    "even_row_background_color_key":"Even Row Background Color",
-    "cell_styles_key":"Cell Styles",
-    "hyperlinks_key":"Hyperlinks",
-    "selected_rows_only_key":"Selected Rows Only",
-    "export_key":"Export"
+    "landscape_key": "Landscape",
+    "portrait_key": "Portrait",
+    "footer_(page_count)_key": "Footer (page count)",
+    "header_height_key": "Header Height",
+    "cell_height_key": "Cell Height",
+    "odd_row_background_color_key": "Odd Row Background Color",
+    "even_row_background_color_key": "Even Row Background Color",
+    "cell_styles_key": "Cell Styles",
+    "hyperlinks_key": "Hyperlinks",
+    "selected_rows_only_key": "Selected Rows Only",
+    "export_key": "Export",
+    "OOPS!_NO_DATA_FOUND.": "OOPS! NO DATA FOUND."
 }

@@ -1,65 +1,65 @@
-import React,{useMemo} from "react";
+import React, { useMemo } from "react";
 import { Card, Col } from "react-bootstrap";
 import Styles from "styles/Dashboard.module.scss";
 import { useTranslation } from "next-i18next";
 import AgGridDT from "components/AgGridDT";
 
 export default function Index({ data }) {
-  const { t } = useTranslation("Dashboard");
+  const { t } = useTranslation("dashboard");
 
-    // change the value of MaintenanceType that came from http reqeust to its name
-    const handleMaintenanceType = (params) => {
-      const allData = {
-        1: "Engine Oil Change",
-        2: "Change Vehicle Brakes",
-        3: "Vehicle License Renew",
-        4: "Vehicle Wash",
-        5: "Tires Change",
-        6: "Transmission Oil Change",
-        7: "Filter Change",
-        8: "Others",
-      };
-      return allData[params?.data?.MaintenanceType];
+  // change the value of MaintenanceType that came from http reqeust to its name
+  const handleMaintenanceType = (params) => {
+    const allData = {
+      1: t("engine_oil_change_key"),
+      2: t("change_vehicle_brakes_key"),
+      3: t("vehicle_license_renew_key"),
+      4: t("vehicle_wash_key"),
+      5: t("tires_change_key"),
+      6: t("transmission_oil_change_key"),
+      7: t("filter_change_key"),
+      8: t("others_key"),
     };
-  
-    // change the value of PeriodType that came from http reqeust to its name
-    const handlePeriodType = (params) => {
-      const allData = {
-        1: "By Mileage",
-        2: "By Fixed Date",
-        4: "By Working Hours",
-      };
-      return allData[params.data.PeriodType];
-    };
+    return allData[params?.data?.MaintenanceType];
+  };
 
-    // the default setting of the AG grid table .. sort , filter , etc...
-    const defaultColDef = useMemo(() => {
-      return {
-        sortable: true,
-        flex: 1,
-        resizable: true,
-        filter: true,
-      };
-    }, []);
+  // change the value of PeriodType that came from http reqeust to its name
+  const handlePeriodType = (params) => {
+    const allData = {
+      1: t("by_mileage_key"),
+      2: t("by_fixed_date_key"),
+      4: t("by_working_hours_key"),
+    };
+    return allData[params.data.PeriodType];
+  };
+
+  // the default setting of the AG grid table .. sort , filter , etc...
+  const defaultColDef = useMemo(() => {
+    return {
+      sortable: true,
+      flex: 1,
+      resizable: true,
+      filter: true,
+    };
+  }, []);
 
   const columns = useMemo(
     () => [
       {
-        headerName: `${t("Display_Name")}`,
+        headerName: `${t("display_name_key")}`,
         field: "DisplayName",
         minWidth: 170,
         sortable: true,
         unSortIcon: true,
       },
       {
-        headerName: `${t("Group_Name")}`,
+        headerName: `${t("group_name_key")}`,
         field: "groupName",
         minWidth: 150,
         sortable: true,
         unSortIcon: true,
       },
       {
-        headerName: `${t("Maintenance")}`,
+        headerName: `${t("maintenance_type_key")}`,
         field: "MaintenanceType",
         valueGetter: handleMaintenanceType,
         minWidth: 150,
@@ -67,13 +67,13 @@ export default function Index({ data }) {
         unSortIcon: true,
       },
       {
-        headerName: `${t("Next_Value")}`,
+        headerName: `${t("next_value_key")}`,
         field: "NextValue",
         minWidth: 140,
         unSortIcon: true,
       },
       {
-        headerName: `${t("Period_Type")}`,
+        headerName: `${t("period_type_key")}`,
         field: "PeriodType",
         minWidth: 150,
         sortable: true,
@@ -90,20 +90,20 @@ export default function Index({ data }) {
         <Card>
           <Card.Header className="d-flex justify-content-between">
             <h4 className={"card-title " + Styles.head_title}>
-              {t("Next_repair_plans")}
+              {t("next_repair_plans_key")}
             </h4>
           </Card.Header>
           <Card.Body>
-          <AgGridDT
-                rowHeight={65}
-                columnDefs={columns}
-                rowData={data}
-                paginationNumberFormatter={function (params) {
-                  return params.value.toLocaleString();
-                }}
-                defaultColDef={defaultColDef}
-                footer={false}
-              />
+            <AgGridDT
+              rowHeight={65}
+              columnDefs={columns}
+              rowData={data}
+              paginationNumberFormatter={function (params) {
+                return params.value.toLocaleString();
+              }}
+              defaultColDef={defaultColDef}
+              footer={false}
+            />
           </Card.Body>
         </Card>
       </Col>

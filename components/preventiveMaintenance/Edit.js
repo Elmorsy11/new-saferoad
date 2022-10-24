@@ -84,7 +84,7 @@ const Edit = ({
     () => [
       {
         value: 1,
-        label: t("by_Mileage_key"),
+        label: t("by_mileage_key"),
       },
       {
         value: 2,

@@ -32,5 +32,17 @@
     "maintenance_type_key": "Maintenance Type",
     "start_value_key": "Start Value",
     "next_value_key": "Next Value",
-    "period_type_key": "Period Type"
+    "period_type_key": "Period Type",
+    "engine_oil_change_key": "Engine Oil Change",
+    "change_vehicle_brakes_key": "Change Vehicle Brakes",
+    "vehicle_license_renew_key": "Vehicle License Renew",
+    "vehicle_wash_key": "Vehicle Wash",
+    "tires_change_key": "Tires Change",
+    "transmission_oil_change_key": "Transmission Oil Change",
+    "filter_change_key": "Filter Change",
+    "others_key": "Other",
+    "by_mileage_key": "By Mileage",
+    "by_fixed_date_key": "By Fixed Date",
+    "by_working_hours_key": "By Working Hours",
+    "no_drivers_to_show_key": "No Drivers to Show"
 }

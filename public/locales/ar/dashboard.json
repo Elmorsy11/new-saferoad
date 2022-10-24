@@ -32,5 +32,17 @@
     "maintenance_type_key": "نوع الصيانة",
     "start_value_key": "قيمه البدايه",
     "next_value_key": "القيمة التالية",
-    "period_type_key": "نوع الفترة"
+    "period_type_key": "نوع الفترة",
+    "engine_oil_change_key": "تغيير زيت المحرك",
+    "change_vehicle_brakes_key": "تغيير فرامل السيارة",
+    "vehicle_license_renew_key": "تجديد رخصة المركبة",
+    "vehicle_wash_key": "غسيل السيارة",
+    "tires_change_key": "تغيير الاطارات",
+    "transmission_oil_change_key": "تغيير زيت ناقل الحركة",
+    "filter_change_key": "مرشح التغيير",
+    "others_key": "آخر",
+    "by_Mileage_key": "بالأميال",
+    "by_fixed_date_key": "حسب التاريخ المحدد",
+    "by_working_hours_key": "حسب ساعات العمل",
+    "no_drivers_to_show_key": "لا يوجد سائقين لإظهارها"
 }

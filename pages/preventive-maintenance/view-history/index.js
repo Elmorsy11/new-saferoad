@@ -42,14 +42,14 @@ const ViewHistory = () => {
   // change the value of MaintenanceType that came from http reqeust to its name
   const handleMaintenanceType = (params) => {
     const allData = {
-      1: "Engine Oil Change",
-      2: "Change Vehicle Brakes",
-      3: "Vehicle License Renew",
-      4: "Vehicle Wash",
-      5: "Tires Change",
-      6: "Transmission Oil Change",
-      7: "Filter Change",
-      8: "Others",
+      1: t("engine_oil_change_key"),
+      2: t("change_vehicle_brakes_key"),
+      3: t("vehicle_license_renew_key"),
+      4: t("vehicle_wash_key"),
+      5: t("tires_change_key"),
+      6: t("transmission_oil_change_key"),
+      7: t("filter_change_key"),
+      8: t("others_key"),
     };
     return allData[params?.data?.MaintenanceType];
   };
@@ -57,11 +57,11 @@ const ViewHistory = () => {
   // change the value of PeriodType that came from http reqeust to its name
   const handlePeriodType = (params) => {
     const allData = {
-      1: "By Mileage",
-      2: "By Fixed Date",
-      3: "By Working Hours",
+      1: t("by_mileage_key"),
+      2: t("by_fixed_date_key"),
+      4: t("by_working_hours_key"),
     };
-    return allData[params?.data?.PeriodType];
+    return allData[params.data.PeriodType];
   };
 
   // change the value of Recurring that came from http reqeust to true/false
@@ -72,8 +72,8 @@ const ViewHistory = () => {
   // change the value of NotifyPeriod that came from http reqeust to its name
   const handleNotifyPeriod = (params) => {
     const allData = {
-      1: "Percentage",
-      2: "Value",
+      1: t("percentage_key"),
+      2: t("value_key"),
     };
     return allData[params?.data?.WhenPeriod];
   };

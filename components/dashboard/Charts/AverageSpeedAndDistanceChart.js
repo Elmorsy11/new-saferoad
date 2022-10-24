@@ -107,7 +107,7 @@ export default function AverageSpeedAndDistanceChart({ data, loading }) {
                 height="245"
               />
             ) : (
-              <EmptyMess msg="OOPS! NO DATA FOUND." />
+              <EmptyMess />
             )}
           </div>
         </div>

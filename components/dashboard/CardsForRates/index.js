@@ -46,7 +46,8 @@ export default function Index({ data, loading }) {
                   </div>
                 ) : (
                   <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
-                    No Drivers to Show
+
+                    {t("no_drivers_to_show_key")}
                   </div>
                 )}
               </Card.Body>
@@ -86,7 +87,7 @@ export default function Index({ data, loading }) {
                   </div>
                 ) : (
                   <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
-                    No Drivers to Show
+                    {t("no_drivers_to_show_key")}
                   </div>
                 )}
               </Card.Body>
@@ -127,7 +128,7 @@ export default function Index({ data, loading }) {
                   </div>
                 ) : (
                   <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
-                    No vehicles to Show
+                    {t("no_drivers_to_show_key")}
                   </div>
                 )}
               </Card.Body>
@@ -167,7 +168,7 @@ export default function Index({ data, loading }) {
                   </div>
                 ) : (
                   <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
-                    No vehicles to Show
+                    {t("no_drivers_to_show_key")}
                   </div>
                 )}
               </Card.Body>

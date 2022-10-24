@@ -28,12 +28,13 @@
     "landscape_key": "عرضى",
     "portrait_key": "طولى",
     "footer_(page_count)_key": "التذييل (عدد الصفحات)",
-    "header_height_key":"ارتفاع الرأس",
-    "cell_height_key":"ارتفاع الخلية",
-    "odd_row_background_color_key":"لون خلفية الصف الفردي",
-    "even_row_background_color_key":"لون خلفية الصف الزوجي",
-    "cell_styles_key":"أنماط الخلية",
-    "hyperlinks_key":"الارتباطات التشعبية",
-    "selected_rows_only_key":"الصفوف المختارة فقط",
-    "export_key":"تصدير"
+    "header_height_key": "ارتفاع الرأس",
+    "cell_height_key": "ارتفاع الخلية",
+    "odd_row_background_color_key": "لون خلفية الصف الفردي",
+    "even_row_background_color_key": "لون خلفية الصف الزوجي",
+    "cell_styles_key": "أنماط الخلية",
+    "hyperlinks_key": "الارتباطات التشعبية",
+    "selected_rows_only_key": "الصفوف المختارة فقط",
+    "export_key": "تصدير",
+    "OOPS!_NO_DATA_FOUND.": "عفوا لا توجد بيانات لعرضها."
 }

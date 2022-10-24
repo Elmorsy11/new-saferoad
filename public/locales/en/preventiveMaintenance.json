@@ -34,7 +34,7 @@
     "transmission_oil_change_key": "Transmission Oil Change",
     "filter_change_key": "Filter Change",
     "others_key": "Other",
-    "by_Mileage_key": "By Mileage",
+    "by_mileage_key": "By Mileage",
     "by_fixed_date_key": "By Fixed Date",
     "by_working_hours_key": "By Working Hours",
     "value_key": "Value",
