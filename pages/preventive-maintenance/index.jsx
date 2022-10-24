@@ -228,8 +228,8 @@ function PreventiveMaintenance() {
         <Col sm="12">
           <Card>
             <Card.Body>
-              <div className="d-flex justify-content-center justify-content-md-between flex-wrap">
-                <div className="d-flex justify-content-center flex-wrap mb-4">
+              <div className="d-flex justify-content-start justify-content-md-center justify-content-md-between flex-wrap">
+                <div className="d-flex flex-column flex-md-row justify-content-center flex-wrap mb-4">
                   <Link href="/preventive-maintenance/add">
                     <a>
                       <Button

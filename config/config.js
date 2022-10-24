@@ -1,5 +1,5 @@
-const development_domain_server = "http://192.168.1.14:5555/";
-// const development_domain_server = "https://sr-fms-api.herokuapp.com/";
+// const development_domain_server = "http://192.168.1.14:5555/";
+const development_domain_server = "https://sr-fms-api.herokuapp.com/";
 const development_path_server = "";
 
 // http://192.168.1.26:5555/
