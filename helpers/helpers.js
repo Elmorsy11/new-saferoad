@@ -230,7 +230,7 @@ export const getKey = (state) => {
   }
 };
 
-export const filterByNames = (data, inputValue) => {
+export const filterByNames = (t, data, inputValue) => {
   // Create a dynamic regex expression object with ignore case sensitivity
   const re = new RegExp(_.escapeRegExp(inputValue), "i");
   // clone the original data deeply
@@ -243,13 +243,13 @@ export const filterByNames = (data, inputValue) => {
     // to avoid skipping list iteration when name matches
     return (
       object.subTitle.filter((item) => {
-        if (re.test(item.name)) {
+        if (re.test(t(item.name))) {
           item["highlight"] = true;
-          return item.name;
+          return t(item.name);
         } else {
           return false;
         }
-      }).length > 0 || re.test(object.name)
+      }).length > 0 || re.test(t(object.name))
     );
   });
   // console.log("results in helpers", results);

@@ -36,5 +36,8 @@
     "hyperlinks_key": "الارتباطات التشعبية",
     "selected_rows_only_key": "الصفوف المختارة فقط",
     "export_key": "تصدير",
-    "OOPS!_NO_DATA_FOUND.": "عفوا لا توجد بيانات لعرضها."
+    "OOPS!_NO_DATA_FOUND.": "عفوا لا توجد بيانات لعرضها.",
+    "reports_key": "التقارير",
+    "back_key": "رجوع",
+    "operate_driver_key": "تشغيل السائق"
 }

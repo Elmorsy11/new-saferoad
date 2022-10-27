@@ -6,7 +6,6 @@ const SubHeader = ({ pageName = "" }) => {
   const { t } = useTranslation("main");
 
   const [state, setState] = useState("");
-  console.log(pageName);
   useEffect(() => {
     switch (pageName) {
       case "/":

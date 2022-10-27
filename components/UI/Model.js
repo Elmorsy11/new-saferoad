@@ -1,4 +1,3 @@
-import { useTranslation } from "next-i18next";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -12,10 +11,11 @@ const Model = ({
   show,
   disabled,
   updateButton,
+  size = "lg",
   footer = true,
+  className
 }) => {
   const darkMode = useSelector((state) => state.config.darkMode);
-  const { t } = useTranslation("main");
 
   return (
     <Modal
@@ -23,8 +23,8 @@ const Model = ({
       onHide={onHide}
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      className={`modal${darkMode ? "-dark" : ""}`}
-      size="lg"
+      className={`modal${darkMode ? "-dark" : ""} ${className}`}
+      size={size}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">{header}</Modal.Title>
@@ -36,7 +36,7 @@ const Model = ({
             {updateButton}
           </Button>
           <Button className="p-2" onClick={onHide}>
-            {t("cancel_key")}
+            Close
           </Button>
         </Modal.Footer>
       )}

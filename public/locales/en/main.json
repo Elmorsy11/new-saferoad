@@ -36,5 +36,8 @@
     "hyperlinks_key": "Hyperlinks",
     "selected_rows_only_key": "Selected Rows Only",
     "export_key": "Export",
-    "OOPS!_NO_DATA_FOUND.": "OOPS! NO DATA FOUND."
+    "OOPS!_NO_DATA_FOUND.": "OOPS! NO DATA FOUND.",
+    "reports_key": "Reports",
+    "back_key": "Back",
+    "operate_driver_key": "Operate Driver"
 }

@@ -9,6 +9,8 @@ import { useTranslation } from "next-i18next";
 import Home from "components/icons/Home";
 import PreventiveMaintenance from "components/icons/PreventiveMaintenance";
 import Track from "components/icons/Track";
+import Reports from "components/icons/Reports";
+import DriverManagement from "components/icons/DriverManagement";
 let urlsData = [
   {
     path: "/",
@@ -24,6 +26,16 @@ let urlsData = [
     path: "/preventive-maintenance",
     label: "preventive_maintenance_key",
     icon: <PreventiveMaintenance />
+  },
+  {
+    path: "/reports",
+    label: "reports_key",
+    icon: <Reports />
+  },
+  {
+    path: "/drivers-management",
+    label: "operate_driver_key",
+    icon: <DriverManagement />
   },
 ]
 const VerticalNav = () => {

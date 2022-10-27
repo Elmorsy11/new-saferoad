@@ -10,12 +10,12 @@ import {
   deletePreventive,
 } from "services/preventiveMaintenance";
 import Link from "next/link";
-import DeleteModal from "components/Modals/DeleteModal";
+import DeleteModal from "components/UI/DeleteModal";
 import { toast } from "react-toastify";
 import HideActions from "hooks/HideActions";
 import AgGridDT from "components/AgGridDT";
 import { useRouter } from "next/router";
-import Model from "components/Modals/Model";
+import Model from "components/UI/Model";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import Edit from "components/preventiveMaintenance/Edit";
 import Reset from "components/preventiveMaintenance/Reset";

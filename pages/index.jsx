@@ -107,7 +107,7 @@ const Home = () => {
         setLoadingPreventiveChart(false);
         setLocalstorage("preventive-data", respond);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.error);
         setLoadingPreventiveChart(false);
       }
     };
@@ -126,7 +126,7 @@ const Home = () => {
         setLoadingTopWorstData(false);
         setLocalstorage("top-worst-data", respond);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.error);
         setLoadingTopWorstData(false);
       }
     };
@@ -145,7 +145,7 @@ const Home = () => {
         setLoadingUtilization(false);
         setLocalstorage("avg-utilization-data", respond.avgUtlizations);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.error);
         setLoadingUtilization(false);
       }
     };
@@ -164,7 +164,7 @@ const Home = () => {
         setLoadingAvgSpeedChart(false);
         setLocalstorage("speed-chart-data", respond.fuelConsumptions);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.error);
         setLoadingAvgSpeedChart(false);
       }
     };

@@ -1,0 +1,45 @@
+{
+    "operate_driver_key": "Operate driver",
+    "driver_management_key": "Driver management",
+    "delete_driver_key": "Delete driver",
+    "are_you_sure_you_want_to_delete_this_driver?": "Are you sure you want to delete this  driver?",
+
+    "deleted_successfully_key": "Deleted successfully",
+    "add_new_driver_key": "Add a new driver",
+    "update_driver_key": "Update driver",
+    "update_key": "Update",
+    "open_in_new_tab_key": "Open in new tab",
+
+    "full_name_key": "Full name",
+    "vehicles_key": "Vehicles",
+    "delete_key": "Delete",
+    "edit_key": "Edit",
+    "phone_number_key": "Phone number",
+    "email_key": "Email",
+    "department_key": "Department",
+    "licence_number_key": "licence number",
+    "licence_expiration_date_key": "Licence expiration date",
+    "RFID_key": "RFID",
+    "wasl_integration_key": "WASL Integration",
+
+    "driver_updated_successfully_key": "Driver updated successfully",
+    "first_name_key": "First name",
+    "last_name_key": "Last name",
+    "date_of_birth": "Date of birth",
+    "nationality_key": "Nationality",
+    "email_address_key": "Email address",
+    "upload_image_key": "Upload image",
+    "selected_vehicle_plate_number_key": "Selected vehicle plate number",
+    "WASL_Integration_(Optional)_key": "WASL integration (optional)",
+    "identity_number_key": "Identity number",
+    "date_of_birth_hijri_key": "Date of birth hijri",
+    "mobile_number_key": "mobile number",
+    "save_key": "save",
+    "cancel_key": "Cancel",
+    
+    
+    
+    "back_key":"Back",
+    "assigned_vehicles_key":"Assigned vehicles",
+    "unassigned_vehicles_key":"UnAssigned vehicles"
+}

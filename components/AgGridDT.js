@@ -38,7 +38,7 @@ const AgGridDT = ({
   gridColumnApi,
   Height,
   rowSelection,
-  footer=true
+  footer = true
 }) => {
   const router = useRouter();
   const { darkMode, language } = useSelector((state) => state.config);
@@ -86,12 +86,14 @@ const AgGridDT = ({
       />
       {!router.pathname.includes("/track") && footer && (
         <div className="d-flex">
-          <Button variant="primary " className="p-2" onClick={onBtnExport}>
+          <Button
+            disabled={!rowData?.length} variant="primary " className="p-2" onClick={onBtnExport}>
             <FontAwesomeIcon className="me-2" icon={faFileExcel} size="sm" />
             {t("export_to_excel_key")}
           </Button>
 
           <Button
+            disabled={!rowData?.length}
             variant="primary  ms-2"
             className="p-2"
             onClick={handleOpenBtnsExportsModel}

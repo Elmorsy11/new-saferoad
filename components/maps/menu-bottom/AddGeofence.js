@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button, Form, Modal, Row } from "react-bootstrap";
 import AgGridDT from "../../AgGridDT";
 import HideActions from "hooks/HideActions";
-import DeleteModal from "../../Modals/DeleteModal";
+import DeleteModal from "../../UI/DeleteModal";
 import config from "config/config";
 import axios from "axios";
 import { toast } from "react-toastify";
