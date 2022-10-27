@@ -41,7 +41,9 @@ const AgGridDT = ({
   footer = true
 }) => {
   const router = useRouter();
-  const { darkMode, language } = useSelector((state) => state.config);
+  const { darkMode } = useSelector((state) => state.config);
+  const { locale } = router;
+
   const { t } = useTranslation(["main"]);
   const [openBtnsExportsModel, setOpenBtnsExportsModel] = useState(false);
 
@@ -59,7 +61,7 @@ const AgGridDT = ({
     >
       <AgGridReact
         rowHeight={rowHeight || 65}
-        enableRtl={language == "ar" ? true : false}
+        enableRtl={locale == "ar" ? true : false}
         columnDefs={columnDefs}
         rowData={rowData}
         rowSelection={rowSelection || 'multiple'}

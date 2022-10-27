@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar, toggleHead } from "lib/slices/layoutConfig";
-import { changeLanguage, darkMode } from "lib/slices/config";
+import { darkMode } from "lib/slices/config";
 import { useRouter } from "next/router";
 // translation
 import { useTranslation } from "next-i18next";
@@ -20,8 +20,6 @@ const Header = () => {
   const { config, layoutConfig } = useSelector((state) => state);
   const { locales, locale: activeLocale } = router;
   const otherLocales = locales?.filter((locale) => locale !== activeLocale);
-
-
   const handleSignOut = (e) => {
     e.preventDefault();
     signOut();
@@ -29,22 +27,14 @@ const Header = () => {
   useEffect(() => {
     document.body.setAttribute(
       "dir",
-      `${config.language === "ar" ? "rtl" : "ltr"}`
+      `${activeLocale === "ar" ? "rtl" : "ltr"}`
     );
-    config.darkMode
+    config?.darkMode
       ? document.body.classList.add("dark")
       : document.body.classList.remove("dark");
 
-    let timer = setTimeout(() => {
-      router.push(router.pathname, router.pathname, { locale: config.language });
-    }, 500);
-    return () => {
-      clearTimeout(timer);
-    }
-
-  }, [config]);
+  }, [config, activeLocale]);
   const toggleDarkMode = () => dispatch(darkMode());
-  const toggleLanguage = (locale) => dispatch(changeLanguage(locale));
   return (
     <>
       <Navbar
@@ -385,7 +375,6 @@ const Header = () => {
                       <Dropdown.Item
                         key={"locale-" + locale}
                         className="py-0 px-3 d-flex flex-row align-items-center"
-                        onClick={() => toggleLanguage(locale)}
                       >
                         <Image
                           src={`/flags/${locale}.svg`}
