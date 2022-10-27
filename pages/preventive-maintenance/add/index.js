@@ -285,7 +285,7 @@ const FormikAdd = () => {
       setloading(false);
       router.push("/preventive-maintenance");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data?.message);
       setloading(false);
     }
   };
