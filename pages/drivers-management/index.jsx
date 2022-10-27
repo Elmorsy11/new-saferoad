@@ -204,9 +204,9 @@ function DriversManagement() {
                 rowHeight={65}
                 columnDefs={columns}
                 rowData={DataTable}
-                onCellMouseOver={(e) =>
-                  (e.event.path[1].dataset.test = "showActions")
-                }
+                onCellMouseOver={(e) => {
+                  e.event.target.dataset.test = "showActions"
+                }}
                 onCellMouseOut={HideActions}
                 paginationNumberFormatter={function (params) {
                   return params.value.toLocaleString();
