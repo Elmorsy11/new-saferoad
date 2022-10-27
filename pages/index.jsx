@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -107,7 +107,7 @@ const Home = () => {
         setLoadingPreventiveChart(false);
         setLocalstorage("preventive-data", respond);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error.response.data?.message);
         setLoadingPreventiveChart(false);
       }
     };
@@ -126,7 +126,7 @@ const Home = () => {
         setLoadingTopWorstData(false);
         setLocalstorage("top-worst-data", respond);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error.response.data?.message);
         setLoadingTopWorstData(false);
       }
     };
@@ -145,7 +145,7 @@ const Home = () => {
         setLoadingUtilization(false);
         setLocalstorage("avg-utilization-data", respond.avgUtlizations);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error.response.data?.message);
         setLoadingUtilization(false);
       }
     };
@@ -164,7 +164,7 @@ const Home = () => {
         setLoadingAvgSpeedChart(false);
         setLocalstorage("speed-chart-data", respond.fuelConsumptions);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error.response.data?.message);
         setLoadingAvgSpeedChart(false);
       }
     };
@@ -220,7 +220,9 @@ const Home = () => {
       </Row>
       {/* ############################ table  ############################################## */}
       <Row>
-        <NextrepairplansTable data={preventiveChartData?.Upcoming_Maintenance_Plans} />
+        <NextrepairplansTable
+          data={preventiveChartData?.Upcoming_Maintenance_Plans}
+        />
       </Row>
     </div>
   );

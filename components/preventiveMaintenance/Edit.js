@@ -123,7 +123,7 @@ const Edit = ({
         setSelectedVehicles(respond?.result);
         setPeriodType(respond?.result[0].PeriodType);
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error.response.data?.message);
         setLoadingPage(false);
       }
     })();
@@ -243,7 +243,7 @@ const Edit = ({
         updateTable();
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error.response.data?.message);
       setloading(false);
     }
   };
