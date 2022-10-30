@@ -29,40 +29,33 @@ export default function Index({ data, loading }) {
               <Spinner />
             ) : topRated.length > 0 ? (
               <div>
-                <Link
-                  href={{
-                    pathname: `/driver/[driverId]`,
-                    query: { driverId: topRated[0]?.DriverID },
-                  }}
-                >
-                  <a>
-                    <Stars
-                      name={topRated[0]?.DriverName}
-                      imgSrc={"/assets/images/avatars/01.png"}
-                      imgAlt={"one"}
-                      starsCount={5}
-                    />
-                  </a>
-                </Link>
-                <Link
-                  href={{
-                    pathname: `/driver/[driverId]`,
-                    query: { driverId: topRated[1]?.DriverID },
-                  }}
-                >
-                  <a>
-                    <Stars
-                      name={topRated[1]?.DriverName}
-                      imgSrc={"/assets/images/avatars/01.png"}
-                      imgAlt={"two"}
-                      starsCount={5}
-                    />
-                  </a>
-                </Link>
+                {new Array(2).fill({}).map((e, i) => {
+                  const driverId = topRated[i]?.DriverID
+                  const driverName = topRated[i]?.DriverName
+                  if (driverId) {
+                    return <Link key={driverId}
+                      href={{
+                        pathname: `/driver/[driverId]`,
+                        query: { driverId: driverId },
+                      }}
+                    >
+                      <a><Stars
+                        name={driverName}
+                        imgSrc={"/assets/images/avatars/01.png"}
+                        imgAlt={driverName}
+                        starsCount={5}
+                      />
+                      </a>
+                    </Link>
+                  } else {
+                    return <div key={i} className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-4 px-3">
+                      {t("no_drivers_to_show_key")}
+                    </div>
+                  }
+                })}
               </div>
             ) : (
               <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
-
                 {t("no_drivers_to_show_key")}
               </div>
             )}
@@ -84,36 +77,30 @@ export default function Index({ data, loading }) {
               <Spinner />
             ) : BadRated.length > 0 ? (
               <div>
-                <Link
-                  href={{
-                    pathname: `/driver/[driverId]`,
-                    query: { driverId: BadRated[0]?.DriverID },
-                  }}
-                >
-                  <a>
-                    <Stars
-                      name={BadRated[0]?.DriverName}
-                      imgSrc={"/assets/images/avatars/01.png"}
-                      imgAlt={"one"}
-                      starsCount={1}
-                    />
-                  </a>
-                </Link>
-                <Link
-                  href={{
-                    pathname: `/driver/[driverId]`,
-                    query: { driverId: BadRated[1]?.DriverID },
-                  }}
-                >
-                  <a>
-                    <Stars
-                      name={BadRated[1]?.DriverName}
-                      imgSrc={"/assets/images/avatars/01.png"}
-                      imgAlt={"two"}
-                      starsCount={1}
-                    />
-                  </a>
-                </Link>
+                {new Array(2).fill({}).map((e, i) => {
+                  const driverId = BadRated[i]?.DriverID
+                  const driverName = BadRated[i]?.DriverName
+                  if (driverId) {
+                    return <Link key={driverId}
+                      href={{
+                        pathname: `/driver/[driverId]`,
+                        query: { driverId: driverId },
+                      }}
+                    >
+                      <a><Stars
+                        name={driverName}
+                        imgSrc={"/assets/images/avatars/01.png"}
+                        imgAlt={driverName}
+                        starsCount={1}
+                      />
+                      </a>
+                    </Link>
+                  } else {
+                    return <div key={i} className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-4 px-3">
+                      {t("no_drivers_to_show_key")}
+                    </div>
+                  }
+                })}
               </div>
             ) : (
               <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
@@ -139,18 +126,21 @@ export default function Index({ data, loading }) {
               <Spinner />
             ) : topRated.length > 0 ? (
               <div>
-                <Stars
-                  name={topRated[0]?.DisplayName}
-                  imgSrc={"/assets/images/741407.png"}
-                  imgAlt={"one"}
-                  starsCount={5}
-                />
-                <Stars
-                  name={topRated[1]?.DisplayName}
-                  imgSrc={"/assets/images/741407.png"}
-                  imgAlt={"tow"}
-                  starsCount={5}
-                />
+                {new Array(2).fill({}).map((e, i) => {
+                  if (topRated[i]?.DisplayName) {
+                    return <Stars
+                      key={i}
+                      name={topRated[i]?.DisplayName}
+                      imgSrc={"/assets/images/741407.png"}
+                      imgAlt={topRated[i]?.DisplayName}
+                      starsCount={5}
+                    />
+                  } else {
+                    return <div key={i} className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
+                      {t("no_drivers_to_show_key")}
+                    </div>
+                  }
+                })}
               </div>
             ) : (
               <div className=" border border-1 border-light rounded-1 text-dark text-center  mb-3 py-3 px-2">
