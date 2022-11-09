@@ -33,10 +33,16 @@ const SubHeader = ({ pageName = "" }) => {
             <Col md="12">
               <div className="d-flex justify-content-between flex-wrap">
                 <div>
-                  <h1>{t(state)}</h1>
+                  <h1
+                    style={{
+                      fontSize: "46px",
+                      lineHeight: "62px",
+                    }}
+                  >
+                    {t(state)}
+                  </h1>
                 </div>
-                <div className="d-flex align-items-center">
-                </div>
+                <div className="d-flex align-items-center"></div>
               </div>
             </Col>
           </Row>

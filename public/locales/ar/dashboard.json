@@ -44,5 +44,6 @@
     "by_Mileage_key": "بالأميال",
     "by_fixed_date_key": "حسب التاريخ المحدد",
     "by_working_hours_key": "حسب ساعات العمل",
-    "no_drivers_to_show_key": "لا يوجد سائقين لإظهارها"
+    "no_drivers_to_show_key": "لا يوجد سائقين لإظهارها",
+    "oops!_no_data_found_key": "عفوًا! لم يتم العثور على بيانات"
 }

@@ -13,6 +13,7 @@
     "percentage_key": "Percentage",
     "export_to_excel_key": "Export To Excel",
     "export_as_pdf_file_key": "Export As Pdf File",
+    "no_rows_to_shows_key":"No Rows to Show",
     "delete_selected_key": "Delete Selected",
     "edit_key": "Edit",
     "delete_key": "Delete",

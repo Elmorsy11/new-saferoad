@@ -7,7 +7,7 @@ import { Saferoad } from "components/maps/leafletchild";
 import { useDispatch, useSelector } from "react-redux";
 import { setMap } from "lib/slices/mainMap";
 
-const Map = ({ myMap }) => {
+const Map = ({ myMap, minHeight = "60vh" }) => {
   const L = require("leaflet");
   const dispatch = useDispatch();
   const VehFullData = useSelector((state) => state.streamData.VehFullData);
@@ -40,7 +40,7 @@ const Map = ({ myMap }) => {
   }, [myMap, VehFullData]);
   return (
     <>
-      <div style={{ width: "100%", minHeight: "60vh" }} id="MyMap"></div>
+      <div style={{ width: "100%", minHeight: minHeight }} id="MyMap"></div>
     </>
   );
 };

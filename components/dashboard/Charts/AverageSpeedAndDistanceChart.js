@@ -43,7 +43,7 @@ export default function AverageSpeedAndDistanceChart({ data, loading }) {
           fontWeight: "bold",
         },
         toolbar: {
-          show: false,
+          show: true,
         },
         sparkline: {
           enabled: false,
@@ -107,7 +107,7 @@ export default function AverageSpeedAndDistanceChart({ data, loading }) {
                 height="245"
               />
             ) : (
-              <EmptyMess />
+              <EmptyMess msg={`${t("oops!_no_data_found_key")}.`}  />
             )}
           </div>
         </div>

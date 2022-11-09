@@ -13,6 +13,7 @@
     "percentage_key": "نسبة مئوية",
     "export_to_excel_key": "تصدير إلى Excel",
     "export_as_pdf_file_key": "تصدير كملف PDF",
+    "no_rows_to_shows_key":"لا توجد صفوف للعرض",
     "delete_selected_key": "احذف المختار",
     "edit_key": "تعديل",
     "delete_key": "حذف",

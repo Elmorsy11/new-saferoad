@@ -51,6 +51,8 @@ const Home = () => {
   } = useSelector((state) => state);
   const { myMap } = useSelector((state) => state.mainMap);
 
+  const { darkMode } = useSelector((state) => state.config);
+
   // progress count up wait till loading
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -71,6 +73,13 @@ const Home = () => {
   useEffect(() => {
     indexStreamLoader();
   }, []);
+
+  useEffect(() => {
+    const htmlTag = document.getElementsByTagName("html")[0];
+    darkMode
+      ? htmlTag.setAttribute("darkMode", true)
+      : htmlTag.setAttribute("darkMode", false);
+  }, [darkMode]);
 
   // helper func to get data from localstorage
   const getLocalstorage = (dataName, setData, setLoading) => {
@@ -172,7 +181,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="p-3">
+    <div className="m-3">
       <Row>
         {/* ############################  progress bars + Map  ############################################## */}
         <Col lg="6">
@@ -182,10 +191,10 @@ const Home = () => {
         </Col>
         {/* map */}
         <Col lg="6">
-          <Card style={{ height: "calc(100% - 2rem)", overflow: "hidden" }}>
+          <Card className="shadow-sm border border-light" style={{ height: "calc(100% - 2rem)", overflow: "hidden" }}>
             <Card.Body className="p-0 position-relative">
               {/* <Google /> */}
-              <Google myMap={myMap} />
+              <Google minHeight={'100%'} myMap={myMap} />
             </Card.Body>
           </Card>
         </Col>

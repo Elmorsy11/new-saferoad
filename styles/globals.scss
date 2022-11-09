@@ -73,9 +73,12 @@
 
 body {
     font-family: "Trasandina W03 Regular Italic", sans-serif !important;
-    background-color: transparent;
+    background-color: #dbdfe370;
     a {
         text-decoration: none !important;
+    }
+    .dark{
+        background-color: #151824 !important
     }
 }
 [dir="rtl"] body {

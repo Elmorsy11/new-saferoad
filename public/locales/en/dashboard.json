@@ -44,5 +44,9 @@
     "by_mileage_key": "By Mileage",
     "by_fixed_date_key": "By Fixed Date",
     "by_working_hours_key": "By Working Hours",
-    "no_drivers_to_show_key": "No Drivers to Show"
+    "no_vehicles_to_show_key": "No Vehicles to Show",
+    "no_drivers_to_show_key": "No Drivers to Show",
+    "no_vehicle_to_show_key": "No Vehicle to Show",
+    "no_driver_to_show_key": "No Driver to Show",
+    "oops!_no_data_found_key": "OOPS! NO DATA FOUND"
 }

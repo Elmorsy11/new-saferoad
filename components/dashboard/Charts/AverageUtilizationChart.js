@@ -26,11 +26,11 @@ export default function AverageUtilizationChart({ data, loading }) {
       },
     ],
     options: {
+      type: "bar",
       chart: {
         fontFamily: "Cairo , sans-serif",
-        stacked: true,
         toolbar: {
-          show: false,
+          show: true,
         },
       },
       colors: ["#246c66"],
@@ -42,9 +42,7 @@ export default function AverageUtilizationChart({ data, loading }) {
           borderRadius: 5,
         },
       },
-      legend: {
-        show: false,
-      },
+
       dataLabels: {
         enabled: false,
       },
@@ -105,10 +103,10 @@ export default function AverageUtilizationChart({ data, loading }) {
                 options={chart.options}
                 series={chart.series}
                 type="bar"
-                height="245"
+                height="300"
               />
             ) : (
-              <EmptyMess />
+              <EmptyMess msg={`${t("oops!_no_data_found_key")}.`} />
             )}
           </div>
         </div>

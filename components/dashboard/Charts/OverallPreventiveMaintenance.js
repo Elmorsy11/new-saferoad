@@ -25,8 +25,9 @@ export default function OverallPreventiveMaintenance({ data, loading }) {
 
         height: 245,
         type: "bar",
+        
         toolbar: {
-          show: false,
+          show: true,
         },
         sparkline: {
           enabled: false,
@@ -34,8 +35,10 @@ export default function OverallPreventiveMaintenance({ data, loading }) {
       },
       plotOptions: {
         bar: {
-          borderRadius: 10,
-          columnWidth: "30%",
+          horizontal: false,
+          columnWidth: "28%",
+          endingShape: "rounded",
+          borderRadius: 5,
         },
       },
       dataLabels: {
@@ -100,7 +103,7 @@ export default function OverallPreventiveMaintenance({ data, loading }) {
                 height="245"
               />
             ) : (
-              <EmptyMess />
+              <EmptyMess msg={`${t("oops!_no_data_found_key")}.`} />
             )}
           </div>
         </div>

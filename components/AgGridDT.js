@@ -12,9 +12,12 @@ import { faFileExcel, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import { Button, Modal } from "react-bootstrap";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
+import Spinner from "components/UI/Spinner";
+
 const PDFExportPanel = dynamic(() => import("./pdfExport/PDFExportPanel"), {
   ssr: false,
 });
+
 const AgGridDT = ({
   columnDefs,
   rowData,
@@ -32,13 +35,13 @@ const AgGridDT = ({
   suppressExcelExport,
   getRowStyle,
   autoSize,
-  overlayLoadingTemplate,
+  loadingOverlayComponent,
   suppressSizeToFit,
   gridApi,
   gridColumnApi,
   Height,
   rowSelection,
-  footer = true
+  footer = true,
 }) => {
   const router = useRouter();
   const { darkMode } = useSelector((state) => state.config);
@@ -64,7 +67,7 @@ const AgGridDT = ({
         enableRtl={locale == "ar" ? true : false}
         columnDefs={columnDefs}
         rowData={rowData}
-        rowSelection={rowSelection || 'multiple'}
+        rowSelection={rowSelection || "multiple"}
         onSelectionChanged={onSelectionChanged || null}
         onCellMouseOver={onCellMouseOver || null}
         onCellMouseOut={onCellMouseOut || null}
@@ -77,19 +80,22 @@ const AgGridDT = ({
         onFirstDataRendered={onFirstDataRendered || null}
         defaultColDef={defaultColDef || null}
         onGridReady={onGridReady || null}
-        overlayNoRowsTemplate={overlayNoRowsTemplate}
+        overlayNoRowsTemplate={
+          overlayNoRowsTemplate || t("no_rows_to_shows_key")
+        }
         suppressMenuHide={suppressMenuHide || true}
         getRowStyle={getRowStyle || null}
-        overlayLoadingTemplate={
-          overlayLoadingTemplate ||
-          `<h3 style="opacity: 0.5">${t("please_wait_while_your_rows_are_loading_key")}</h3>`
-        }
+        loadingOverlayComponent={loadingOverlayComponent || Spinner}
         suppressSizeToFit={suppressSizeToFit || false}
       />
       {!router.pathname.includes("/track") && footer && (
         <div className="d-flex">
           <Button
-            disabled={!rowData?.length} variant="primary " className="p-2" onClick={onBtnExport}>
+            disabled={!rowData?.length}
+            variant="primary "
+            className="p-2"
+            onClick={onBtnExport}
+          >
             <FontAwesomeIcon className="me-2" icon={faFileExcel} size="sm" />
             {t("export_to_excel_key")}
           </Button>
@@ -108,13 +114,12 @@ const AgGridDT = ({
       )}
 
       <Modal
-
         centered
         show={openBtnsExportsModel}
         onHide={() => setOpenBtnsExportsModel(false)}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{t('PDF_export_options_key')}</Modal.Title>
+          <Modal.Title>{t("PDF_export_options_key")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <PDFExportPanel

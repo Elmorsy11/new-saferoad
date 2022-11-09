@@ -1,12 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import Styles from "styles/Dashboard.module.scss";
+import Styles from "../../styles/Dashboard.module.scss";
 
 function Stars({
   name = "name",
   imgSrc,
   imgAlt = "image alt",
   starsCount,
+  type,
+  id
 }) {
   const starsBlack = 5 - starsCount;
   return (
@@ -22,7 +24,8 @@ function Stars({
           />
         </div>
         <div>
-          <h6 className={"mb-1 " + Styles.name_size}>{name}</h6>
+          <h6 className={"mb-0 " + Styles.name_size}>{name}</h6>
+          <span className="fs-6 text-secondary">{type} id: {id || 'unknown'}</span>
           <div className="text-secondary text-warning">
             {new Array(starsCount).fill({})?.map((ora, i) => {
               return (
