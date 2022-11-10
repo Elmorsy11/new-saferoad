@@ -2,10 +2,8 @@ import React, { Fragment } from "react";
 import { Field, ErrorMessage } from "formik";
 import TextError from "./TextError";
 import { Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
 
-function Input({ label, name, type, className, ...rest }) {
-  const { darkMode } = useSelector((state) => state.config);
+function Textarea({ label, name, className, ...rest }) {
   return (
     <Fragment>
       <Field name={name}>
@@ -14,15 +12,8 @@ function Input({ label, name, type, className, ...rest }) {
             <Form.Group className={`${className}`} controlId={label}>
               <Form.Label>{label}</Form.Label>
               <Form.Control
-                autoComplete="off"
-                className={`border-primary ${
-                  type === "date"
-                    ? darkMode
-                      ? "date_input_dark"
-                      : "date_input"
-                    : ""
-                }`}
-                type={type}
+                className={`border-primary`}
+                as='textarea'
                 {...rest}
                 {...field}
               />
@@ -35,4 +26,4 @@ function Input({ label, name, type, className, ...rest }) {
   );
 }
 
-export default Input;
+export default Textarea;

@@ -237,11 +237,11 @@ const Edit = ({
       const respond = await updatePreventive(id, submitedData);
       toast.success(respond.result);
       router.push("/preventive-maintenance");
-      setloading(false);
       if (model) {
         handleModel();
         updateTable();
       }
+      setloading(false);
     } catch (error) {
       toast.error(error.response.data?.message);
       setloading(false);

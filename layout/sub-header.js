@@ -20,6 +20,9 @@ const SubHeader = ({ pageName = "" }) => {
       case "/preventive-maintenance/edit/[editId]":
         setState("update_maintenance_plan_key");
         break;
+      case "/preventive-maintenance/view-history":
+        setState("view_history_key");
+        break;
       default:
         setState("");
         break;

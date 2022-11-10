@@ -5,7 +5,14 @@ import TextError from "../TextError";
 import { useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 
-const ReactSelect = ({ label, name, className, options, ...rest }) => {
+const ReactSelect = ({
+  label,
+  name,
+  className,
+  options,
+  isObject = false,
+  ...rest
+}) => {
   const { darkMode } = useSelector((state) => state.config);
 
   const light = (isSelected, isFocused) => {
@@ -65,6 +72,12 @@ const ReactSelect = ({ label, name, className, options, ...rest }) => {
     menu: (styles) => {
       return { ...styles, backgroundColor: darkMode ? "#151824" : "#fff" };
     },
+    input: (styles) => {
+      return {
+        ...styles,
+        color: darkMode ? "#fff" : "#151824",
+      };
+    },
   };
 
   return (
@@ -75,6 +88,7 @@ const ReactSelect = ({ label, name, className, options, ...rest }) => {
         options={options}
         id={name}
         name={name}
+        isObject={isObject}
         {...rest}
         styles={colorStyles}
       />

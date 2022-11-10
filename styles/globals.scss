@@ -2663,3 +2663,15 @@ rs-calendar-table-cell {
 //     }
 //   }
 // }
+
+.form-control {
+    color: #151824 !important;
+}
+.form-label,.form-check-label{
+    color: #151824 !important;
+}
+body.dark {
+    .form-label,.form-check-label{
+        color: #bfc9e3 !important;
+    }
+}

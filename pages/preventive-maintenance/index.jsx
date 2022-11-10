@@ -42,7 +42,7 @@ function PreventiveMaintenance() {
       setGridApi(params.api);
       setGridColumnApi(params.columnApi);
     } catch (error) {
-      toast.error(error.response.data?.message);
+      toast.error(error.response?.data?.message);
     }
   }, []);
 
@@ -230,22 +230,15 @@ function PreventiveMaintenance() {
             <Card.Body>
               <div className="d-flex justify-content-start justify-content-md-center justify-content-md-between flex-wrap">
                 <div className="d-flex flex-column flex-md-row justify-content-center flex-wrap mb-4">
-                  <Link href="/preventive-maintenance/add">
-                    <a>
-                      <Button
-                        variant="primary p-1 d-flex align-items-center"
-                        className="m-1"
-                        style={{ fontSize: "13px" }}
-                      >
-                        <FontAwesomeIcon
-                          className="me-2"
-                          icon={faPlus}
-                          size="sm"
-                        />
-                        {t("add_maintenance_plan_key")}
-                      </Button>
-                    </a>
-                  </Link>
+                  <Button
+                    variant="primary p-1 d-flex align-items-center"
+                    className="m-1"
+                    style={{ fontSize: "13px" }}
+                    onClick={() => router.push("/preventive-maintenance/add")}
+                  >
+                    <FontAwesomeIcon className="me-2" icon={faPlus} size="sm" />
+                    {t("add_maintenance_plan_key")}
+                  </Button>
 
                   <Button
                     disabled={!rowsSelected.length}

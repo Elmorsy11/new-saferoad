@@ -21,7 +21,7 @@
     "please_wait_while_your_rows_are_loading_key": "يرجى الانتظار بينما يتم تحميل بياناتك",
     "no,_cancel": "لا إلغاء",
     "yes,_delete_it!": "نعم ، احذفها!",
-    "are_you_sure?": "Are you sure?",
+    "are_you_sure?": "هل أنت متأكد؟",
     "are_you_sure_you_want_to_delete_this_table?": "هل أنت متأكد أنك تريد حذف هذا الجدول؟",
     "cancel_key": "إلغاء",
 
@@ -40,5 +40,7 @@
     "OOPS!_NO_DATA_FOUND.": "عفوا لا توجد بيانات لعرضها.",
     "reports_key": "التقارير",
     "back_key": "رجوع",
-    "operate_driver_key": "تشغيل السائق"
+    "operate_driver_key": "تشغيل السائق",
+    "close_key": "إلغاء",
+    "view_history_key": "عرض السجل"
 }

@@ -64,5 +64,9 @@
     "open_in_new_tab_key": "Open in new tab",
     "update_maintenance_plan_key": "Update Maintenance Plan",
     "deleted_successfully_key": "Deleted successfully",
-    "reset_notification's_value_key":"Reset Notification's Value"
+    "reset_notification's_value_key":"Reset Notification's Value",
+    "there_are_already_plans_with_the_same_type_created_for_some_of_the_vehicles_you_have_selected_key":"There are already plans with the same type created for some of the vehicles you have selected",
+    "replace_key": "Replace",
+    "add_maintenance_plan_warning_key": "Add Maintenance Plan Warning",
+    "reset_by_key":"Reset By"
 }

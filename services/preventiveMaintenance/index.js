@@ -43,6 +43,19 @@ export const addNewPreventive = async (data) => {
   return response.data;
 };
 
+// confirm new preventive maintenance(add page)
+export const confirmPreventive = async (data) => {
+  const response = await axios({
+    method: "post",
+    url: "dashboard/management/maintenance/checkMaintenance",
+    data: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.data;
+};
+
 // get data of preventive maintenance to edit(edit page)
 export const fitchPreventiveForEdit = async (id) => {
   const response = await axios({

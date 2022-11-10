@@ -34,7 +34,7 @@
     "transmission_oil_change_key": "تغيير زيت ناقل الحركة",
     "filter_change_key": "مرشح التغيير",
     "others_key": "آخر",
-    "by_Mileage_key": "بالأميال",
+    "by_mileage_key": "بالأميال",
     "by_fixed_date_key": "حسب التاريخ المحدد",
     "by_working_hours_key": "حسب ساعات العمل",
     "value_key": "قيمة",
@@ -65,5 +65,9 @@
     "open_in_new_tab_key": "فتح في علامة تبويب جديدة",
     "update_maintenance_plan_key": "تحديث خطة الصيانة",
     "deleted_successfully_key": "حذف بنجاح",
-    "reset_notification's_value_key":"إعادة تعيين قيمة الإخطار"
+    "reset_notification's_value_key":"إعادة تعيين قيمة الإخطار",
+    "there_are_already_plans_with_the_same_type_created_for_some_of_the_vehicles_you_have_selected_key": "هناك بالفعل خطط مع نفس النوع الذي تم إنشاؤه لبعض المركبات التي حددتها",
+    "replace_key": "استبدال",
+    "add_maintenance_plan_warning_key": "تحذير إضافة خطة الصيانة",
+    "reset_by_key":"إعادة تعيين من قبل"
 }

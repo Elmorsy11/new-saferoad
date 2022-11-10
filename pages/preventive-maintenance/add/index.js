@@ -1,3 +1,4 @@
+import React from "react";
 import { faCheck, faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
@@ -9,13 +10,16 @@ import useStreamDataState from "hooks/useStreamDataState";
 import { encryptName } from "helpers/encryptions";
 import { Formik, Form } from "formik";
 import { addPreventiveMaintenanceValidation } from "helpers/yupValidations";
-import React from "react";
 import Input from "components/formik/Input";
 import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import Checkbox from "components/formik/Checkbox";
-import { addNewPreventive } from "services/preventiveMaintenance";
+import {
+  confirmPreventive,
+  addNewPreventive,
+} from "services/preventiveMaintenance";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import Model from "components/UI/Model";
 
 const FormikAdd = () => {
   const { t } = useTranslation("preventiveMaintenance");
@@ -32,6 +36,13 @@ const FormikAdd = () => {
   const [nextValue, setNextValue] = useState("");
   const [whenValue, setWhenValue] = useState("");
   const [percentageValue, setPercentageValue] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [valueNotifyPeriodError, setValueNotifyPeriodError] = useState(false);
+
+  const [loading, setloading] = useState(false);
+  const [submitedData, setSubmitedData] = useState(false);
+  const [replaceClicked, setReplaceClicked] = useState(false);
+
   // data for select boxes
   const optionsMaintenanceType = useMemo(
     () => [
@@ -74,7 +85,7 @@ const FormikAdd = () => {
     () => [
       {
         value: 1,
-        label: t("by_Mileage_key"),
+        label: t("by_mileage_key"),
       },
       {
         value: 2,
@@ -100,9 +111,6 @@ const FormikAdd = () => {
     ],
     [t]
   );
-  const [valueNotifyPeriodError, setValueNotifyPeriodError] = useState(false);
-
-  const [loading, setloading] = useState(false);
 
   // minimum date used in date inputs
   const minDate = new Date().toISOString().slice(0, 10);
@@ -115,10 +123,10 @@ const FormikAdd = () => {
 
   // helper func to make Mileage and working hours logic
   const periodTypeFunc = useCallback(
-    (vehiclesData, vehiclesDataType, type) => {
+    (vehiclesData, vehiclesDataType) => {
       setStartValue(
         vehiclesData?.length === 1
-          ? [vehiclesData[0]?.[`${type}`]]
+          ? [vehiclesDataType[0]]
           : vehiclesData?.length > 1
           ? vehiclesDataType
           : 0
@@ -126,18 +134,19 @@ const FormikAdd = () => {
 
       setNextValue(
         vehiclesData?.length === 1
-          ? [vehiclesData[0]?.[`${type}`] + +maintenanceDueValue]
+          ? [vehiclesDataType[0] + +maintenanceDueValue]
           : vehiclesData?.length > 1
           ? vehiclesDataType.map((vehicle) => vehicle + +maintenanceDueValue)
           : 0
       );
 
+      // if user choose percentage then we need to calculate the value 
       if (notifyType === "1") {
         setValueNotifyType(false);
         setWhenValue(
           vehiclesData?.length === 1
             ? [
-                vehiclesData[0]?.[`${type}`] +
+                vehiclesDataType[0] +
                   +maintenanceDueValue * (+percentageValue / 100),
               ]
             : vehiclesData?.length > 1
@@ -149,6 +158,7 @@ const FormikAdd = () => {
         );
         // delete Value Notify Period Error if Percentage selected
         setValueNotifyPeriodError(false);
+        // if user choose value logic
       } else if (notifyType === "2") {
         setValueNotifyType(true);
       }
@@ -170,16 +180,20 @@ const FormikAdd = () => {
     );
     setSelectedVehiclesData(vehiclesData);
 
-    const vehiclesMileage = vehiclesData?.map((vehicle) => vehicle.Mileage);
-    const vehiclesHours = vehiclesData?.map((vehicle) => vehicle.WorkingHours);
+    const vehiclesMileage = vehiclesData?.map(
+      (vehicle) => +(vehicle.Mileage / 1000).toFixed(2)
+    );
+    const vehiclesHours = vehiclesData?.map((vehicle) =>
+      Math.round(vehicle.WorkingHours / 60 / 60)
+    );
 
     // conditions of period Type equal to Mileage
     if (periodType === 1) {
-      periodTypeFunc(vehiclesData, vehiclesMileage, "Mileage");
+      periodTypeFunc(vehiclesData, vehiclesMileage);
       // conditions of period Type equal to WorkingHours
     } else if (periodType === 4) {
-      periodTypeFunc(vehiclesData, vehiclesHours, "WorkingHours");
-      // conditions of period Type equal to Fixed DAte
+      periodTypeFunc(vehiclesData, vehiclesHours);
+      // conditions of period Type equal to Fixed Date
     } else if (periodType === 2) {
       setFixedDateCase(true);
       const today = new Date().toISOString().slice(0, 10);
@@ -196,6 +210,26 @@ const FormikAdd = () => {
     };
   });
 
+  // helper function to make add request
+  const postData = useCallback(
+    async (data) => {
+      try {
+        const postData = await addNewPreventive(data);
+        toast.success(postData.result);
+        router.push("/preventive-maintenance");
+        setloading(false);
+        setReplaceClicked(false);
+      } catch (error) {
+        toast.error(error.response.data?.message);
+        setloading(false);
+        setShowModal(false);
+        setReplaceClicked(false);
+      }
+    },
+    [router]
+  );
+
+  // initial Values needed for formik
   const initialValues = {
     selectedVehicles: [],
     MaintenanceType: 1,
@@ -212,6 +246,7 @@ const FormikAdd = () => {
     WhenValue: "",
   };
 
+  // control input values on formik
   const getFormData = (values) => {
     setSelectedVehicles(values.selectedVehicles);
     setPeriodType(values.PeriodType);
@@ -226,6 +261,7 @@ const FormikAdd = () => {
     }
   };
 
+  // submit form
   const onSubmit = async (data) => {
     const StartValue =
       startValue?.length > 1 && typeof startValue !== "string"
@@ -270,6 +306,7 @@ const FormikAdd = () => {
       NotifyBySMS: null,
       IsNotified: null,
     };
+    setSubmitedData(submitedData);
 
     // validation when select more than one vehicle and select value option in period type
     if (selectedVehicles.length > 1 && notifyType === "2" && periodType !== 2) {
@@ -280,10 +317,12 @@ const FormikAdd = () => {
 
     setloading(true);
     try {
-      const respond = await addNewPreventive(submitedData);
-      toast.success(respond.result);
-      setloading(false);
-      router.push("/preventive-maintenance");
+      const confirmData = await confirmPreventive(submitedData);
+      if (confirmData.result) {
+        setShowModal(true);
+      } else {
+        await postData(submitedData);
+      }
     } catch (error) {
       toast.error(error.response.data?.message);
       setloading(false);
@@ -291,7 +330,7 @@ const FormikAdd = () => {
   };
 
   return (
-    <>
+    <div className="container-fluid">
       <Card>
         <Card.Header className="h3">
           {t("add_maintenance_plan_key")}
@@ -473,7 +512,7 @@ const FormikAdd = () => {
                   <div className="w-25 d-flex flex-wrap flex-md-nowrap">
                     <Button
                       type="submit"
-                      // disabled={loading || selectedVehicles.length === 0}
+                      disabled={loading || selectedVehicles.length === 0}
                       className="px-3 py-2 text-nowrap me-3 ms-0  mb-2 mb-md-0"
                     >
                       {!loading ? (
@@ -508,9 +547,31 @@ const FormikAdd = () => {
               );
             }}
           </Formik>
+          {/* confirm Model if preventive repeated */}
+          <Model
+            header={t("add_maintenance_plan_warning_key")}
+            show={showModal}
+            onHide={() => {
+              setShowModal(false);
+              setloading(false);
+            }}
+            onUpdate={async () => {
+              setReplaceClicked(true);
+              await postData(submitedData);
+            }}
+            updateButton={t("replace_key")}
+            disabled={replaceClicked ? true : false}
+          >
+            <h5 className="text-center opacity-50">
+              {t(
+                "there_are_already_plans_with_the_same_type_created_for_some_of_the_vehicles_you_have_selected_key"
+              )}
+              .
+            </h5>
+          </Model>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 };
 

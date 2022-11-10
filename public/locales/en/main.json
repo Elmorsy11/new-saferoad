@@ -40,5 +40,7 @@
     "OOPS!_NO_DATA_FOUND.": "OOPS! NO DATA FOUND.",
     "reports_key": "Reports",
     "back_key": "Back",
-    "operate_driver_key": "Operate Driver"
+    "operate_driver_key": "Operate Driver",
+    "close_key": "Close",
+    "view_history_key": "View History"
 }
