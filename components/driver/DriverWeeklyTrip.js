@@ -66,7 +66,7 @@ const DriverWeeklyTrip = ({ data, loading }) => {
   };
 
   return (
-    <Card className="shadow-sm border border-light">
+    <Card className="shadow-sm border border-light" style={{ height: "calc(100% - 2rem)" }}>
       {loading ? (
         <Spinner />
       ) : data.length > 0 ? (
@@ -80,7 +80,7 @@ const DriverWeeklyTrip = ({ data, loading }) => {
           />
         </Card.Body>
       ) : (
-        <EmptyMess msg={`${t("oops!_no_data_found_key")}.`} />
+        <EmptyMess height="100%" msg={`${t("oops!_no_data_found_key")}.`} />
       )}
     </Card>
   );
