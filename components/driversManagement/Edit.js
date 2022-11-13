@@ -86,7 +86,7 @@ export default function Edit({
     setloading(true);
     try {
       await updateDriver(id, submitData);
-      toast.success("driver_updated_successfully_key");
+      toast.success(t("driver_updated_successfully_key"));
       router.push("/drivers-management");
       setloading(false);
       if (model) {
@@ -169,8 +169,8 @@ export default function Edit({
                           />
 
                           <Input
-                            placeholder={t("licence_number_key")}
-                            label={t("licence_number_key")}
+                            placeholder={t("license_number_key")}
+                            label={t("license_number_key")}
                             name="DLNumber"
                             type="number"
                             min={0}
@@ -178,8 +178,8 @@ export default function Edit({
                           />
 
                           <Input
-                            placeholder={t("licence_expiration_date_key")}
-                            label={t("licence_expiration_date_key")}
+                            placeholder={t("license_expiration_date_key")}
+                            label={t("license_expiration_date_key")}
                             name="DLExpirationDate"
                             type="date"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}

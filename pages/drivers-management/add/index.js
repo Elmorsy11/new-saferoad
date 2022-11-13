@@ -65,7 +65,7 @@ export default function Index() {
   const columns = useMemo(
     () => [
       {
-        headerName: `${t("Select")}`,
+        headerName: `${t("select_key")}`,
         field: "Select",
         maxWidth: 70,
         sortable: false,
@@ -74,23 +74,23 @@ export default function Index() {
         filter: false,
       },
       {
-        headerName: `${t("Vehicle ID")}`,
+        headerName: `${t("vehicle_id_key")}`,
         field: "VehicleID",
       },
       {
-        headerName: `${t("Vehicle Name")}`,
+        headerName: `${t("vehicle_name_key")}`,
         field: "DisplayName",
       },
       {
-        headerName: `${t("Plate Name")}`,
+        headerName: `${t("plate_name_key")}`,
         field: "PlateNumber",
       },
       {
-        headerName: `${t("Manufacturing Year")}`,
+        headerName: `${t("manufacturing_year_key")}`,
         field: "MakeYear",
       },
       {
-        headerName: `${t("Group Name")}`,
+        headerName: `${t("group_name_key")}`,
         field: "GroupName",
       },
     ],
@@ -155,14 +155,11 @@ export default function Index() {
     setloading(true);
     try {
       const respond = await addDriver(submitData);
-      toast.success("Driver Add Successfully.");
+      toast.success(`${t("driver_added_successfully_key")}.`);
       if (submitData.SelectedVehiclePlateNumber) {
         try {
-          await addVehicleToDriver(
-            respond.driver[0][0],
-            rowSelected.VehicleID
-          );
-          toast.success("Vehicle Assigned Successfully");
+          await addVehicleToDriver(respond.driver[0][0], rowSelected.VehicleID);
+          toast.success(t("vehicle_assigned_successfully_key"));
           setloading(false);
         } catch (error) {
           setloading(false);
@@ -178,9 +175,9 @@ export default function Index() {
   };
 
   return (
-    <>
+    <div className="container-fluid">
       <Card>
-        <Card.Header className="h3">Add New Driver</Card.Header>
+        <Card.Header className="h3">{t("add_new_driver_key")}</Card.Header>
         <Card.Body>
           <Formik
             initialValues={initialValues}
@@ -195,24 +192,24 @@ export default function Index() {
                     <Col md={12}>
                       <Row>
                         <Input
-                          placeholder="First Name"
-                          label="First Name"
+                          placeholder={t("first_name_key")}
+                          label={t("first_name_key")}
                           name="FirstName"
                           type="text"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="Last Name"
-                          label="Last Name"
+                          placeholder={t("last_name_key")}
+                          label={t("last_name_key")}
                           name="LastName"
                           type="text"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="Date Of Birth"
-                          label="Date Of Birth"
+                          placeholder={t("date_of_birth")}
+                          label={t("date_of_birth")}
                           name="DateOfBirth"
                           type="date"
                           min="1900-01-01"
@@ -222,15 +219,15 @@ export default function Index() {
 
                         <ReactSelect
                           options={nationalities}
-                          label="Nationality"
+                          label={t("nationality_key")}
                           name="Nationality"
-                          placeholder={"Select Driver Nationality"}
+                          placeholder={t("nationality_key")}
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="Phone Number"
-                          label="Phone Number"
+                          placeholder={t("phone_number_key")}
+                          label={t("phone_number_key")}
                           name="PhoneNumber"
                           type="number"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -238,16 +235,16 @@ export default function Index() {
                         />
 
                         <Input
-                          placeholder="Email Address"
-                          label="Email"
+                          label={t("email_address_key")}
+                          placeholder={t("email_address_key")}
                           name="Email"
                           type="email"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="Licence Number"
-                          label="Licence Number"
+                          placeholder={t("license_number_key")}
+                          label={t("license_number_key")}
                           name="DLNumber"
                           type="number"
                           min={0}
@@ -255,8 +252,8 @@ export default function Index() {
                         />
 
                         <Input
-                          placeholder="Licence Expiration Date"
-                          label="Licence Expiration Date"
+                          placeholder={t("license_expiration_date_key")}
+                          label={t("license_expiration_date_key")}
                           name="DLExpirationDate"
                           type="date"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -264,16 +261,16 @@ export default function Index() {
                         />
 
                         <Input
-                          placeholder="Department"
-                          label="Department"
+                          placeholder={t("department_key")}
+                          label={t("department_key")}
                           name="Department"
                           type="text"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="RFID"
-                          label="RFID"
+                          placeholder={t("RFID_key")}
+                          label={t("RFID_key")}
                           name="RFID"
                           type="text"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -283,7 +280,7 @@ export default function Index() {
                           controlId="formFile"
                           className="col-12 col-md-6 col-lg-4 mb-3"
                         >
-                          <Form.Label>Upload Image</Form.Label>
+                          <Form.Label>{t("upload_image_key")}</Form.Label>
                           <Form.Control
                             className="border-primary"
                             type="file"
@@ -298,34 +295,34 @@ export default function Index() {
                         </Form.Group>
 
                         <Input
-                          placeholder="Selected Vehicle Plate Number"
-                          label="Selected Vehicle Plate Number"
+                          placeholder={t("selected_vehicle_plate_number_key")}
+                          label={t("selected_vehicle_plate_number_key")}
                           name="SelectedVehiclePlateNumber"
                           type="text"
                           disabled={true}
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
-                        <h4>WASL Integration (Optional)</h4>
+                        <h4>{t("WASL_Integration_(Optional)_key")}</h4>
                         <Input
-                          placeholder="Identity Number"
-                          label="Identity Number"
+                          placeholder={t("identity_number_key")}
+                          label={t("identity_number_key")}
                           name="IdentityNumber"
                           type="text"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="Date Of Birth Hijri"
-                          label="Date Of Birth Hijri"
+                          placeholder={t("date_of_birth_hijri_key")}
+                          label={t("date_of_birth_hijri_key")}
                           name="DateOfBirthHijri"
                           type="text"
                           className={"col-12 col-md-6 col-lg-4 mb-3"}
                         />
 
                         <Input
-                          placeholder="Mobile Number"
-                          label="Mobile Number"
+                          placeholder={t("mobile_number_key")}
+                          label={t("mobile_number_key")}
                           name="MobileNumber"
                           type="number"
                           min={0}
@@ -335,7 +332,7 @@ export default function Index() {
                     </Col>
                   </Row>
                   <Model
-                    header={"Vehicles List"}
+                    header={t("vehicles_list_key")}
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     onUpdate={() => {
@@ -346,7 +343,7 @@ export default function Index() {
                       );
                     }}
                     disabled={rowSelected ? false : true}
-                    updateButton={"Assign to Driver"}
+                    updateButton={t("assign_to_driver_key")}
                   >
                     <AgGridDT
                       rowHeight={"auto"}
@@ -379,7 +376,7 @@ export default function Index() {
                           icon={faCar}
                           size="sm"
                         />
-                        Assign Vehicle to Driver
+                        {t("assign_vehicle_to_driver_key")}
                       </Button>
                       <Button
                         type="submit"
@@ -399,7 +396,7 @@ export default function Index() {
                             size="sm"
                           />
                         )}
-                        Save
+                        {t("save_key")}
                       </Button>
                       <Button
                         className="px-3 py-2 text-nowrap me-3 ms-0"
@@ -413,7 +410,7 @@ export default function Index() {
                           icon={faTimes}
                           size="sm"
                         />
-                        Cancel
+                        {t("cancel_key")}
                       </Button>
                     </div>
                   </Row>
@@ -423,7 +420,7 @@ export default function Index() {
           </Formik>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 }
 

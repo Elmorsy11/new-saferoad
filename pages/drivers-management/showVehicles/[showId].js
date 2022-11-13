@@ -30,18 +30,19 @@ export default function ShowVehicles(props) {
   const [loadingUnAssignRq, setloadingUnAssignRq] = useState(false);
 
   // fitch assigned Vehicles data
-  const onGridassignReady = useCallback(async (params) => {
-    try {
-      const respond = await getDriverAssignedVehicles(showId);
-      setAssignedVehicles([...respond?.vehicles]);
-      setGridApiassigned(params.api);
-      setGridColumnApiassigned(params.columnApi);
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-
-
-  }, [showId]);
+  const onGridassignReady = useCallback(
+    async (params) => {
+      try {
+        const respond = await getDriverAssignedVehicles(showId);
+        setAssignedVehicles([...respond?.vehicles]);
+        setGridApiassigned(params.api);
+        setGridColumnApiassigned(params.columnApi);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    },
+    [showId]
+  );
   // fitch Unassigned Vehicles data
   const onGridUnassignReady = useCallback(async (params) => {
     try {
@@ -95,40 +96,56 @@ export default function ShowVehicles(props) {
   // columns used in ag grid
   const AssignedVecColumns = useMemo(
     () => [
-      { headerName: "Group Name", field: "AccountID", sortable: true },
-      { headerName: "Plate Number", field: "PlateNumber", sortable: true },
-      { headerName: "Display Name", field: "DisplayName", sortable: true },
-      { headerName: "Color", field: "Color", sortable: true },
-      { headerName: "Make Year", field: "MakeYear", sortable: true },
-      { headerName: "TypeID", field: "TypeID", sortable: true },
-      { headerName: "ModelID", field: "ModelID", sortable: true },
+      { headerName: t("group_name_key"), field: "GroupName", sortable: true },
       {
-        headerName: "Actions",
+        headerName: t("plate_number_key"),
+        field: "PlateNumber",
+        sortable: true,
+      },
+      {
+        headerName: t("display_name_key"),
+        field: "DisplayName",
+        sortable: true,
+      },
+      { headerName: t("color_key"), field: "Color", sortable: true },
+      { headerName: t("makeYear_key"), field: "MakeYear", sortable: true },
+      { headerName: t("typeID_key"), field: "TypeID", sortable: true },
+      { headerName: t("modelID_key"), field: "ModelID", sortable: true },
+      {
+        headerName: t("actions_key"),
         cellRenderer: (params) => (
           <Button
             disabled={loadingUnAssignRq}
             onClick={() => UnAssignVehicleRq(params.data)}
           >
-            UnAssign Vehicle
+            {t("unassign_vehicle_key")}
           </Button>
         ),
         sortable: true,
         unSortIcon: true,
       },
     ],
-    [loadingUnAssignRq]
+    [loadingUnAssignRq, t]
   );
   const UnAssignedVecColumns = useMemo(
     () => [
-      { headerName: "group_name_key", field: "GroupName", sortable: true },
-      { headerName: "plate_number_key", field: "PlateNumber", sortable: true },
-      { headerName: "display_name_key", field: "DisplayName", sortable: true },
-      { headerName: "Color", field: "Color", sortable: true },
-      { headerName: "MakeYear", field: "MakeYear", sortable: true },
-      { headerName: "TypeID", field: "TypeID", sortable: true },
-      { headerName: "ModelID", field: "ModelID", sortable: true },
+      { headerName: t("group_name_key"), field: "GroupName", sortable: true },
       {
-        headerName: "Actions",
+        headerName: t("plate_number_key"),
+        field: "PlateNumber",
+        sortable: true,
+      },
+      {
+        headerName: t("display_name_key"),
+        field: "DisplayName",
+        sortable: true,
+      },
+      { headerName: t("color_key"), field: "Color", sortable: true },
+      { headerName: t("makeYear_key"), field: "MakeYear", sortable: true },
+      { headerName: t("typeID_key"), field: "TypeID", sortable: true },
+      { headerName: t("modelID_key"), field: "ModelID", sortable: true },
+      {
+        headerName: t("actions_key"),
         cellRenderer: (params) => {
           return (
             <Button
@@ -137,21 +154,20 @@ export default function ShowVehicles(props) {
                 AssignVehicleRq(params.data);
               }}
             >
-              Assign Vehicle
+              {t("assign_vehicle_key")}
             </Button>
           );
         },
       },
     ],
-    [loadingAssignRq]
+    [loadingAssignRq, t]
   );
 
   return (
-    <>
+    <div className="container-fluid">
       <Card>
         <Card.Header className="h3">{t("assigned_vehicles_key")}</Card.Header>
         <Card.Body>
-
           <div className="d-flex justify-content-center justify-content-md-between flex-wrap">
             <div className="d-flex justify-content-center flex-wrap mb-4">
               <Link href="/drivers-management" passHref>
@@ -185,8 +201,6 @@ export default function ShowVehicles(props) {
             gridApi={gridApiassigned}
             gridColumnApi={gridColumnApiassigned}
           />
-
-
         </Card.Body>
       </Card>
       <Card>
@@ -206,21 +220,19 @@ export default function ShowVehicles(props) {
             gridApi={gridApiUnassigned}
             gridColumnApi={gridColumnApiUnassigned}
           />
-
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 }
 
-
 // translation ##################################
 export async function getServerSideProps({ locale, query }) {
-  const { showId } = query
+  const { showId } = query;
   return {
     props: {
       ...(await serverSideTranslations(locale, ["driversManagement", "main"])),
-      showId
+      showId,
     },
   };
 }

@@ -82,13 +82,15 @@ function DriversManagement() {
         valueGetter: handleFullName,
         cellRenderer: (params) => (
           <>
-            <a
-              href="/driver"
-              target="_blank"
-              className="text-decoration-underline"
+            <Link
+              href={{
+                pathname: `/driver/[driverId]`,
+                query: { driverId: params.data.DriverID },
+              }}
+              passHref
             >
               {params.value}
-            </a>
+            </Link>
             <div className="d-flex justify-content-start gap-1 options flex-wrap">
               <Link
                 href={`/drivers-management/showVehicles/${params.data.DriverID}`}
@@ -144,14 +146,14 @@ function DriversManagement() {
         unSortIcon: true,
       },
       {
-        headerName: `${t("licence_number_key")}`,
+        headerName: `${t("license_number_key")}`,
         field: "DLNumber",
         minWidth: 120,
         sortable: true,
         unSortIcon: true,
       },
       {
-        headerName: `${t("licence_expiration_date_key")}`,
+        headerName: `${t("license_expiration_date_key")}`,
         field: "DLExpirationDate",
         minWidth: 140,
         unSortIcon: true,
@@ -223,7 +225,7 @@ function DriversManagement() {
       <DeleteModal
         show={showModalDelete}
         loading={loadingDelete}
-
+        confirmText={t("yes,_delete_key")}
         title={t("delete_driver_key")}
         description={t("are_you_sure_you_want_to_delete_this_driver?")}
         onConfirm={onDelete}

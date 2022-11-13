@@ -158,28 +158,28 @@ export const editPreventiveMaintenanceValidation = (
 
 export const addEditOperateDriver = (t) => {
   const required = t("is_required_key");
+  const mustDate = t("must_be_a_date_key");
   const mustNumber = t("must_be_number_key");
 
   return Yup.object().shape({
-    FirstName: stringValidation("First Name").matches(
+    FirstName: stringValidation(t("first_name_key"),required).matches(
       /^([a-zA-Z]+\s)*[a-zA-Z]+$/,
-      "First Name must not have numbers"
+      t("first_name_must_not_have_numbers_key")
     ),
-    LastName: stringValidation("Last Name").matches(
+    LastName: stringValidation(t("last_name_key"),required).matches(
       /^([a-zA-Z]+\s)*[a-zA-Z]+$/,
-      "Last Name must not have numbers"
+      t("last_name_must_not_have_numbers_key")
     ),
-    DateOfBirth: dateValidation("Date Of Birth"),
-    Nationality: stringValidation("Nationality"),
-    PhoneNumber: numberValidation("Phone Number", required, mustNumber),
-    Email: emailValidation(t("invalid_email_address_key"), t("email_is_required")),
-    DLNumber: numberValidation("Licence Number", required, mustNumber).min(
+    DateOfBirth: dateValidation(t("date_of_birth_key"),required,mustDate),
+    Nationality: stringValidation(t("nationality_key"),required),
+    PhoneNumber: numberValidation(t("phone_number_key"), required, mustNumber),
+    Email: emailValidation(t("invalid_email_address_key"), t("email_is_required_key")),
+    DLNumber: numberValidation(t("license_number_key"), required, mustNumber).min(
       0,
-      "Licence Number must be greater than or equal to 0"
+      (`${t("license_number_must_be_greater_than_or_equal_to_key")} 0`)
     ),
-    DLExpirationDate: dateValidation("Licence Expiration Date"),
-    Department: stringValidation("Department"),
-    RFID: stringValidation("RFID"),
+    DLExpirationDate: dateValidation(t("license_expiration_date_key"),required,mustDate),
+    Department: stringValidation(t("department_key"),required),
+    RFID: stringValidation("RFID",required),
   });
-
 }
