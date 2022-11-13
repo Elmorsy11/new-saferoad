@@ -22,8 +22,7 @@ import DriverUtilizationStatistics from "components/driver/DriverUtilizationStat
 import DriverBehavior from "components/driver/DriverBehavior";
 import { useTranslation } from "next-i18next";
 
-const Driver = ({ query }) => {
-  const id = query.driverId;
+const Driver = ({ driverId }) => {
   const [driverInfo, setDriverInfo] = useState({});
   const [driverInfoLoading, setDriverInfoLoading] = useState(true);
   const [overSpeedStatistics, setOverSpeedStatistics] = useState([]);
@@ -42,7 +41,7 @@ const Driver = ({ query }) => {
     // fetch driver info(driver dashboard)
     const fetchDriverInfo = async () => {
       try {
-        const respond = await fetchDriverData(id);
+        const respond = await fetchDriverData(driverId);
         setDriverInfo(respond.driver[0]);
         setDriverInfoLoading(false);
       } catch (error) {
@@ -55,7 +54,7 @@ const Driver = ({ query }) => {
     // fetch Over Speed Statistics Chart
     const fetchOverSpeedStatisticsChart = async () => {
       try {
-        const respond = await fetchOverSpeedStatistics(id);
+        const respond = await fetchOverSpeedStatistics(driverId);
         setOverSpeedStatistics(respond.overSpeed);
         setOverSpeedStatisticsLoading(false);
       } catch (error) {
@@ -68,7 +67,7 @@ const Driver = ({ query }) => {
     // fetch Weekly trips and fuel consumption
     const fetchWeeklyTripsAndFuelChart = async () => {
       try {
-        const respond = await fetchWeeklyTripsAndFuel(id);
+        const respond = await fetchWeeklyTripsAndFuel(driverId);
         setWeeklyTripsAndFuel(respond);
         setWeeklyTripsAndFuelLoading(false);
       } catch (error) {
@@ -81,7 +80,7 @@ const Driver = ({ query }) => {
     // fetch utilization statistics and driver behavior
     const fetchUtzStatisticsAndBehaviorChart = async () => {
       try {
-        const respond = await fetchUtzStatisticsAndBehavior(id);
+        const respond = await fetchUtzStatisticsAndBehavior(driverId);
         setUtzStatisticsAndBehavior(respond);
         setUtzStatisticsAndBehaviorLoading(false);
       } catch (error) {
@@ -90,7 +89,7 @@ const Driver = ({ query }) => {
       }
     };
     fetchUtzStatisticsAndBehaviorChart();
-  }, [id]);
+  }, [driverId]);
 
   const cardsData = [
     {
@@ -227,11 +226,12 @@ const Driver = ({ query }) => {
 export default Driver;
 
 // translation ##################################
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ locale, query }) {
+  const { driverId } = query;
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["main", "driver"])),
-      query: context.query,
+      ...(await serverSideTranslations(locale, ["driver", "main"])),
+      driverId,
     },
   };
 }
