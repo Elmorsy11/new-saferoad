@@ -42,5 +42,9 @@
     "back_key": "رجوع",
     "operate_driver_key": "تشغيل السائق",
     "close_key": "إلغاء",
-    "view_history_key": "عرض السجل"
+    "view_history_key": "عرض السجل",
+    "add_driver_key": "إضافة سائق",
+    "update_driver_key": "تحديث بيانات السائق",
+    "show_vehicles_key": "عرض المركبات",
+    "driver_dashboard_key": "لوحة القيادة للسائق"
 }

@@ -23,6 +23,21 @@ const SubHeader = ({ pageName = "" }) => {
       case "/preventive-maintenance/view-history":
         setState("view_history_key");
         break;
+      case "/drivers-management":
+        setState("operate_driver_key");
+        break;
+      case "/drivers-management/add":
+        setState("add_driver_key");
+        break;
+      case "/drivers-management/edit/[editId]":
+        setState("update_driver_key");
+        break;
+      case "/drivers-management/showVehicles/[showId]":
+        setState("show_vehicles_key");
+        break;
+      case "/driver/[driverId]":
+        setState("driver_dashboard_key");
+        break;
       default:
         setState("");
         break;

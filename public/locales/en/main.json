@@ -42,5 +42,9 @@
     "back_key": "Back",
     "operate_driver_key": "Operate Driver",
     "close_key": "Close",
-    "view_history_key": "View History"
+    "view_history_key": "View History",
+    "add_driver_key": "Add Driver",
+    "update_driver_key": "Update Driver",
+    "show_vehicles_key": "Show Vehicles",
+    "driver_dashboard_key": "Driver Dashboard"
 }
