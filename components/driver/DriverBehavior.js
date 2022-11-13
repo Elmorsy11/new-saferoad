@@ -7,7 +7,7 @@ import Spinner from "components/UI/Spinner";
 import { useTranslation } from "next-i18next";
 
 const DriverBehavior = ({ data = {}, loading }) => {
-  const { t } = useTranslation(["driver"]);
+  const { t } = useTranslation("driver");
 
   const DriverBehavior = [
     {
@@ -41,7 +41,9 @@ const DriverBehavior = ({ data = {}, loading }) => {
         <Spinner />
       ) : Object.keys(data).length ? (
         <Card.Body>
-          <h4 className="text-secondary text-center">{t('driver_behavior_key')}</h4>
+          <h4 className="text-secondary text-center">
+            {t("driver_behavior_key")}
+          </h4>
           <div className="mt-4">
             {DriverBehavior?.map(({ title, icon, rate }, idx) => {
               return (
@@ -83,7 +85,7 @@ const DriverBehavior = ({ data = {}, loading }) => {
           </div>
         </Card.Body>
       ) : (
-        <EmptyMess msg={`${t('oops!_no_data_found_key')}.`} />
+        <EmptyMess msg={`${t("oops!_no_data_found_key")}.`} />
       )}
     </Card>
   );

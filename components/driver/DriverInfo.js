@@ -8,7 +8,7 @@ import Spinner from "components/UI/Spinner";
 import { useTranslation } from "next-i18next";
 
 const DriverInfo = ({ data, loading }) => {
-  const { t } = useTranslation(["driver"]);
+  const { t } = useTranslation("driver");
 
   const driverInfo = [
     {
@@ -47,75 +47,75 @@ const DriverInfo = ({ data, loading }) => {
   ];
 
   return (
-      <Card className="shadow-sm border border-light">
-        <Card.Body>
-          {loading ? (
-            <Spinner />
-          ) : Object.keys(data).length > 0 ? (
-            <Row>
-              <Col md="6">
-                <div className="h-100 d-flex flex-column align-items-center justify-content-center">
-                  <Image
-                    className="img-fluid rounded-circle card-img w-50"
-                    src="/assets/images/driver.png"
-                    alt="avatar"
-                    layout="fixed"
-                    width={200}
-                    height={200}
-                  />
-                  <h4 className="text-secondary text-center mt-3">
-                    {`${data.FirstName} ${data.LastName}`}
-                  </h4>
-                </div>
-              </Col>
-              {/* <Col md='2'></Col> */}
-              <Col md="6">
-                <div className="mt-4 ms-5">
-                  {driverInfo?.map(({ title, value, rate }, idx) => {
-                    return (
-                      <p key={idx}>
-                        <span className="fw-bold">{title}: </span>
-                        <span className="">{value}</span>
-                        {rate ? (
-                          <>
-                            <FontAwesomeIcon
-                              style={{ color: "orange" }}
-                              icon={faStar}
-                              size="sm"
-                            />
-                            <FontAwesomeIcon
-                              style={{ color: "orange" }}
-                              icon={faStar}
-                              size="sm"
-                            />
-                            <FontAwesomeIcon
-                              style={{ color: "orange" }}
-                              icon={faStar}
-                              size="sm"
-                            />
-                            <FontAwesomeIcon
-                              style={{ color: "orange" }}
-                              icon={faStar}
-                              size="sm"
-                            />
-                            <FontAwesomeIcon
-                              style={{ color: "orange" }}
-                              icon={faStar}
-                              size="sm"
-                            />
-                          </>
-                        ) : null}
-                      </p>
-                    );
-                  })}
-                </div>
-              </Col>
-            </Row>
-          ) : (
-            <EmptyMess msg={`${t('oops!_no_data_found_key')}.`}/>
-          )}
-        </Card.Body>
-      </Card>
+    <Card className="shadow-sm border border-light">
+      <Card.Body>
+        {loading ? (
+          <Spinner />
+        ) : Object.keys(data).length > 0 ? (
+          <Row>
+            <Col md="6">
+              <div className="h-100 d-flex flex-column align-items-center justify-content-center">
+                <Image
+                  className="img-fluid rounded-circle card-img w-50"
+                  src="/assets/images/driver.png"
+                  alt="avatar"
+                  layout="fixed"
+                  width={200}
+                  height={200}
+                />
+                <h4 className="text-secondary text-center mt-3">
+                  {`${data.FirstName} ${data.LastName}`}
+                </h4>
+              </div>
+            </Col>
+            {/* <Col md='2'></Col> */}
+            <Col md="6">
+              <div className="mt-4 ms-5">
+                {driverInfo?.map(({ title, value, rate }, idx) => {
+                  return (
+                    <p key={idx}>
+                      <span className="fw-bold">{title}: </span>
+                      <span className="">{value}</span>
+                      {rate ? (
+                        <>
+                          <FontAwesomeIcon
+                            style={{ color: "orange" }}
+                            icon={faStar}
+                            size="sm"
+                          />
+                          <FontAwesomeIcon
+                            style={{ color: "orange" }}
+                            icon={faStar}
+                            size="sm"
+                          />
+                          <FontAwesomeIcon
+                            style={{ color: "orange" }}
+                            icon={faStar}
+                            size="sm"
+                          />
+                          <FontAwesomeIcon
+                            style={{ color: "orange" }}
+                            icon={faStar}
+                            size="sm"
+                          />
+                          <FontAwesomeIcon
+                            style={{ color: "orange" }}
+                            icon={faStar}
+                            size="sm"
+                          />
+                        </>
+                      ) : null}
+                    </p>
+                  );
+                })}
+              </div>
+            </Col>
+          </Row>
+        ) : (
+          <EmptyMess msg={`${t("oops!_no_data_found_key")}.`} />
+        )}
+      </Card.Body>
+    </Card>
   );
 };
 

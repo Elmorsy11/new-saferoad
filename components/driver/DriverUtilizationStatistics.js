@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const DriverUtilizationStatistics = ({ data = {}, loading }) => {
-  const { t } = useTranslation(["driver"]);
+  const { t } = useTranslation("driver");
 
   const total = data?.Parking + data?.Driving + data?.Idle;
   const parking = ((data?.Parking / total) * 100).toFixed(2);
@@ -63,7 +63,8 @@ const DriverUtilizationStatistics = ({ data = {}, loading }) => {
             ":  " +
             +Math.round(
               (opts.w.globals.series[opts.seriesIndex] * total) / 100
-            ) + " " +
+            ) +
+            " " +
             t("hr_key")
           );
         },
@@ -94,7 +95,7 @@ const DriverUtilizationStatistics = ({ data = {}, loading }) => {
       {loading ? (
         <Spinner />
       ) : Object.keys(data) ? (
-        <Card.Body style={{direction:'ltr'}}>
+        <Card.Body style={{ direction: "ltr" }}>
           <h4 className="text-secondary text-center">
             {t("utilization_statistics_key")}
           </h4>

@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const DriverFuelConsumption = ({ data, loading }) => {
-  const { t } = useTranslation(["driver"]);
+  const { t } = useTranslation("driver");
 
   const yAxis = data?.map((ele) => ele.fuel.toFixed(2)) || [];
   const xAxis =
@@ -53,8 +53,10 @@ const DriverFuelConsumption = ({ data, loading }) => {
       {loading ? (
         <Spinner />
       ) : data.length > 0 ? (
-        <Card.Body style={{direction:'ltr'}}>
-          <h4 className="text-secondary text-center">{t("fuel_consumption_key")}</h4>
+        <Card.Body style={{ direction: "ltr" }}>
+          <h4 className="text-secondary text-center">
+            {t("fuel_consumption_key")}
+          </h4>
           <Chart
             options={chart.options}
             series={chart.series}

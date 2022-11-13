@@ -8,7 +8,7 @@ import { useTranslation } from "next-i18next";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const DriverSpeedStatisticsChart = ({ data, loading }) => {
-  const { t } = useTranslation(["driver"]);
+  const { t } = useTranslation("driver");
 
   const yAxis = data?.map((ele) => ele.overSpeedCount);
   const xAxis = data?.map((ele) =>
@@ -59,8 +59,10 @@ const DriverSpeedStatisticsChart = ({ data, loading }) => {
       {loading ? (
         <Spinner />
       ) : data.length > 0 ? (
-        <Card.Body style={{direction:'ltr'}}>
-          <h4 className="text-secondary text-center">{t("over_speed_statistics_key")}</h4>
+        <Card.Body style={{ direction: "ltr" }}>
+          <h4 className="text-secondary text-center">
+            {t("over_speed_statistics_key")}
+          </h4>
           <Chart
             options={chart.options}
             series={chart.series}
