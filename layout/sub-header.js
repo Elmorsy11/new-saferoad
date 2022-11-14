@@ -38,6 +38,9 @@ const SubHeader = ({ pageName = "" }) => {
       case "/driver/[driverId]":
         setState("driver_dashboard_key");
         break;
+      case "/vehicle/[vehicleId]":
+        setState("vehicle_dashboard_key");
+        break;
       default:
         setState("");
         break;
