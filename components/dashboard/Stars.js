@@ -25,7 +25,7 @@ function Stars({
         </div>
         <div>
           <h6 className={"mb-0 " + Styles.name_size}>{name}</h6>
-          <span className="fs-6 text-secondary">{type} id: {id || 'unknown'}</span>
+          <span className="fs-6 text-secondary">{type}: {id || 'unknown'}</span>
           <div className="text-secondary text-warning">
             {new Array(starsCount).fill({})?.map((ora, i) => {
               return (

@@ -48,7 +48,7 @@ export default function Index({ data, loading }) {
                             imgAlt={driverName}
                             starsCount={5}
                             id={driverId}
-                            type={'Driver'}
+                            type={t('driver_id_key')}
                           />
                         </a>
                       </Link>
@@ -107,7 +107,7 @@ export default function Index({ data, loading }) {
                             imgAlt={driverName}
                             starsCount={1}
                             id={driverId}
-                            type={'Driver'}
+                            type={t('driver_id_key')}
                           />
                         </a>
                       </Link>
@@ -170,7 +170,7 @@ export default function Index({ data, loading }) {
                             imgAlt={vehicleName}
                             starsCount={5}
                             id={topRated[i]?.VehicleID}
-                            type={'Vehicle'}
+                            type={t('vehicle_id_key')}
                           />
                         </a>
                       </Link>
@@ -232,8 +232,7 @@ export default function Index({ data, loading }) {
                             imgAlt={vehicleName}
                             starsCount={1}
                             id={BadRated[i]?.VehicleID}
-
-                            type={'Vehicle'}
+                            type={t('vehicle_id_key')}
                           />
                         </a>
                       </Link>

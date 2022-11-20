@@ -48,5 +48,7 @@
     "no_drivers_to_show_key": "No Drivers to Show",
     "no_vehicle_to_show_key": "No Vehicle to Show",
     "no_driver_to_show_key": "No Driver to Show",
-    "oops!_no_data_found_key": "OOPS! NO DATA FOUND"
+    "oops!_no_data_found_key": "OOPS! NO DATA FOUND",
+    "vehicle_id_key": "Vehicle ID",
+    "driver_id_key": "Driver ID"
 }
