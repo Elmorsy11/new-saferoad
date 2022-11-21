@@ -76,8 +76,8 @@ export default function Management() {
     },
     {
       head: "manage_your_vehicles_key",
-      desc: "To manage your Vehicles please click here",
-      link: "/management/VehicleManagment",
+      desc: "to_manage_your_vehicles_please_click_here_key",
+      link: "/management/vehicle-management",
       id: 22,
       icon: () => {
         return <ManageVehiclesIcon />;
@@ -85,7 +85,7 @@ export default function Management() {
     },
     {
       head: "manage_your_devices_key",
-      desc: "To manage your devices and assign devices to your vehicle please click here",
+      desc: "to_manage_your_devices_and_assign_devices_to_your_vehicle_please_click_here_key",
       link: "/management/device-management",
       id: 22,
       icon: () => {
@@ -94,7 +94,7 @@ export default function Management() {
     },
     {
       head: "manage_your_sim_cards_key",
-      desc: "To manage your SIM Cards please click here",
+      desc: "to_manage_your_sim_cards_please_click_here_key",
       link: "/management/sim-management",
       id: 22,
       icon: () => {
@@ -103,7 +103,7 @@ export default function Management() {
     },
     {
       head: "manage_your_drivers_key",
-      desc: "To manage your drivers and assign drivers to your vehicle please click here",
+      desc: "to_manage_your_drivers_and_assign_drivers_to_your_vehicle_please_click_here_key",
       link: "/driversManagement",
       id: 22,
       icon: () => {
@@ -112,7 +112,7 @@ export default function Management() {
     },
     {
       head: "manage_your_groups_key",
-      desc: "To manage your drivers and assign drivers to your vehicle please click here",
+      desc: "to_manage_your_vehicles_groups_please_click_here_key",
       link: "/management/ManageGroupsVehicles",
       id: 22,
       disabled: true,

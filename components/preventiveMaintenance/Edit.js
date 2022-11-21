@@ -12,7 +12,7 @@ import {
 import Input from "components/formik/Input";
 import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import Checkbox from "components/formik/Checkbox";
-import { editPreventiveMaintenanceValidation } from "helpers/yupValidations";
+import { editPreventiveMaintenanceValidation } from "helpers/yup-validations/preventiveMaintenance-driversManagement/yupValidations";
 import Spinner from "components/UI/Spinner";
 import { useTranslation } from "next-i18next";
 

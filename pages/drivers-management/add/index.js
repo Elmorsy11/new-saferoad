@@ -16,7 +16,7 @@ import { useTranslation } from "next-i18next";
 import { Formik } from "formik";
 import Input from "components/formik/Input";
 import ReactSelect from "components/formik/ReactSelect/ReactSelect";
-import { addEditOperateDriver } from "helpers/yupValidations";
+import { addEditOperateDriver } from "helpers/yup-validations/preventiveMaintenance-driversManagement/yupValidations";
 import nationalities from "public/dummyData/nationalities.json";
 import {
   fitchUnassignedVehicles,
