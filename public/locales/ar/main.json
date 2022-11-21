@@ -47,5 +47,6 @@
     "update_driver_key": "تحديث بيانات السائق",
     "show_vehicles_key": "عرض المركبات",
     "driver_dashboard_key": "لوحة القيادة للسائق",
-    "vehicle_dashboard_key": "لوحة معلومات للمركبة"
+    "vehicle_dashboard_key": "لوحة معلومات للمركبة",
+    "management_key": "الإدارة"
 }

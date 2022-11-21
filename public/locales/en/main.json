@@ -47,5 +47,6 @@
     "update_driver_key": "Update Driver",
     "show_vehicles_key": "Show Vehicles",
     "driver_dashboard_key": "Driver Dashboard",
-    "vehicle_dashboard_key": "Vehicle Dashboard"
+    "vehicle_dashboard_key": "Vehicle Dashboard",
+    "management_key": "Management"
 }

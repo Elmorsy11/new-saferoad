@@ -1,43 +1,47 @@
 import React from "react";
-import {
-  Accordion,
-} from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
-import Home from "components/icons/Home";
-import PreventiveMaintenance from "components/icons/PreventiveMaintenance";
-import Track from "components/icons/Track";
-import Reports from "components/icons/Reports";
-import DriverManagement from "components/icons/DriverManagement";
+import HomeIcon from "components/icons/sidebar/HomeIcon";
+import PreventiveMaintenanceIcon from "components/icons/sidebar/PreventiveMaintenanceIcon";
+import TrackIcon from "components/icons/sidebar/TrackIcon";
+import ReportsIcon from "components/icons/sidebar/ReportsIcon";
+import DriverManagementIcon from "components/icons/sidebar/DriverManagementIcon";
+import ManagementIcon from "components/icons/sidebar/ManagementIcon";
 let urlsData = [
   {
     path: "/",
     label: "dashboard_key",
-    icon: <Home />
+    icon: <HomeIcon />,
   },
   {
     path: "/track",
     label: "track_key",
-    icon: <Track />
+    icon: <TrackIcon />,
   },
   {
     path: "/preventive-maintenance",
     label: "preventive_maintenance_key",
-    icon: <PreventiveMaintenance />
+    icon: <PreventiveMaintenanceIcon />,
   },
   {
     path: "/reports",
     label: "reports_key",
-    icon: <Reports />
+    icon: <ReportsIcon />,
   },
   {
     path: "/drivers-management",
     label: "operate_driver_key",
-    icon: <DriverManagement />
+    icon: <DriverManagementIcon />,
   },
-]
+  {
+    path: "/management",
+    label: "management_key",
+    icon: <ManagementIcon />,
+  },
+];
 const VerticalNav = () => {
   let router = useRouter();
   const { t } = useTranslation("main");
@@ -47,23 +51,26 @@ const VerticalNav = () => {
         {urlsData?.map(({ path, label, icon }, i) => {
           return (
             <React.Fragment key={i}>
-              <Accordion.Item as="li" eventKey="horizontal-menu" bsPrefix="nav-item">
+              <Accordion.Item
+                as="li"
+                eventKey="horizontal-menu"
+                bsPrefix="nav-item"
+              >
                 <Link href={path} passHref={true}>
                   <a>
                     <div
-                      className={`${router.pathname === path ? "active" : ""
-                        } nav-link`}
+                      className={`${
+                        router.pathname === path ? "active" : ""
+                      } nav-link`}
                     >
-                      <i className="icon">
-                        {icon}
-                      </i>
+                      <i className="icon">{icon}</i>
                       <span className="item-name">{t(`${label}`)}</span>
                     </div>
                   </a>
                 </Link>
               </Accordion.Item>
             </React.Fragment>
-          )
+          );
         })}
 
         {/* <Accordion.Item as="li" eventKey="horizontal-menu" bsPrefix="nav-item">
