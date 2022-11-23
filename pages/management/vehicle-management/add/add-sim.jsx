@@ -19,6 +19,7 @@ import Model from "components/UI/Model";
 import { useDispatch, useSelector } from "react-redux";
 import { addSim, resetData } from "lib/slices/addNewVehicle";
 import Spinner from "components/UI/Spinner";
+import { useTranslation } from "next-i18next";
 
 const AddSimtoDevice = () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ const AddSimtoDevice = () => {
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
   const vehicle = useSelector((state) => state.addNewVehicle.vehicle);
+  const { t } = useTranslation("management");
 
   // route away when use direct link
   useEffect(() => {
@@ -70,7 +72,7 @@ const AddSimtoDevice = () => {
           };
         });
         setUnAssignedSimCardsOptions([
-          { value: "add", label: "Add New SIM Card", provID: "new" },
+          { value: "add", label: t("add_new_SIM_card_key"), provID: "new" },
           ...unAssignedSimcards,
         ]);
         setRespond(respond.allSims);
@@ -84,10 +86,10 @@ const AddSimtoDevice = () => {
   }, []);
 
   const simProviderOtions = [
-    { value: 1, label: "Mobily" },
-    { value: 2, label: "STC" },
-    { value: 3, label: "Zain" },
-    { value: 4, label: "Lebara" },
+    { value: 1, label: t("mobily_key") },
+    { value: 2, label: t("STC_key") },
+    { value: 3, label: t("zain_key") },
+    { value: 4, label: t("lebara_key") },
   ];
 
   const onSubmit = async (data) => {
@@ -101,7 +103,7 @@ const AddSimtoDevice = () => {
   };
 
   const initialValues = {
-    simSelected: [{ value: "add", label: "Add New Device", provID: "new" }],
+    simSelected: [{ value: "add", label: t("add_new_SIM_card_key"), provID: "new" }],
     simSerialNumber: "",
     phoneNumber: "",
     provider: 1,
@@ -131,7 +133,7 @@ const AddSimtoDevice = () => {
           <Card.Body>
             <Formik
               initialValues={initialValues}
-              validationSchema={vehicleAddSim}
+              validationSchema={vehicleAddSim(t)}
               onSubmit={onSubmit}
             >
               {(formik) => {
@@ -141,21 +143,21 @@ const AddSimtoDevice = () => {
                     <Row>
                       <Col className="mx-auto" md={6}>
                         <Row>
-                          <h4 className="mb-3">Select exist SIM card</h4>
+                          <h4 className="mb-3">{t("select_exist_SIM_card_key")}</h4>
                           <ReactSelect
                             options={unAssignedDevicesOptions}
-                            label="Select a SIM card"
-                            placeholder="Select a SIM card"
+                            label={t("select_a_SIM_card_key")}
+                            placeholder={t("select_a_SIM_card_key")}
                             name="simSelected"
                             className={"col-12 mb-3"}
                             isSearchable={true}
                             isObject={true}
                           />
 
-                          <h4 className="mb-3">Add a new SIM card</h4>
+                          <h4 className="mb-3">{t("add_a_new_SIM_card_key")}</h4>
                           <Input
-                            placeholder="Serial Number"
-                            label="Serial Number"
+                            placeholder={t("serial_number_key")}
+                            label={t("serial_number_key")}
                             name="simSerialNumber"
                             type="text"
                             className={"col-6 mb-3"}
@@ -169,8 +171,8 @@ const AddSimtoDevice = () => {
                           />
 
                           <Input
-                            placeholder="Phone Number"
-                            label="Phone Number"
+                            placeholder={t("phone_number_key")}
+                            label={t("phone_number_key")}
                             name="phoneNumber"
                             type="text"
                             className={"col-6 mb-3"}
@@ -184,8 +186,8 @@ const AddSimtoDevice = () => {
 
                           <ReactSelect
                             options={simProviderOtions}
-                            label="SIM Provider"
-                            placeholder="Select SIM Provider"
+                            label={t("SIM_provider_key")}
+                            placeholder={t("select_SIM_provider_key")}
                             name="provider"
                             className={"col-12 mb-3"}
                             isSearchable={true}
@@ -220,7 +222,7 @@ const AddSimtoDevice = () => {
                               icon={faArrowLeft}
                               size="sm"
                             />
-                            Back
+                            {t("back_key")}
                           </Button>
                           <Button
                             type="submit"
@@ -231,7 +233,7 @@ const AddSimtoDevice = () => {
                               icon={faArrowRight}
                               size="sm"
                             />
-                            Next
+                            {t("next_key")}
                           </Button>
                           <Button
                             className="px-3 py-2 text-nowrap me-3 ms-0"
@@ -244,7 +246,7 @@ const AddSimtoDevice = () => {
                               icon={faTimes}
                               size="sm"
                             />
-                            Cancel
+                            {t("cancel_key")}
                           </Button>
                         </div>
                       </Col>
@@ -255,21 +257,20 @@ const AddSimtoDevice = () => {
             </Formik>
             {modalShow && (
               <Model
-                header={"Cancel The Process"}
-                show={modalShow}
+              header={t("cancel_the_process_key")}
+              show={modalShow}
                 onHide={() => setModalShow(false)}
-                updateButton={"Yes, I'm Sure"}
+                updateButton={t("yes,_i'm_sure_key")}
                 onUpdate={() => {
                   dispatch(resetData());
                   router.push("/management/vehicle-management");
                 }}
               >
                 <h4 className="text-center">
-                  Are You Sure You Want to Cancel This Process?
+                {t("are_you_sure_you_want_to_cancel_this_process_key")}
                 </h4>
                 <p className="text-center text-danger">
-                  (You will lose all your entered data if you cancel the
-                  process.)
+                {t("you_will_lose_all_your_entered_data_if_you_cancel_the_process_key")}.
                 </p>
               </Model>
             )}

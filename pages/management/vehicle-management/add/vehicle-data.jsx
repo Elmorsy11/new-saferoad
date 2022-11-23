@@ -15,9 +15,11 @@ import { fetchAllSelectionsData } from "services/management/VehicleManagement";
 import { useDispatch, useSelector } from "react-redux";
 import { addVehicle } from "lib/slices/addNewVehicle";
 import Spinner from "components/UI/Spinner";
+import { useTranslation } from "next-i18next";
 
 const VehicleData = () => {
   const router = useRouter();
+  const { t } = useTranslation("management");
   const [wirteInOptional, setWirteInOptional] = useState(false);
   // const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(true);
@@ -135,11 +137,11 @@ const VehicleData = () => {
       {loadingPage && <Spinner />}
       {Object.keys(selectionData).length > 0 && (
         <Card>
-          <Card.Header className="h3">Add New Vehicle</Card.Header>
+          <Card.Header className="h3">{t("add_new_vehicle_key")}</Card.Header>
           <Card.Body>
             <Formik
               initialValues={initialValues}
-              validationSchema={vehicleDataValidation(wirteInOptional)}
+              validationSchema={vehicleDataValidation(wirteInOptional,t)}
               onSubmit={onSubmit}
             >
               {(formik) => {
@@ -150,16 +152,16 @@ const VehicleData = () => {
                       <Col md={12}>
                         <Row>
                           <Input
-                            placeholder="Display Name"
-                            label="Display Name"
+                            placeholder={t("display_name_key")}
+                            label={t("display_name_key")}
                             name="DisplayName"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
 
                           <Input
-                            placeholder="Plate Number"
-                            label="Plate Number"
+                            placeholder={t("plate_number_key")}
+                            label={t("plate_number_key")}
                             name="PlateNumber"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -167,8 +169,8 @@ const VehicleData = () => {
 
                           <ReactSelect
                             options={ManufactCompanyName}
-                            label="Manufacturing company"
-                            placeholder="Select Manufacturing company"
+                            label={t("manufacturing_company_key")}
+                            placeholder={t("select_manufacturing_company_key")}
                             name="MakeID"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                             isSearchable={true}
@@ -176,16 +178,16 @@ const VehicleData = () => {
 
                           <ReactSelect
                             options={model}
-                            label="Model"
-                            placeholder="Select Model"
+                            label={t("model_key")}
+                            placeholder={t("select_model_key")}
                             name="ModelID"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                             isSearchable={true}
                           />
 
                           <Input
-                            placeholder="Manufacturing Year"
-                            label="Manufacturing Year"
+                            placeholder={t("manufacturing_year_key")}
+                            label={t("manufacturing_year_key")}
                             name="MakeYear"
                             type="number"
                             min={1800}
@@ -194,32 +196,32 @@ const VehicleData = () => {
 
                           <ReactSelect
                             options={vehicleType}
-                            label="Vehicle Type"
-                            placeholder="Select Vehicle Type"
+                            label={t("vehicle_type_key")}
+                            placeholder={t("select_vehicle_type_key")}
                             name="TypeID"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                             isSearchable={true}
                           />
 
                           <Input
-                            placeholder="Color"
-                            label="Color"
+                            placeholder={t("color_key")}
+                            label={t("color_key")}
                             name="Color"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
 
                           <Input
-                            placeholder="Chassis Number"
-                            label="Chassis Number"
+                            placeholder={t("chassis_number_key")}
+                            label={t("chassis_number_key")}
                             name="Chassis"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
 
                           <Input
-                            placeholder="Speed Limit"
-                            label="Speed Limit"
+                            placeholder={t("speed_limit_key")}
+                            label={t("speed_limit_key")}
                             name="SpeedLimit"
                             type="number"
                             min={0}
@@ -228,8 +230,8 @@ const VehicleData = () => {
                           />
 
                           <Input
-                            placeholder="Liter Per 100KM"
-                            label="Liter Per 100KM"
+                            placeholder={t("liter_per_100KM_key")}
+                            label={t("liter_per_100KM_key")}
                             name="LiterPer100KM"
                             type="number"
                             min={0}
@@ -243,7 +245,7 @@ const VehicleData = () => {
                               option={[
                                 {
                                   value: "1",
-                                  key: "Required RFID",
+                                  key: t("required_RFID_key"),
                                 },
                               ]}
                               className="col-6 col-lg-3"
@@ -253,7 +255,7 @@ const VehicleData = () => {
                               option={[
                                 {
                                   value: "2",
-                                  key: "HaveIgnition",
+                                  key: t("have_ignition_key"),
                                 },
                               ]}
                               className="col-6 col-lg-3"
@@ -263,62 +265,62 @@ const VehicleData = () => {
                               option={[
                                 {
                                   value: "3",
-                                  key: "HaveRelay",
+                                  key: t("have_relay_key"),
                                 },
                               ]}
                               className="col-6 col-lg-3"
                             />
                           </Row>
 
-                          <h4>WASL Integration (Optional)</h4>
+                          <h4>{t("WASL_integration_(optional)_key")}</h4>
                           <Input
-                            placeholder="Number"
-                            label="Number"
+                            placeholder={t("number_key")}
+                            label={t("number_key")}
                             name="Number"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
 
                           <Input
-                            placeholder="Right Letter"
-                            label="Right Letter"
+                            placeholder={t("right_letter_key")}
+                            label={t("right_letter_key")}
                             name="RightLetter"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
 
                           <Input
-                            placeholder="Middle Letter"
-                            label="Middle Letter"
+                            placeholder={t("middle_letter_key")}
+                            label={t("middle_letter_key")}
                             name="MiddleLetter"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
                           <Input
-                            placeholder="Left Letter"
-                            label="Left Letter"
+                            placeholder={t("left_letter_key")}
+                            label={t("left_letter_key")}
                             name="LeftLetter"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
                           <Input
-                            placeholder="Sequence Number"
-                            label="Sequence Number"
+                            placeholder={t("sequence_number_key")}
+                            label={t("sequence_number_key")}
                             name="SequenceNumber"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
                           <Input
-                            placeholder="Plate Type"
-                            label="Plate Type"
+                            placeholder={t("plate_type_key")}
+                            label={t("plate_type_key")}
                             name="PlateType"
                             type="number"
                             min={0}
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
                           />
                           <Input
-                            placeholder="IMEI Number"
-                            label="IMEI Number"
+                            placeholder={t("IMEI_number_key")}
+                            label={t("IMEI_number_key")}
                             name="ImeiNumber"
                             type="text"
                             className={"col-12 col-md-6 col-lg-4 mb-3"}
@@ -338,7 +340,7 @@ const VehicleData = () => {
                             icon={faArrowRight}
                             size="sm"
                           />
-                          Next
+                          {t("next_key")}
                         </Button>
                         <Button
                           className="px-3 py-2 text-nowrap me-3 ms-0"
@@ -351,7 +353,7 @@ const VehicleData = () => {
                             icon={faTimes}
                             size="sm"
                           />
-                          Cancel
+                          {t("cancel_key")}
                         </Button>
                       </div>
                     </Row>

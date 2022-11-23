@@ -26,6 +26,7 @@ import Model from "components/UI/Model";
 import { resetData } from "lib/slices/addNewVehicle";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "components/UI/Spinner";
+import { useTranslation } from "next-i18next";
 
 const AddVehToGroup = () => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const AddVehToGroup = () => {
   const dispatch = useDispatch();
   const { vehicle, device, sim } = useSelector((state) => state.addNewVehicle);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation("management");
 
   // route away when use direct link
   useEffect(() => {
@@ -133,7 +135,7 @@ const AddVehToGroup = () => {
           <Card.Body>
             <Formik
               initialValues={initialValues}
-              validationSchema={vehicleAddGroup}
+              validationSchema={vehicleAddGroup(t)}
               onSubmit={onSubmit}
             >
               {(formik) => {
@@ -142,19 +144,19 @@ const AddVehToGroup = () => {
                     <Row>
                       <Col className="mx-auto" md={6}>
                         <Row>
-                          <h4 className="mb-3">Add Group Information</h4>
+                          <h4 className="mb-3">{t("add_group_information_key")}</h4>
                           <ReactSelect
                             options={groupsOptions}
-                            label="Group Name"
-                            placeholder="Select a Group Name"
+                            label={t("group_name_key")}
+                            placeholder={t("select_a_group_name_key")}
                             name="GroupID"
                             className={"col-12 mb-3"}
                             isSearchable={true}
                           />
 
                           <Input
-                            placeholder="Maximum Parking Time"
-                            label="Maximum Parking Time"
+                            placeholder={t("maximum_parking_time_key")}
+                            label={t("maximum_parking_time_key")}
                             name="MaxParkingTime"
                             type="number"
                             className={"col-6 mb-3"}
@@ -163,8 +165,8 @@ const AddVehToGroup = () => {
                           />
 
                           <Input
-                            placeholder="Maximum Idling Time"
-                            label="Maximum Idling Time"
+                            placeholder={t("maximum_idling_time_key")}
+                            label={t("maximum_idling_time_key")}
                             name="MaxIdlingTime"
                             type="number"
                             className={"col-6 mb-3"}
@@ -173,8 +175,8 @@ const AddVehToGroup = () => {
                           />
 
                           <Textarea
-                            label="Remarks"
-                            placeholder="Add Remarks"
+                            label={t("remarks_key")}
+                            placeholder={t("add_remarks_key")}
                             name="Remarks"
                             className={"col-12 mb-3"}
                           />
@@ -195,7 +197,7 @@ const AddVehToGroup = () => {
                               icon={faArrowLeft}
                               size="sm"
                             />
-                            Back
+                            {t("back_key")}
                           </Button>
                           <Button
                             type="submit"
@@ -215,7 +217,7 @@ const AddVehToGroup = () => {
                                 size="sm"
                               />
                             )}
-                            Finish
+                            {t("finish_key")}
                           </Button>
                           <Button
                             className="px-3 py-2 text-nowrap me-3 ms-0"
@@ -228,7 +230,7 @@ const AddVehToGroup = () => {
                               icon={faTimes}
                               size="sm"
                             />
-                            Cancel
+                            {t("cancel_key")}
                           </Button>
                         </div>
                       </Col>
@@ -239,21 +241,20 @@ const AddVehToGroup = () => {
             </Formik>
             {modalShow && (
               <Model
-                header={"Cancel The Process"}
+                header={t("cancel_the_process_key")}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                updateButton={"Yes, I'm Sure"}
+                updateButton={t("yes,_i'm_sure_key")}
                 onUpdate={() => {
                   dispatch(resetData());
                   router.push("/management/vehicle-management");
                 }}
               >
                 <h4 className="text-center">
-                  Are You Sure You Want to Cancel This Process?
+                {t("are_you_sure_you_want_to_cancel_this_process_key")}
                 </h4>
                 <p className="text-center text-danger">
-                  (You will lose all your entered data if you cancel the
-                  process.)
+                {t("you_will_lose_all_your_entered_data_if_you_cancel_the_process_key")}.
                 </p>
               </Model>
             )}

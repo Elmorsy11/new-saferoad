@@ -20,6 +20,7 @@ import Model from "components/UI/Model";
 import { useDispatch, useSelector } from "react-redux";
 import { addDevice, resetData } from "lib/slices/addNewVehicle";
 import Spinner from "components/UI/Spinner";
+import { useTranslation } from "next-i18next";
 
 const AddDeviceToVeh = () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ const AddDeviceToVeh = () => {
   const [modalShow, setModalShow] = useState(false);
   const dispatch = useDispatch();
   const vehicle = useSelector((state) => state.addNewVehicle.vehicle);
+  const { t } = useTranslation("management");
 
   // route away when use direct link
   useEffect(() => {
@@ -70,7 +72,7 @@ const AddDeviceToVeh = () => {
           };
         });
         setUnAssignedDevicesOptions([
-          { value: "add", label: "Add New Device", typeID: "new" },
+          { value: "add", label: t("add_new_device_key"), typeID: "new" },
           ...unAssignedDevices,
         ]);
         setAllDeviceTypesOptions(
@@ -97,7 +99,9 @@ const AddDeviceToVeh = () => {
   };
 
   const initialValues = {
-    deviceSelected: [{ value: "add", label: "Add New Device", typeID: "new" }],
+    deviceSelected: [
+      { value: "add", label: t("add_new_device_key"), typeID: "new" },
+    ],
     serialNumber: "",
     deviceTypeId: 1,
   };
@@ -124,7 +128,7 @@ const AddDeviceToVeh = () => {
           <Card.Body>
             <Formik
               initialValues={initialValues}
-              validationSchema={vehicleAddDevice}
+              validationSchema={vehicleAddDevice(t)}
               onSubmit={onSubmit}
             >
               {(formik) => {
@@ -134,21 +138,23 @@ const AddDeviceToVeh = () => {
                     <Row>
                       <Col className="mx-auto" md={5}>
                         <Row>
-                          <h4 className="mb-3">Select exist Device</h4>
+                          <h4 className="mb-3">
+                            {t("select_exist_device_key")}
+                          </h4>
                           <ReactSelect
                             options={unAssignedDevicesOptions}
-                            label="Select a Device"
-                            placeholder="Select a Device"
+                            label={t("select_a_device_key")}
+                            placeholder={t("select_a_device_key")}
                             name="deviceSelected"
                             className={"col-12 mb-3"}
                             isSearchable={true}
                             isObject={true}
                           />
 
-                          <h4 className="mb-3">Add a New Device</h4>
+                          <h4 className="mb-3">{t("add_a_new_device_key")}</h4>
                           <Input
-                            placeholder="Serial Number"
-                            label="Serial Number"
+                            placeholder={t("serial_number_key")}
+                            label={t("serial_number_key")}
                             name="serialNumber"
                             type="text"
                             className={"col-12 mb-3"}
@@ -162,8 +168,8 @@ const AddDeviceToVeh = () => {
 
                           <ReactSelect
                             options={allDeviceTypesOptions}
-                            label="Device Type"
-                            placeholder="Select Device Type"
+                            label={t("device_type_key")}
+                            placeholder={t("select_device_type_key")}
                             name="deviceTypeId"
                             className={"col-12 mb-3"}
                             isSearchable={true}
@@ -199,7 +205,7 @@ const AddDeviceToVeh = () => {
                               icon={faArrowLeft}
                               size="sm"
                             />
-                            Back
+                            {t("back_key")}
                           </Button>
                           <Button
                             type="submit"
@@ -210,7 +216,7 @@ const AddDeviceToVeh = () => {
                               icon={faArrowRight}
                               size="sm"
                             />
-                            Next
+                            {t("next_key")}
                           </Button>
                           <Button
                             className="px-3 py-2 text-nowrap me-3 ms-0"
@@ -225,7 +231,7 @@ const AddDeviceToVeh = () => {
                               icon={faForward}
                               size="sm"
                             />
-                            Skip
+                            {t("skip_key")}
                           </Button>
                           <Button
                             className="px-3 py-2 text-nowrap me-3 ms-0"
@@ -238,7 +244,7 @@ const AddDeviceToVeh = () => {
                               icon={faTimes}
                               size="sm"
                             />
-                            Cancel
+                            {t("cancel_key")}
                           </Button>
                         </div>
                       </Col>
@@ -249,21 +255,23 @@ const AddDeviceToVeh = () => {
             </Formik>
             {modalShow && (
               <Model
-                header={"Cancel The Process"}
+                header={t("cancel_the_process_key")}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                updateButton={"Yes, I'm Sure"}
+                updateButton={t("yes,_i'm_sure_key")}
                 onUpdate={() => {
                   dispatch(resetData());
                   router.push("/management/vehicle-management");
                 }}
               >
                 <h4 className="text-center">
-                  Are You Sure You Want to Cancel This Process?
+                  {t("are_you_sure_you_want_to_cancel_this_process_key")}
                 </h4>
                 <p className="text-center text-danger">
-                  (You will lose all your entered data if you cancel the
-                  process.)
+                  {t(
+                    "you_will_lose_all_your_entered_data_if_you_cancel_the_process_key"
+                  )}
+                  .
                 </p>
               </Model>
             )}
