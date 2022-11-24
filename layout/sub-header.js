@@ -41,6 +41,33 @@ const SubHeader = ({ pageName = "" }) => {
       case "/vehicle/[vehicleId]":
         setState("vehicle_dashboard_key");
         break;
+      case "/management":
+        setState("management_key");
+        break;
+      case "/management/vehicle-management":
+        setState("vehicle_management_key");
+        break;
+      case "/management/vehicle-management/add/vehicle-data":
+        setState("add_vehicle_key");
+        break;
+      case "/management/vehicle-management/add/add-device":
+        setState("add_device_to_vehicle_key");
+        break;
+      case "/management/vehicle-management/add/add-sim":
+        setState("add_SIM_to_vehicle's_device_key");
+        break;
+      case "/management/vehicle-management/add/add-group":
+        setState("add_vehicle_to_group_key");
+        break;
+      case "/management/vehicle-management/edit/[editId]":
+        setState("update_vehicle_information_key");
+        break;
+      case "/management/sim-management":
+        setState("SIM_cards_management_key");
+        break;
+      case "/management/sim-management/add":
+        setState("add_SIM_card_key");
+        break;
       default:
         setState("");
         break;

@@ -24,7 +24,6 @@
     "are_you_sure?": "Are you sure?",
     "are_you_sure_you_want_to_delete_this_table?": "Are you sure you want to delete this table?",
     "cancel_key": "Cancel",
-
     "PDF_export_options_key": "PDF Export Options",
     "landscape_key": "Landscape",
     "portrait_key": "Portrait",
@@ -48,5 +47,13 @@
     "show_vehicles_key": "Show Vehicles",
     "driver_dashboard_key": "Driver Dashboard",
     "vehicle_dashboard_key": "Vehicle Dashboard",
-    "management_key": "Management"
+    "management_key": "Management",
+    "vehicle_management_key": "Vehicle Management",
+    "add_vehicle_key": "Add Vehicle",
+    "add_device_to_vehicle_key": "Add Device To Vehicle",
+    "add_SIM_to_vehicle's_device_key": "Add SIM To Vehicle's Device",
+    "add_vehicle_to_group_key": "Add Vehicle To Group",
+    "update_vehicle_information_key": "Update Vehicle Information",
+    "SIM_cards_management_key": "SIM Cards Management",
+    "add_SIM_card_key": "Add SIM Card"
 }

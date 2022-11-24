@@ -24,7 +24,6 @@
     "are_you_sure?": "هل أنت متأكد؟",
     "are_you_sure_you_want_to_delete_this_table?": "هل أنت متأكد أنك تريد حذف هذا الجدول؟",
     "cancel_key": "إلغاء",
-
     "PDF_export_options_key": "خيارات تصدير PDF",
     "landscape_key": "عرضى",
     "portrait_key": "طولى",
@@ -48,5 +47,13 @@
     "show_vehicles_key": "عرض المركبات",
     "driver_dashboard_key": "لوحة القيادة للسائق",
     "vehicle_dashboard_key": "لوحة معلومات للمركبة",
-    "management_key": "الإدارة"
+    "management_key": "الإدارة",
+    "vehicle_management_key": "إدارة المركبات",
+    "add_vehicle_key": "إضافة مركبة",
+    "add_device_to_vehicle_key": "أضف جهازًا إلى السيارة",
+    "add_SIM_to_vehicle's_device_key": "إضافة بطاقة SIM إلى جهاز السيارة",
+    "add_vehicle_to_group_key": "إضافة مركبة إلى مجموعة",
+    "update_vehicle_information_key": "تحديث معلومات المركبة",
+    "SIM_cards_management_key": "إدارة بطاقات SIM",
+    "add_SIM_card_key": "إضافة بطاقة SIM"
 }
