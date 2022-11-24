@@ -8,17 +8,20 @@ import { Formik } from "formik";
 import Input from "components/formik/Input";
 import ReactSelect from "components/formik/ReactSelect/ReactSelect";
 import { vehicleAddDevice } from "helpers/yup-validations/management/VehicleManagement";
-import { fetchAllUnAssignedDevicesData } from "services/management/VehicleManagement";
-import { addDeviceRequst } from "services/management/VehicleManagement";
+import {
+  fetchUnassignedDevices,
+  assignSimToDevice,
+} from "services/management/SimManagement";
 import Spinner from "components/UI/Spinner";
 import { useTranslation } from "next-i18next";
 
-const AddDeviceToVeh = ({ id, handleModel }) => {
+const AddSimToDevice = ({ id, handleModel }) => {
   const [loadingPage, setLoadingPage] = useState(true);
   const [unAssignedDevicesOptions, setUnAssignedDevicesOptions] = useState([]);
   const [allDeviceTypesOptions, setAllDeviceTypesOptions] = useState([]);
   const [serialNumberInput, setSerialNumberInput] = useState("");
   const [chosenType, setChosenType] = useState("");
+  const [deviceId, setDeviceId] = useState("");
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation("management");
 
@@ -26,10 +29,10 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const respond = await fetchAllUnAssignedDevicesData();
+        const respond = await fetchUnassignedDevices();
         const unAssignedDevices = respond.unAssignedDevices.map((ele) => {
           return {
-            value: ele.SerialNumber,
+            value: ele.DeviceID,
             label: ele.SerialNumber,
             typeID: ele.DeviceTypeID,
           };
@@ -51,12 +54,11 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
 
   const onSubmit = async (data) => {
     const submitData = {
-      serialNumber: data.serialNumber,
-      deviceTypeId: chosenType ? chosenType : data.deviceTypeId,
+      deviceId: deviceId,
     };
     setLoading(true);
     try {
-      const respond = await addDeviceRequst({ ...submitData, vehicleId: id });
+      const respond = await assignSimToDevice(id,submitData);
       toast.success("Device Added to Vehicle Successfully");
       setLoading(false);
       handleModel();
@@ -74,6 +76,7 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
 
   const getFormData = (values) => {
     //assign value of chosen to input
+    setDeviceId(values.deviceSelected[0]?.value);
     setSerialNumberInput(values.deviceSelected[0]?.label);
     setChosenType(values.deviceSelected[0]?.typeID);
   };
@@ -94,7 +97,7 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
                 return (
                   <Form onSubmit={formik.handleSubmit}>
                     <Row>
-                      <Col className="mx-auto" md={5}>
+                      <Col className="mx-auto" md={10}>
                         <Row>
                           <h4 className="mb-3">{t("select_exist_device_key")}</h4>
                           <ReactSelect
@@ -124,7 +127,7 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
                           <ReactSelect
                             options={allDeviceTypesOptions}
                             label={t("device_type_key")}
-                            placeholder={t("select_device_type")}
+                            placeholder={t("select_device_type_key")}
                             name="deviceTypeId"
                             className={"col-12 mb-3"}
                             isSearchable={true}
@@ -145,7 +148,7 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="mx-auto" md={5}>
+                      <Col className="mx-auto" md={10}>
                         <div className="w-25 d-flex flex-wrap flex-md-nowrap">
                           <Button
                             type="submit"
@@ -178,7 +181,7 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
                               icon={faTimes}
                               size="sm"
                             />
-                            {t("cancel_key")}
+                          {t("cancel_key")}
                           </Button>
                         </div>
                       </Col>
@@ -194,4 +197,4 @@ const AddDeviceToVeh = ({ id, handleModel }) => {
   );
 };
 
-export default AddDeviceToVeh;
+export default AddSimToDevice;

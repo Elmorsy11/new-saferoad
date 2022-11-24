@@ -1,19 +1,25 @@
 import * as Yup from "yup";
 
-const numberValidation = (inputName) => {
+const numberValidation = (inputName, required, mustNumber) => {
   return Yup.number()
-    .required(`${inputName} is required`)
-    .typeError(`${inputName} must be a number`);
+    .required(`${inputName} ${required}`)
+    .typeError(`${inputName} ${mustNumber}`);
 };
 
-const stringValidation = (inputName) => {
-  return Yup.string().required(`${inputName} is required`).trim();
+const stringValidation = (inputName, required) => {
+  return Yup.string().required(`${inputName} ${required}`).trim();
 };
 
-export const AddSimValidation = Yup.object().shape({
-  SimSerialNumber: stringValidation("Serial Number"),
-  PhoneNumber: numberValidation("Phone Number").min(
-    0,
-    "Phone Number must be greater than 0"
-  ),
-});
+export const AddSimValidation = (t) => {
+  const required = t("is_required_key");
+  const mustNumber = t("must_be_number_key");
+
+  return Yup.object().shape({
+    SimSerialNumber: stringValidation(t("serial_number_key"), required),
+    PhoneNumber: numberValidation(
+      t("phone_number_key"),
+      required,
+      mustNumber
+    ).min(0, t("phone_number_must_be_greater_than_0_key")),
+  });
+};

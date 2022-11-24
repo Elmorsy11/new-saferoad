@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Card, Button } from "react-bootstrap";
-import Link from "next/link";
 // translation
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -104,7 +103,7 @@ export default function Management() {
     {
       head: "manage_your_drivers_key",
       desc: "to_manage_your_drivers_and_assign_drivers_to_your_vehicle_please_click_here_key",
-      link: "/driversManagement",
+      link: "/drivers-management",
       id: 22,
       icon: () => {
         return <ManageDriversIcon />;

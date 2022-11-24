@@ -87,7 +87,7 @@ const AddDeviceToVeh = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [t]);
 
   const onSubmit = async (data) => {
     const submitData = {

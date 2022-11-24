@@ -13,7 +13,7 @@ export default EditVehicle;
 export async function getServerSideProps({ locale, query }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["main", "Management"])),
+      ...(await serverSideTranslations(locale, ["main", "management"])),
       query,
     },
   };

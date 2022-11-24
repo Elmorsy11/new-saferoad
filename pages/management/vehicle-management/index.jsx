@@ -538,7 +538,7 @@ function VehicleManagment() {
       </Model>
       {/* assign device Model */}
       <Model
-        header={"assign_device_to_vehicle_key"}
+        header={t("assign_device_to_vehicle_key")}
         show={assignModalShow}
         onHide={() => setAssignModalShow(false)}
         updateButton={t("update_key")}

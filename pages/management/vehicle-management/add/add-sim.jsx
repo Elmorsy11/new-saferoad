@@ -83,7 +83,7 @@ const AddSimtoDevice = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [t]);
 
   const simProviderOtions = [
     { value: 1, label: t("mobily_key") },
