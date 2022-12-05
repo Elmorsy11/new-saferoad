@@ -68,6 +68,15 @@ const SubHeader = ({ pageName = "" }) => {
       case "/management/sim-management/add":
         setState("add_SIM_card_key");
         break;
+        case "/management/device-management":
+        setState("devices_management_key");
+        break;
+      case "/management/device-management/add/add-device":
+        setState("add_new_device_key");
+        break;
+      case "/management/device-management/add/add-sim":
+        setState("add_sim_card_to_the_device_key");
+        break;
       default:
         setState("");
         break;

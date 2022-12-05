@@ -1,5 +1,79 @@
 import axios from "axios";
 
+// fetch All Assigned Devices(main page)
+export const fetchAllAssignedDevices = async () => {
+  const response = await axios({
+    method: "get",
+    url: `dashboard/management/devices`,
+  });
+  return response.data;
+};
+
+// fetch All Unassigned Devices(main page)
+export const fetchAllUnAssignedDevices = async () => {
+  const response = await axios({
+    method: "get",
+    url: `dashboard/management/devices/unassignedDevices`,
+  });
+  return response.data;
+};
+
+// fetch single Device(main page/edit)
+export const fetchSingleDevice = async (id) => {
+  const response = await axios({
+    method: "get",
+    url: `/dashboard/management/devices/${id}`,
+  });
+  return response.data;
+};
+
+// fetch single Device(main page/edit)
+export const updateDevice = async (id,data) => {
+  const response = await axios({
+    method: "put",
+    url: `/dashboard/management/devices/${id}`,
+    data: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.data;
+};
+
+// add devices bulk(main page/bulk)
+export const PostDevicesBulk = async (data) => {
+  const response = await axios({
+    method: "post",
+    url: `devices/addBulk`, 
+    data: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.data;
+};
+
+// delete device (main page/delete)
+export const deleteDevice = async (deleteSelected) => {
+    const response = await axios({
+      method: "delete",
+      url: `dashboard/management/devices/${deleteSelected}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  };
+
+  // fitch Unassigned Vehicles data (assign device)
+export const fitchUnassignedVehicles = async () => {
+  const response = await axios({
+    method: "get",
+    url: `dashboard/vehicles/info/unassigned`,
+  });
+  return response.data;
+};
+
 // fetch device type for react select (add/add-device)
 export const fetchDeviceTypes = async () => {
   const response = await axios({
@@ -19,7 +93,7 @@ export const fetchAllUnAssignedSimCardData = async () => {
 };
 
 // add new device
-export const aadDeviceRequest = async (data) => {
+export const addDeviceRequest = async (data) => {
   const response = await axios({
     method: "post",
     url: "dashboard/management/devices",

@@ -55,5 +55,8 @@
     "add_vehicle_to_group_key": "إضافة مركبة إلى مجموعة",
     "update_vehicle_information_key": "تحديث معلومات المركبة",
     "SIM_cards_management_key": "إدارة بطاقات SIM",
-    "add_SIM_card_key": "إضافة بطاقة SIM"
+    "add_SIM_card_key": "إضافة بطاقة SIM",
+    "devices_management_key": "إدارة الأجهزة",
+    "add_new_device_key": "أضف جهازًا جديدًا",
+    "add_sim_card_to_the_device_key": "أضف بطاقة SIM إلى الجهاز"
 }

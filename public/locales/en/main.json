@@ -55,5 +55,8 @@
     "add_vehicle_to_group_key": "Add Vehicle To Group",
     "update_vehicle_information_key": "Update Vehicle Information",
     "SIM_cards_management_key": "SIM Cards Management",
-    "add_SIM_card_key": "Add SIM Card"
+    "add_SIM_card_key": "Add SIM Card",
+    "devices_management_key": "Devices management",
+    "add_new_device_key": "Add new device",
+    "add_sim_card_to_the_device_key": "Add sim card to the device"
 }
